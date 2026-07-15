@@ -13,6 +13,9 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Warning
+import androidx.compose.material.icons.filled.CloudUpload
+import androidx.compose.material.icons.filled.CloudDone
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material.icons.automirrored.filled.*
 import androidx.compose.material3.*
@@ -589,7 +592,10 @@ fun StepResult(
                         isLocal = state.isLocal,
                         provider = state.provider,
                         isSaved = state.isSaved,
+                        userRole = state.userRole,
+                        isPushedToCloud = state.isPushedToCloud,
                         onMarkSuccess = { selectedIndices -> viewModel.markAsSuccessful(state.entity.id, selectedIndices) },
+                        onPushToCloud = { viewModel.pushToCloud(state.entity.id) },
                         onVote = { isLike -> state.entity.cloudId?.let { cloudId -> viewModel.voteForSolution(cloudId, state.entity.id, isLike) } },
                         onReset = { viewModel.reset() }
                     )
@@ -740,7 +746,10 @@ fun ResultCard(
     isLocal: Boolean,
     provider: String,
     isSaved: Boolean,
+    userRole: String,
+    isPushedToCloud: Boolean,
     onMarkSuccess: (Set<Int>) -> Unit,
+    onPushToCloud: () -> Unit,
     onVote: (Boolean) -> Unit,
     onReset: () -> Unit
 ) {
@@ -914,6 +923,35 @@ fun ResultCard(
                     Icon(Icons.Default.CheckCircle, null, tint = SuccessGreen, modifier = Modifier.size(20.dp))
                     Spacer(Modifier.width(8.dp))
                     Text("🔖 Сохранено в закладки", color = SuccessGreen, fontWeight = FontWeight.Medium)
+                }
+                
+                if (userRole in listOf("user", "specialist", "admin")) {
+                    Spacer(Modifier.height(8.dp))
+                    if (!isPushedToCloud) {
+                        Button(
+                            onClick = onPushToCloud,
+                            modifier = Modifier.fillMaxWidth().height(50.dp),
+                            colors = ButtonDefaults.buttonColors(containerColor = LocalHitBlue),
+                            shape = RoundedCornerShape(10.dp)
+                        ) {
+                            Icon(Icons.Default.CloudUpload, null, tint = Color.White)
+                            Spacer(Modifier.width(8.dp))
+                            Text("🌐 Предложить в глобальную базу", color = Color.White, fontWeight = FontWeight.Bold)
+                        }
+                    } else {
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .clip(RoundedCornerShape(10.dp))
+                                .background(LocalHitBlue.copy(alpha = 0.15f))
+                                .padding(12.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Icon(Icons.Default.CloudDone, null, tint = LocalHitBlue, modifier = Modifier.size(20.dp))
+                            Spacer(Modifier.width(8.dp))
+                            Text("🌐 Отправлено на модерацию", color = LocalHitBlue, fontWeight = FontWeight.Medium)
+                        }
+                    }
                 }
             }
 

@@ -163,12 +163,16 @@ class DiagnosisViewModel @Inject constructor(
             
             AppLogger.i("DiagnosisViewModel", "Diagnosis result: ${result::class.simpleName}")
             
+            val userRole = com.example.autoelectricai.utils.AuthUtils.currentUserEmail.let { email ->
+                if (email.isNotBlank()) cloudSync.getUserRole(email) else "novice"
+            }
+            
             _uiState.value = when (result) {
                 is DiagnosisResult.LocalHit -> DiagnosisUiState.Success(
-                    result.entity, isLocal = true
+                    result.entity, isLocal = true, userRole = userRole
                 )
                 is DiagnosisResult.AiHit -> DiagnosisUiState.Success(
-                    result.entity, isLocal = false, provider = result.provider
+                    result.entity, isLocal = false, provider = result.provider, userRole = userRole
                 )
                 is DiagnosisResult.Failure -> {
                     AppLogger.e("DiagnosisViewModel", "Failure: ${result.message}")
@@ -221,6 +225,7 @@ class DiagnosisViewModel @Inject constructor(
                 kotlinx.coroutines.CoroutineScope(kotlinx.coroutines.Dispatchers.IO).launch {
                     cloudSync.pushSolution(current.entity)
                 }
+                _uiState.value = current.copy(isPushedToCloud = true)
             }
         }
     }
@@ -277,7 +282,9 @@ sealed class DiagnosisUiState {
         val entity: DiagnosisEntity,
         val isLocal: Boolean,
         val provider: String = "",
-        val isSaved: Boolean = false
+        val isSaved: Boolean = false,
+        val isPushedToCloud: Boolean = false,
+        val userRole: String = "novice"
     ) : DiagnosisUiState()
     data class Error(val message: String) : DiagnosisUiState()
 }
