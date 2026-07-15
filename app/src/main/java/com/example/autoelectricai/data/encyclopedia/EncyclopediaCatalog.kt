@@ -36,67 +36,9 @@ data class EncSystem(
 
 object EncyclopediaCatalog {
 
-    val countries: List<EncCountry> = listOf(
+    private val brandsFlat: List<EncBrand> = listOf(
         // Россия
-        EncCountry(
-            id = "russia",
-            displayName = "Россия",
-            flagEmoji = "🇷🇺",
-            brands = listOf(
-        // ВАЗ (LADA)
-        EncBrand(
-            id = "vaz", displayName = "ВАЗ (LADA)", shortName = "ВАЗ",
-            primaryColor = Color(0xFFCC0000), secondaryColor = Color(0xFF1A1A2E),
-            logoResId = R.drawable.img_logo_vaz,
-            platforms = listOf(
-                EncPlatform("classic", "Классика (2101–2107)", "📂", listOf(
-                    EncSystem("wiring", "Электросхема бортовой сети (6V → 12V)", "⚡", listOf("Схемы", "Типовые проблемы")),
-                    EncSystem("ignition", "Система зажигания", "🔋", listOf("Контактное", "Бесконтактное", "Регулировка")),
-                    EncSystem("lighting", "Освещение и сигнализация", "💡", listOf("Фары", "Задние фонари", "Реле поворотов")),
-                    EncSystem("generator", "Генератор и реле-регулятор", "🔌", listOf("Проверка", "Схема подключения")),
-                    EncSystem("troubleshooting", "Типовые неисправности", "🛠️", listOf("Поиск замыканий", "Утечка тока"))
-                )),
-                EncPlatform("samara", "Самара / Спутник (2108–2115)", "📂", listOf(
-                    EncSystem("power_net", "Бортовая сеть 12V", "⚡", listOf("Блок предохранителей", "Схема проводки")),
-                    EncSystem("carb_inj", "Карбюратор → Инжектор", "🔋", listOf("Отличия проводок", "Датчики")),
-                    EncSystem("ecu", "ЭБУ Январь 4 / 5 / Bosch", "🖥️", listOf("Распиновка ЭБУ", "Коды ошибок (P-коды)", "Процедура диагностики")),
-                    EncSystem("body", "Электрооборудование кузова", "💡", listOf("Стеклоподъемники", "Замки дверей")),
-                    EncSystem("troubleshooting", "Частые проблемы", "🛠️", listOf("Массы", "Монтажный блок"))
-                )),
-                EncPlatform("priora", "Десятка / Калина / Приора (2110–2172)", "📂", listOf(
-                    EncSystem("arch", "Архитектура бортовой сети", "⚡", listOf("Схема", "Отличия моделей")),
-                    EncSystem("ecu", "ЭБУ (Bosch M7.9.7, Январь 7.2, VS 8.0)", "🖥️", listOf("Расположение и распиновка", "Таблица ошибок OBD-II", "Замена и адаптация")),
-                    EncSystem("sensors", "Датчики", "🌡️", listOf("Методы проверки мультиметром", "Параметры нормы", "Коды ошибок датчиков")),
-                    EncSystem("can", "CAN-шина (Приора)", "🔌", listOf("Топология шины", "Устройства на шине")),
-                    EncSystem("lighting", "Система освещения", "💡", listOf("Лампы", "Реле")),
-                    EncSystem("immo", "Иммобилайзер (VS 8.0, ПИВТ)", "🔐", listOf("Обучение", "Сброс")),
-                    EncSystem("troubleshooting", "ТОП-20 неисправностей", "🛠️", listOf("Популярные болячки"))
-                )),
-                EncPlatform("vesta", "Гранта / Веста / XRAY / Niva", "📂", listOf(
-                    EncSystem("can_lin", "Мультиплексная CAN/LIN архитектура", "⚡", listOf("Топология", "Отличия", "Узлы")),
-                    EncSystem("ecu", "ЭБУ двигателя (Bosch ME17, Continental)", "🖥️", listOf("Диагностический протокол", "Адаптация и базовые установки", "Прошивки")),
-                    EncSystem("bus_diag", "CAN-шина и LIN-шина", "📡", listOf("Схема топологии", "Узлы BCM, BSM, ABS", "Диагностика шины")),
-                    EncSystem("immo", "ЭСУД и иммобилайзер", "🔐", listOf("Синхронизация", "Обучение ключей")),
-                    EncSystem("body", "Электросистемы кузова (BCM)", "🚗", listOf("Освещение", "Стеклоочистители")),
-                    EncSystem("climate", "Климатическое оборудование", "❄️", listOf("Электросхема", "Коды климата")),
-                    EncSystem("battery", "АКБ и управление зарядом", "🔋", listOf("Утечки", "Контроль генератора")),
-                    EncSystem("dtc", "Коды ошибок по системам", "🛠️", listOf("DTC-каталог"))
-                )),
-                EncPlatform("vesta_akpp", "Веста / XRAY с АКПП", "📂", listOf(
-                    EncSystem("tcu", "Электронное управление АКПП (TCU)", "⚙️", listOf("Распиновка", "Схема")),
-                    EncSystem("dtc", "Коды ошибок трансмиссии", "❌", listOf("Расшифровка")),
-                ))
-            )
-        )
-        ) // close brands for russia
-        ), // close EncCountry russia
-
-        // Германия
-        EncCountry(
-            id = "germany",
-            displayName = "Германия",
-            flagEmoji = "🇩🇪",
-            brands = listOf(
+        
         EncBrand(
             id = "volkswagen", displayName = "Volkswagen", shortName = "VW",
             primaryColor = Color(0xFF003399), secondaryColor = Color(0xFFFFFFFF),
@@ -378,11 +320,15 @@ object EncyclopediaCatalog {
                 ))
             )
         )
-        ) // close brands for germany
-        ) // close EncCountry germany
     ) // close countries list
 
-    // Flat list of all brands for backward compatibility and cross-searching
-    val brands: List<EncBrand>
-        get() = countries.flatMap { it.brands }
+        val countries: List<EncCountry> = listOf(
+        EncCountry("russia", "Россия", "🇷🇺", brandsFlat.filter { it.id in listOf("vaz") }),
+        EncCountry("germany", "Германия", "🇩🇪", brandsFlat.filter { it.id in listOf("volkswagen", "audi") }),
+        EncCountry("japan", "Япония", "🇯🇵", brandsFlat.filter { it.id in listOf("toyota", "mitsubishi", "honda") }),
+        EncCountry("usa", "США", "🇺🇸", brandsFlat.filter { it.id in listOf("ford", "chevrolet") })
+    )
+
+    val brands: List<EncBrand> get() = brandsFlat
 }
+
