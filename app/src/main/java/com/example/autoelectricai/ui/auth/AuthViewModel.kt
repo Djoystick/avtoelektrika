@@ -190,9 +190,15 @@ class AuthViewModel @Inject constructor(
                             // Если у пользователя нет никнейма, можно попытаться поставить ему firstName
                             val currentNickname = cloudSync.getNickname(fakeEmail)
                             if (currentNickname == null) {
-                                val firstName = snapshot.getString("firstName")
-                                if (firstName != null && cloudSync.checkNicknameUnique(firstName, fakeEmail)) {
-                                    cloudSync.setNickname(fakeEmail, firstName)
+                                val firstName = snapshot.getString("firstName") ?: ""
+                                val lastName = snapshot.getString("lastName") ?: ""
+                                val username = snapshot.getString("username") ?: ""
+                                val display = if (username.isNotBlank()) username else "$firstName $lastName".trim()
+                                
+                                if (display.isNotBlank() && cloudSync.checkNicknameUnique(display, fakeEmail)) {
+                                    cloudSync.setNickname(fakeEmail, display)
+                                } else {
+                                    cloudSync.setNickname(fakeEmail, "Пользователь_${telegramId.takeLast(4)}")
                                 }
                             }
                             

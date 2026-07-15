@@ -900,7 +900,7 @@ fun ResultCard(
                 ) {
                     Icon(Icons.Default.CheckCircle, null, tint = Color.White)
                     Spacer(Modifier.width(8.dp))
-                    Text("✅ Помогло! Сохранить в базу", color = Color.White, fontWeight = FontWeight.Bold)
+                    Text("🔖 Сохранить в закладки", color = Color.White, fontWeight = FontWeight.Bold)
                 }
             } else {
                 Row(
@@ -913,7 +913,7 @@ fun ResultCard(
                 ) {
                     Icon(Icons.Default.CheckCircle, null, tint = SuccessGreen, modifier = Modifier.size(20.dp))
                     Spacer(Modifier.width(8.dp))
-                    Text("Сохранено в базу данных", color = SuccessGreen, fontWeight = FontWeight.Medium)
+                    Text("🔖 Сохранено в закладки", color = SuccessGreen, fontWeight = FontWeight.Medium)
                 }
             }
 

@@ -1,0 +1,4 @@
+{
+  "versionName": "1.7.17",
+  "releaseNotes": "Fix save to bookmarks logic for Sandbox mode; Fix Telegram username extraction"
+}

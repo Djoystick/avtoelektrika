@@ -565,6 +565,7 @@ fun SettingsScreen(
 @Composable
 fun ChangelogDialog(onDismiss: () -> Unit) {
     val changelog = listOf(
+        "v1.7.17" to "Fix save to bookmarks logic for Sandbox mode; Fix Telegram username extraction",
         "v1.7.16" to "Include updated google-services.json for Google Auth",
         "v1.7.15" to "Fix missing Google Auth Client ID and Telegram auth visibility issues",
         "v1.7.15" to "Fix missing Google Auth Client ID and Telegram auth visibility issues",

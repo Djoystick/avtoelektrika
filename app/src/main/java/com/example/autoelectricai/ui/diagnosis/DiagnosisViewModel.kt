@@ -195,33 +195,32 @@ class DiagnosisViewModel @Inject constructor(
                                 entity = current.entity.copy(solution = newJson),
                                 isSaved = true
                             )
-                            kotlinx.coroutines.CoroutineScope(kotlinx.coroutines.Dispatchers.IO).launch {
-                                cloudSync.pushSolution(current.entity.copy(solution = newJson))
-                            }
                         } else {
                             repository.markAsSuccessful(id)
                             _uiState.value = current.copy(isSaved = true)
-                            kotlinx.coroutines.CoroutineScope(kotlinx.coroutines.Dispatchers.IO).launch {
-                                cloudSync.pushSolution(current.entity)
-                            }
                         }
                     } catch (e: Exception) {
                         AppLogger.e("DiagnosisViewModel", "Error filtering JSON solutions", e)
                         repository.markAsSuccessful(id)
                         _uiState.value = current.copy(isSaved = true)
-                        kotlinx.coroutines.CoroutineScope(kotlinx.coroutines.Dispatchers.IO).launch {
-                            cloudSync.pushSolution(current.entity)
-                        }
                     }
                 } else {
                     repository.markAsSuccessful(id)
                     _uiState.value = current.copy(isSaved = true)
-                    kotlinx.coroutines.CoroutineScope(kotlinx.coroutines.Dispatchers.IO).launch {
-                        cloudSync.pushSolution(current.entity)
-                    }
                 }
             } else {
                 repository.markAsSuccessful(id)
+            }
+        }
+    }
+
+    fun pushToCloud(id: Long) {
+        viewModelScope.launch {
+            val current = _uiState.value
+            if (current is DiagnosisUiState.Success && current.entity.id == id) {
+                kotlinx.coroutines.CoroutineScope(kotlinx.coroutines.Dispatchers.IO).launch {
+                    cloudSync.pushSolution(current.entity)
+                }
             }
         }
     }
