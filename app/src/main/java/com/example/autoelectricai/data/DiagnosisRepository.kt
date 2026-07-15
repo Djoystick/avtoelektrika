@@ -64,6 +64,11 @@ class DiagnosisRepository @Inject constructor(
 
         return when (aiResult) {
             is AiResult.Success -> {
+                // Extract encyclopedia categorization fields from AI JSON
+                val encPlatform = extractJsonStringField(aiResult.jsonText, "encyclopediaPlatform")
+                val encSystem = extractJsonStringField(aiResult.jsonText, "encyclopediaSystem")
+                val encSubsystem = extractJsonStringField(aiResult.jsonText, "encyclopediaSubsystem")
+
                 val entity = DiagnosisEntity(
                     carBrand = carBrand,
                     carModel = carModel,
@@ -75,12 +80,25 @@ class DiagnosisRepository @Inject constructor(
                     source = "ai_generated",
                     aiProvider = aiResult.provider,
                     isOfflineReady = false,
-                    authorEmail = com.example.autoelectricai.utils.AuthUtils.currentUserEmail
+                    authorEmail = com.example.autoelectricai.utils.AuthUtils.currentUserEmail,
+                    encyclopediaPlatform = encPlatform,
+                    encyclopediaSystem = encSystem,
+                    encyclopediaSubsystem = encSubsystem
                 )
                 val id = dao.insert(entity)
                 DiagnosisResult.AiHit(entity.copy(id = id), aiResult.provider)
             }
             is AiResult.Error -> DiagnosisResult.Failure(aiResult.message)
+        }
+    }
+
+    /** Safely extracts a top-level string field from a JSON string without full parsing */
+    private fun extractJsonStringField(json: String, fieldName: String): String {
+        return try {
+            val regex = Regex("\"$fieldName\"\\s*:\\s*\"(.*?)\"", RegexOption.DOT_MATCHES_ALL)
+            regex.find(json)?.groupValues?.getOrNull(1)?.trim() ?: ""
+        } catch (e: Exception) {
+            ""
         }
     }
 

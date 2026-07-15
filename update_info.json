@@ -1,4 +1,4 @@
 {
-  "versionName": "1.7.18",
-  "releaseNotes": "Add 'Submit to Database' button for registered users"
+  "versionName": "1.7.19",
+  "releaseNotes": "Внедрена глобальная древовидная структура Энциклопедии, интеграция ИИ-категоризации и навигация по платформам."
 }

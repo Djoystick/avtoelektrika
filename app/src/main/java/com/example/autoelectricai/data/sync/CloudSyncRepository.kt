@@ -199,7 +199,10 @@ class CloudSyncRepository @Inject constructor(
                 "errorCodes" to entity.errorCodes,
                 "solution" to entity.solution,
                 "aiProvider" to entity.aiProvider,
-                "syncVersion" to System.currentTimeMillis()
+                "syncVersion" to System.currentTimeMillis(),
+                "encyclopediaPlatform" to entity.encyclopediaPlatform,
+                "encyclopediaSystem" to entity.encyclopediaSystem,
+                "encyclopediaSubsystem" to entity.encyclopediaSubsystem
             )
             
             if (finalScore != null) {
@@ -222,7 +225,23 @@ class CloudSyncRepository @Inject constructor(
                 firestore.collection(COLLECTION_SOLUTIONS).document()
             }
 
-            docRef.set(cloudData, com.google.firebase.firestore.SetOptions.merge()).await()
+            val batch = firestore.batch()
+            batch.set(docRef, cloudData, com.google.firebase.firestore.SetOptions.merge())
+
+            // Dual-write to Encyclopedia hierarchy if categorized
+            if (entity.encyclopediaPlatform.isNotBlank() && entity.encyclopediaSystem.isNotBlank()) {
+                val encRef = firestore.collection("encyclopedia")
+                    .document(entity.carBrand.ifBlank { "unknown" }.lowercase())
+                    .collection("platforms")
+                    .document(entity.encyclopediaPlatform)
+                    .collection("systems")
+                    .document(entity.encyclopediaSystem)
+                    .collection("articles")
+                    .document(docRef.id)
+                batch.set(encRef, cloudData, com.google.firebase.firestore.SetOptions.merge())
+            }
+
+            batch.commit().await()
             AppLogger.i(TAG, "Successfully pushed solution to cloud: ${docRef.id}")
             
             // Обновляем локальную сущность

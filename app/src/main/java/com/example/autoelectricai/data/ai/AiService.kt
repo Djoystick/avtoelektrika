@@ -1,4 +1,4 @@
-package com.example.autoelectricai.data.ai
+﻿package com.example.autoelectricai.data.ai
 
 import android.util.Log
 import com.example.autoelectricai.utils.AppLogger
@@ -285,3 +285,4 @@ sealed class AiResult {
     data class Success(val jsonText: String, val provider: String) : AiResult()
     data class Error(val message: String) : AiResult()
 }
+

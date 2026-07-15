@@ -31,5 +31,10 @@ data class DiagnosisEntity(
     
     // AI Verification fields (added in DB v5)
     val aiConfidenceScore: Int? = null,
-    val aiConfidenceReason: String? = null
+    val aiConfidenceReason: String? = null,
+
+    // Encyclopedia categorization fields (added in DB v6)
+    val encyclopediaPlatform: String = "",   // e.g. "Десятка / Калина / Приора"
+    val encyclopediaSystem: String = "",      // e.g. "ЭБУ двигателя"
+    val encyclopediaSubsystem: String = ""    // e.g. "Коды ошибок OBD-II"
 )
