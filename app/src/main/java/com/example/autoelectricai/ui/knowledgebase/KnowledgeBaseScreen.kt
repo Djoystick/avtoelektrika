@@ -148,6 +148,7 @@ fun KnowledgeBaseScreen(
                         }
                     }
                 },
+                windowInsets = WindowInsets(0, 0, 0, 0),
                 colors = TopAppBarDefaults.topAppBarColors(containerColor = DarkSurface)
             )
         }
@@ -381,14 +382,14 @@ fun KnowledgeBaseScreen(
 private fun BrandCard(brand: EncBrand, onClick: () -> Unit) {
     Card(
         modifier = Modifier
-            .aspectRatio(1f)
+            .fillMaxWidth()
             .clickable(onClick = onClick),
         colors = CardDefaults.cardColors(containerColor = DarkSurface),
         shape = RoundedCornerShape(12.dp),
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
     ) {
         Column(
-            modifier = Modifier.fillMaxSize().padding(4.dp),
+            modifier = Modifier.fillMaxWidth().padding(vertical = 12.dp, horizontal = 4.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
