@@ -5,6 +5,7 @@ import com.example.autoelectricai.data.ai.AiService
 import com.example.autoelectricai.data.db.DiagnosisDao
 import com.example.autoelectricai.data.db.DiagnosisEntity
 import com.example.autoelectricai.data.db.RecentCar
+import com.example.autoelectricai.data.encyclopedia.EncyclopediaCatalog
 import com.example.autoelectricai.data.prefs.SettingsRepository
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.flow.Flow
@@ -57,9 +58,19 @@ class DiagnosisRepository @Inject constructor(
         val openAiKey = settings.openAiApiKey.first()
         val preferredAi = settings.preferredAi.first()
 
+        // Look up encyclopedia catalog context for this brand to guide AI categorization
+        val encBrand = EncyclopediaCatalog.brands.find {
+            it.displayName.equals(carBrand, ignoreCase = true) ||
+            it.shortName.equals(carBrand, ignoreCase = true) ||
+            it.id.equals(carBrand, ignoreCase = true)
+        }
+        val catalogPlatforms = encBrand?.platforms?.map { it.displayName } ?: emptyList()
+        val catalogSystems = encBrand?.platforms?.flatMap { p -> p.systems.map { it.displayName } }?.distinct() ?: emptyList()
+
         val aiResult = aiService.generateDiagnosis(
             carBrand, carModel, carYear, system, symptoms, errorCodes,
-            geminiKey, geminiProxyUrl, openAiKey, preferredAi
+            geminiKey, geminiProxyUrl, openAiKey, preferredAi,
+            catalogPlatforms, catalogSystems
         )
 
         return when (aiResult) {

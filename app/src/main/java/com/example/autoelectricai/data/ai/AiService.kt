@@ -1,4 +1,4 @@
-﻿package com.example.autoelectricai.data.ai
+package com.example.autoelectricai.data.ai
 
 import android.util.Log
 import com.example.autoelectricai.utils.AppLogger
@@ -32,9 +32,11 @@ class AiService @Inject constructor(
         geminiKey: String,
         geminiProxyUrl: String,
         openAiKey: String,
-        preferredAi: String = "gemini"
+        preferredAi: String = "gemini",
+        catalogPlatforms: List<String> = emptyList(),
+        catalogSystems: List<String> = emptyList()
     ): AiResult {
-        val prompt = buildPrompt(carBrand, carModel, carYear, system, symptoms, errorCodes)
+        val prompt = buildPrompt(carBrand, carModel, carYear, system, symptoms, errorCodes, catalogPlatforms, catalogSystems)
         val errors = mutableListOf<String>()
 
         suspend fun attempt(providerName: String, block: suspend () -> AiResult): AiResult? {
@@ -163,7 +165,9 @@ class AiService @Inject constructor(
 
     private fun buildPrompt(
         carBrand: String, carModel: String, carYear: String,
-        system: String, symptoms: String, errorCodes: String
+        system: String, symptoms: String, errorCodes: String,
+        catalogPlatforms: List<String> = emptyList(),
+        catalogSystems: List<String> = emptyList()
     ): String {
         val carInfo = buildString {
             if (carBrand.isNotBlank()) append("Марка: $carBrand")
@@ -172,17 +176,33 @@ class AiService @Inject constructor(
         }
         val errorInfo = if (errorCodes.isNotBlank()) "Коды ошибок OBD: $errorCodes\n" else ""
 
+        val platformHint = if (catalogPlatforms.isNotEmpty()) {
+            "\nДоступные платформы в каталоге для $carBrand:\n" +
+            catalogPlatforms.joinToString("\n") { "  - \"${it}\"" } +
+            "\nВыбери наиболее подходящую платформу из списка выше для поля encyclopediaPlatform."
+        } else ""
+
+        val systemHint = if (catalogSystems.isNotEmpty()) {
+            "\nДоступные системы в каталоге:\n" +
+            catalogSystems.joinToString("\n") { "  - \"${it}\"" } +
+            "\nВыбери наиболее подходящую систему из списка выше для поля encyclopediaSystem."
+        } else ""
+
         return """
 Ты — профессиональный автоэлектрик с 20-летним опытом. Выступай в роли подробной энциклопедии по ремонту.
 
 Автомобиль: $carInfo
 Система: $system
 Симптомы: $symptoms
-$errorInfo
+$errorInfo$platformHint$systemHint
 
 Сформируй ответ СТРОГО в формате JSON без markdown разметки (без ```json).
 Структура должна быть такой:
 {
+  "encyclopediaBrand": "id бренда строчными буквами (например: toyota, vaz, hyundai)",
+  "encyclopediaPlatform": "точное название платформы из списка выше (если список пуст — придумай подходящее)",
+  "encyclopediaSystem": "точное название системы из списка выше (если список пуст — придумай подходящее)",
+  "encyclopediaSubsystem": "наиболее конкретная подсистема (например: Коды ошибок, Распиновка, Live Data)",
   "solutions": [
     {
       "title": "Краткое название вероятной причины (например, 'Питание ЭБУ')",
@@ -197,6 +217,7 @@ $errorInfo
 }
 
 Требования:
+- ОБЯЗАТЕЛЬНО заполни поля encyclopediaBrand, encyclopediaPlatform, encyclopediaSystem, encyclopediaSubsystem — они нужны для каталогизации решения!
 - Шаги должны быть ОЧЕНЬ развернутыми, как в детальном пошаговом руководстве (Service Manual). Не пиши коротко!
 - ВАЖНО: У тебя есть лимит в 4000 токенов. Обязательно уложись в него и убедись, что JSON полностью закрыт и синтаксически корректен. Если не влезаешь, сократи количество шагов, но сохрани целостность JSON.
 - Каждый шаг — это одно конкретное атомарное действие (например, только снятие клеммы, или только замер на одном пине).

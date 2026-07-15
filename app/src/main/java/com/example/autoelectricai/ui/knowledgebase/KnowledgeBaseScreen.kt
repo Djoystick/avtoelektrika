@@ -309,8 +309,10 @@ fun KnowledgeBaseScreen(
                             ) {
                                 items(filteredPlatforms) { platform ->
                                     val count = diagnoses.count {
-                                        it.carBrand.contains(brand.shortName, ignoreCase = true) &&
-                                        it.encyclopediaPlatform.contains(platform.displayName.take(15), ignoreCase = true)
+                                        (it.carBrand.contains(brand.shortName, ignoreCase = true) ||
+                                         it.carBrand.contains(brand.displayName, ignoreCase = true)) &&
+                                        (it.encyclopediaPlatform.contains(platform.displayName.take(20), ignoreCase = true) ||
+                                         platform.displayName.contains(it.encyclopediaPlatform.take(20), ignoreCase = true))
                                     }
                                     FolderItem(
                                         icon = platform.icon,
@@ -340,8 +342,10 @@ fun KnowledgeBaseScreen(
                         ) {
                             items(platform.systems) { system ->
                                 val count = diagnoses.count {
-                                    it.carBrand.contains(brand.shortName, ignoreCase = true) &&
-                                    it.encyclopediaSystem.contains(system.displayName.take(10), ignoreCase = true)
+                                    (it.carBrand.contains(brand.shortName, ignoreCase = true) ||
+                                     it.carBrand.contains(brand.displayName, ignoreCase = true)) &&
+                                    (it.encyclopediaSystem.contains(system.displayName.take(20), ignoreCase = true) ||
+                                     system.displayName.contains(it.encyclopediaSystem.take(20), ignoreCase = true))
                                 }
                                 FolderItem(
                                     icon = system.icon,
@@ -369,8 +373,10 @@ fun KnowledgeBaseScreen(
                         ) {
                             items(system.subsystems) { sub ->
                                 val count = diagnoses.count {
-                                    it.carBrand.contains(brand.shortName, ignoreCase = true) &&
-                                    it.encyclopediaSubsystem.contains(sub.take(10), ignoreCase = true)
+                                    (it.carBrand.contains(brand.shortName, ignoreCase = true) ||
+                                     it.carBrand.contains(brand.displayName, ignoreCase = true)) &&
+                                    (it.encyclopediaSubsystem.contains(sub.take(20), ignoreCase = true) ||
+                                     sub.contains(it.encyclopediaSubsystem.take(20), ignoreCase = true))
                                 }
                                 FolderItem(
                                     icon = "📄",
@@ -396,11 +402,14 @@ fun KnowledgeBaseScreen(
                             diagnoses
                         } else {
                             diagnoses.filter { entity ->
-                                val brandMatch = entity.carBrand.contains(selectedBrand!!.shortName, ignoreCase = true)
+                                val brandMatch = entity.carBrand.contains(selectedBrand!!.shortName, ignoreCase = true) ||
+                                    entity.carBrand.contains(selectedBrand!!.displayName, ignoreCase = true)
                                 val sysMatch = selectedSystem == null ||
-                                    entity.encyclopediaSystem.contains(selectedSystem!!.displayName.take(10), ignoreCase = true)
+                                    entity.encyclopediaSystem.contains(selectedSystem!!.displayName.take(20), ignoreCase = true) ||
+                                    selectedSystem!!.displayName.contains(entity.encyclopediaSystem.take(20), ignoreCase = true)
                                 val subMatch = selectedSubsystem == null ||
-                                    entity.encyclopediaSubsystem.contains(selectedSubsystem!!.take(10), ignoreCase = true)
+                                    entity.encyclopediaSubsystem.contains(selectedSubsystem!!.take(20), ignoreCase = true) ||
+                                    selectedSubsystem!!.contains(entity.encyclopediaSubsystem.take(20), ignoreCase = true)
                                 brandMatch && sysMatch && subMatch
                             }
                         }
