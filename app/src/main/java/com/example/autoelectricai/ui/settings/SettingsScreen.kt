@@ -565,6 +565,7 @@ fun SettingsScreen(
 @Composable
 fun ChangelogDialog(onDismiss: () -> Unit) {
     val changelog = listOf(
+        "v1.7.19" to "Внедрена глобальная древовидная структура Энциклопедии, интеграция ИИ-категоризации и навигация по платформам.",
         "v1.7.18" to "Add 'Submit to Database' button for registered users",
         "v1.7.17" to "Fix save to bookmarks logic for Sandbox mode; Fix Telegram username extraction",
         "v1.7.16" to "Include updated google-services.json for Google Auth",

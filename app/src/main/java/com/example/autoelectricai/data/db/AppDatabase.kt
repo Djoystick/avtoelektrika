@@ -7,7 +7,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 
 @Database(
     entities = [DiagnosisEntity::class],
-    version = 5,
+    version = 6,
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {
@@ -40,6 +40,14 @@ abstract class AppDatabase : RoomDatabase() {
             override fun migrate(database: SupportSQLiteDatabase) {
                 database.execSQL("ALTER TABLE diagnoses ADD COLUMN aiConfidenceScore INTEGER")
                 database.execSQL("ALTER TABLE diagnoses ADD COLUMN aiConfidenceReason TEXT")
+            }
+        }
+
+        val MIGRATION_5_6 = object : Migration(5, 6) {
+            override fun migrate(database: SupportSQLiteDatabase) {
+                database.execSQL("ALTER TABLE diagnoses ADD COLUMN encyclopediaPlatform TEXT NOT NULL DEFAULT ''")
+                database.execSQL("ALTER TABLE diagnoses ADD COLUMN encyclopediaSystem TEXT NOT NULL DEFAULT ''")
+                database.execSQL("ALTER TABLE diagnoses ADD COLUMN encyclopediaSubsystem TEXT NOT NULL DEFAULT ''")
             }
         }
     }
