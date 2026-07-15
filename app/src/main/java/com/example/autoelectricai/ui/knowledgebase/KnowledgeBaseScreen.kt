@@ -60,6 +60,7 @@ fun KnowledgeBaseScreen(
     var selectedPlatform by remember { mutableStateOf<EncPlatform?>(null) }
     var selectedSystem by remember { mutableStateOf<EncSystem?>(null) }
     var selectedSubsystem by remember { mutableStateOf<String?>(null) }
+    var selectedYear by remember { mutableStateOf<Int?>(null) }
     var showPaywall by remember { mutableStateOf(false) }
     var addendumEntity by remember { mutableStateOf<DiagnosisEntity?>(null) }
     var addendumText by remember { mutableStateOf("") }
@@ -227,6 +228,7 @@ fun KnowledgeBaseScreen(
                                     selectedPlatform = null
                                     selectedSystem = null
                                     selectedSubsystem = null
+                                    selectedYear = null
                                     nav = EncNav.BRANDS
                                 })
                             }
@@ -258,6 +260,7 @@ fun KnowledgeBaseScreen(
                                     selectedPlatform = null
                                     selectedSystem = null
                                     selectedSubsystem = null
+                                    selectedYear = null
                                     nav = EncNav.PLATFORMS
                                 })
                             }
@@ -267,29 +270,62 @@ fun KnowledgeBaseScreen(
                     // ─── PLATFORMS LIST ───────────────────────────────────────
                     EncNav.PLATFORMS -> {
                         val brand = selectedBrand ?: return@AnimatedContent
-                        LazyColumn(
-                            modifier = Modifier.fillMaxSize(),
-                            contentPadding = PaddingValues(horizontal = 16.dp, vertical = 24.dp),
-                            verticalArrangement = Arrangement.spacedBy(16.dp)
-                        ) {
-                            items(brand.platforms) { platform ->
-                                val count = diagnoses.count {
-                                    it.carBrand.contains(brand.shortName, ignoreCase = true) &&
-                                    it.encyclopediaPlatform.contains(platform.displayName.take(15), ignoreCase = true)
-                                }
-                                FolderItem(
-                                    icon = platform.icon,
-                                    title = platform.displayName,
-                                    subtitle = if (count > 0) "$count решений" else null,
-                                    accentColor = brand.primaryColor
-                                ) {
-                                    selectedPlatform = platform
-                                    selectedSystem = null
-                                    selectedSubsystem = null
-                                    nav = EncNav.SYSTEMS
+                        
+                        Column(modifier = Modifier.fillMaxSize()) {
+                            // Year Filter
+                            val years = listOf(null, 1990, 1995, 2000, 2005, 2010, 2015, 2020, 2025)
+                            androidx.compose.foundation.lazy.LazyRow(
+                                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                                contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)
+                            ) {
+                                items(years) { year ->
+                                    val isSelected = selectedYear == year
+                                    Box(
+                                        modifier = Modifier
+                                            .clip(RoundedCornerShape(16.dp))
+                                            .background(if (isSelected) brand.primaryColor else Color.DarkGray)
+                                            .clickable { selectedYear = year }
+                                            .padding(horizontal = 16.dp, vertical = 8.dp)
+                                    ) {
+                                        Text(
+                                            text = year?.toString() ?: "Все",
+                                            color = if (isSelected) brand.secondaryColor else Color.White,
+                                            fontWeight = FontWeight.Bold,
+                                            fontSize = 14.sp
+                                        )
+                                    }
                                 }
                             }
-                            item { Spacer(Modifier.height(60.dp)) }
+                            
+                            val filteredPlatforms = brand.platforms.filter { p -> 
+                                val sy = selectedYear
+                                if (sy == null) true else sy >= p.startYear && (p.endYear == null || sy <= p.endYear)
+                            }
+
+                            LazyColumn(
+                                modifier = Modifier.fillMaxSize(),
+                                contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp),
+                                verticalArrangement = Arrangement.spacedBy(16.dp)
+                            ) {
+                                items(filteredPlatforms) { platform ->
+                                    val count = diagnoses.count {
+                                        it.carBrand.contains(brand.shortName, ignoreCase = true) &&
+                                        it.encyclopediaPlatform.contains(platform.displayName.take(15), ignoreCase = true)
+                                    }
+                                    FolderItem(
+                                        icon = platform.icon,
+                                        title = platform.displayName,
+                                        subtitle = if (count > 0) "$count решений" else null,
+                                        accentColor = brand.primaryColor
+                                    ) {
+                                        selectedPlatform = platform
+                                        selectedSystem = null
+                                        selectedSubsystem = null
+                                        nav = EncNav.SYSTEMS
+                                    }
+                                }
+                                item { Spacer(Modifier.height(60.dp)) }
+                            }
                         }
                     }
 
@@ -463,11 +499,25 @@ private fun BrandCard(brand: EncBrand, onClick: () -> Unit) {
                     .padding(6.dp),
                 contentAlignment = Alignment.Center
             ) {
-                androidx.compose.foundation.Image(
-                    painter = androidx.compose.ui.res.painterResource(id = brand.logoResId),
-                    contentDescription = brand.shortName,
-                    modifier = Modifier.fillMaxSize()
-                )
+                if (brand.logoResId != null) {
+                    androidx.compose.foundation.Image(
+                        painter = androidx.compose.ui.res.painterResource(id = brand.logoResId),
+                        contentDescription = brand.shortName,
+                        modifier = Modifier.fillMaxSize()
+                    )
+                } else {
+                    Box(
+                        modifier = Modifier.fillMaxSize().background(brand.primaryColor, RoundedCornerShape(8.dp)),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Text(
+                            text = brand.shortName.take(3).uppercase(),
+                            color = brand.secondaryColor,
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 18.sp
+                        )
+                    }
+                }
             }
             Spacer(Modifier.height(6.dp))
             Text(
