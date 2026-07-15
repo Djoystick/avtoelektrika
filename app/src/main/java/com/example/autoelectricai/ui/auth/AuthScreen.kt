@@ -73,7 +73,7 @@ fun AuthScreen(
         ) {
             // App Logo or Icon
             Icon(
-                painter = painterResource(id = R.drawable.ic_launcher_foreground), // Ensure you have this
+                imageVector = Icons.Default.Lock,
                 contentDescription = "Logo",
                 tint = AmberPrimary,
                 modifier = Modifier.size(100.dp)

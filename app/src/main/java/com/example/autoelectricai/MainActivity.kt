@@ -37,12 +37,11 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         
-        // Remove signInAnonymouslyIfNeeded() from here to allow the AuthScreen to handle login
-        // signInAnonymouslyIfNeeded()
+        signInAnonymouslyIfNeeded()
         scheduleCloudSync()
 
         setContent {
-            val startDestination = if (auth.currentUser == null) "auth" else "diagnosis"
+            val startDestination = "diagnosis"
             AutoElectricTheme {
                 com.example.autoelectricai.ui.main.MainScreen(startDestination = startDestination)
             }
