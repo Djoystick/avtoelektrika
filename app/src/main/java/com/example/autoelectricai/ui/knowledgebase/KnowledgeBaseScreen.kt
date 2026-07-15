@@ -206,8 +206,8 @@ fun KnowledgeBaseScreen(
                             columns = GridCells.Fixed(4),
                             modifier = Modifier.fillMaxSize(),
                             contentPadding = PaddingValues(horizontal = 16.dp, vertical = 24.dp),
-                            horizontalArrangement = Arrangement.spacedBy(16.dp),
-                            verticalArrangement = Arrangement.spacedBy(16.dp)
+                            horizontalArrangement = Arrangement.spacedBy(10.dp),
+                            verticalArrangement = Arrangement.spacedBy(10.dp)
                         ) {
                             items(EncyclopediaCatalog.brands) { brand ->
                                 BrandCard(brand = brand, onClick = {
@@ -383,7 +383,7 @@ private fun BrandCard(brand: EncBrand, onClick: () -> Unit) {
         modifier = Modifier
             .aspectRatio(1f)
             .clickable(onClick = onClick),
-        colors = CardDefaults.cardColors(containerColor = Color.White),
+        colors = CardDefaults.cardColors(containerColor = DarkSurface),
         shape = RoundedCornerShape(12.dp),
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
     ) {
@@ -392,21 +392,16 @@ private fun BrandCard(brand: EncBrand, onClick: () -> Unit) {
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            // Brand color circle with initials
             Box(
                 modifier = Modifier
-                    .size(44.dp)
-                    .clip(RoundedCornerShape(8.dp))
-                    .background(
-                        Brush.radialGradient(listOf(brand.primaryColor, brand.primaryColor.copy(alpha = 0.7f)))
-                    ),
+                    .size(60.dp)
+                    .clip(RoundedCornerShape(8.dp)),
                 contentAlignment = Alignment.Center
             ) {
-                Icon(
+                androidx.compose.foundation.Image(
                     painter = androidx.compose.ui.res.painterResource(id = brand.logoResId),
                     contentDescription = brand.shortName,
-                    tint = brand.secondaryColor,
-                    modifier = Modifier.size(24.dp)
+                    modifier = Modifier.fillMaxSize()
                 )
             }
             Spacer(Modifier.height(4.dp))
@@ -463,16 +458,16 @@ private fun FolderItem(
         colors = CardDefaults.cardColors(containerColor = DarkSurface),
         shape = RoundedCornerShape(12.dp)
     ) {
-        Row(modifier = Modifier.padding(20.dp), verticalAlignment = Alignment.CenterVertically) {
+        Row(modifier = Modifier.padding(14.dp), verticalAlignment = Alignment.CenterVertically) {
             Box(
-                modifier = Modifier.size(48.dp).clip(RoundedCornerShape(12.dp))
+                modifier = Modifier.size(38.dp).clip(RoundedCornerShape(10.dp))
                     .background(accentColor.copy(alpha = 0.15f))
-                    .border(1.dp, accentColor.copy(alpha = 0.3f), RoundedCornerShape(10.dp)),
+                    .border(1.dp, accentColor.copy(alpha = 0.3f), RoundedCornerShape(8.dp)),
                 contentAlignment = Alignment.Center
             ) {
-                Text(icon, fontSize = 20.sp)
+                Text(icon, fontSize = 18.sp)
             }
-            Spacer(Modifier.width(14.dp))
+            Spacer(Modifier.width(12.dp))
             Column(modifier = Modifier.weight(1f)) {
                 Text(title, color = TextPrimary, fontSize = 14.sp, fontWeight = FontWeight.SemiBold)
                 if (subtitle != null) {

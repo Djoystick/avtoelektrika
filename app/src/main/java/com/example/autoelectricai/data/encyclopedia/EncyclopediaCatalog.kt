@@ -34,7 +34,7 @@ object EncyclopediaCatalog {
         EncBrand(
             id = "vaz", displayName = "ВАЗ (LADA)", shortName = "ВАЗ",
             primaryColor = Color(0xFFCC0000), secondaryColor = Color(0xFF1A1A2E),
-            logoResId = R.drawable.ic_logo_vaz,
+            logoResId = R.drawable.img_logo_vaz,
             platforms = listOf(
                 EncPlatform("classic", "Классика (2101–2107)", "📂", listOf(
                     EncSystem("wiring", "Электросхема бортовой сети (6V → 12V)", "⚡", listOf("Схемы", "Типовые проблемы")),
@@ -81,7 +81,7 @@ object EncyclopediaCatalog {
         EncBrand(
             id = "volkswagen", displayName = "Volkswagen", shortName = "VW",
             primaryColor = Color(0xFF003399), secondaryColor = Color(0xFFFFFFFF),
-            logoResId = R.drawable.ic_logo_volkswagen,
+            logoResId = R.drawable.img_logo_volkswagen,
             platforms = listOf(
                 EncPlatform("vag_common", "Общая архитектура VAG", "📂", listOf(
                     EncSystem("can", "CAN-шина: топология", "🌐", listOf("Comfort CAN", "Drive CAN", "Media CAN")),
@@ -123,7 +123,7 @@ object EncyclopediaCatalog {
         EncBrand(
             id = "toyota", displayName = "Toyota", shortName = "Toyota",
             primaryColor = Color(0xFFEB0A1E), secondaryColor = Color(0xFFFFFFFF),
-            logoResId = R.drawable.ic_logo_toyota,
+            logoResId = R.drawable.img_logo_toyota,
             platforms = listOf(
                 EncPlatform("common", "Общая архитектура Toyota", "📂", listOf(
                     EncSystem("can", "CAN-шина: Multi-CAN", "🌐", listOf("SFI", "Body", "DLC")),
@@ -161,7 +161,7 @@ object EncyclopediaCatalog {
         EncBrand(
             id = "ford", displayName = "Ford", shortName = "Ford",
             primaryColor = Color(0xFF003478), secondaryColor = Color(0xFFFFFFFF),
-            logoResId = R.drawable.ic_logo_ford,
+            logoResId = R.drawable.img_logo_ford,
             platforms = listOf(
                 EncPlatform("common", "Общая архитектура Ford", "📂", listOf(
                     EncSystem("can", "CAN HS / MS / LS шины", "🌐", listOf("3-шинная топология")),
@@ -204,7 +204,7 @@ object EncyclopediaCatalog {
         EncBrand(
             id = "audi", displayName = "Audi", shortName = "Audi",
             primaryColor = Color(0xFFBB0A30), secondaryColor = Color(0xFF000000),
-            logoResId = R.drawable.ic_logo_audi,
+            logoResId = R.drawable.img_logo_audi,
             platforms = listOf(
                 EncPlatform("common", "Общая архитектура Audi", "📂", listOf(
                     EncSystem("can", "CAN / MOST шины", "🌐", listOf("Drive", "Comfort", "Media", "MOST оптика")),
@@ -240,7 +240,7 @@ object EncyclopediaCatalog {
         EncBrand(
             id = "chevrolet", displayName = "Chevrolet", shortName = "Chevy",
             primaryColor = Color(0xFFD4AF37), secondaryColor = Color(0xFF000000),
-            logoResId = R.drawable.ic_logo_chevrolet,
+            logoResId = R.drawable.img_logo_chevrolet,
             platforms = listOf(
                 EncPlatform("gm_common", "Общая архитектура GM", "📂", listOf(
                     EncSystem("gmlan", "GMLAN HS / LS", "🌐", listOf("GM CAN")),
@@ -281,7 +281,7 @@ object EncyclopediaCatalog {
         EncBrand(
             id = "mitsubishi", displayName = "Mitsubishi", shortName = "Mitsu",
             primaryColor = Color(0xFFED1A3B), secondaryColor = Color(0xFF000000),
-            logoResId = R.drawable.ic_logo_mitsubishi,
+            logoResId = R.drawable.img_logo_mitsubishi,
             platforms = listOf(
                 EncPlatform("common", "Общая архитектура Mitsubishi", "📂", listOf(
                     EncSystem("can", "CAN-шина", "🌐", listOf("M-CAN", "Body CAN")),
@@ -322,7 +322,7 @@ object EncyclopediaCatalog {
         EncBrand(
             id = "honda", displayName = "Honda", shortName = "Honda",
             primaryColor = Color(0xFFCC0000), secondaryColor = Color(0xFFFFFFFF),
-            logoResId = R.drawable.ic_logo_honda,
+            logoResId = R.drawable.img_logo_honda,
             platforms = listOf(
                 EncPlatform("common", "Общая архитектура Honda", "📂", listOf(
                     EncSystem("can", "CAN шина (F-CAN, B-CAN)", "🌐", listOf("Топология F-CAN", "Топология B-CAN")),
