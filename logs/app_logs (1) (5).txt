@@ -1,210 +1,60 @@
-[2026-07-12 20:00:37] INFO/MainActivity: Signed in anonymously: oBH6n9jgiDXG8ZKf2dRnUKxZyzv1
-[2026-07-12 20:01:33] INFO/CloudSyncRepo: Successfully set role admin for j.j.niccals2@gmail.com
-[2026-07-12 20:01:33] INFO/CloudSyncRepo: Successfully set role admin for j.j.niccals2@gmail.com
-[2026-07-12 20:09:59] INFO/DiagnosisViewModel: Starting diagnosis for: BMW 5 Series
-[2026-07-12 20:10:40] INFO/DiagnosisViewModel: Diagnosis result: AiHit
-[2026-07-12 20:25:33] INFO/CloudSyncRepo: Successfully set role admin for j.j.niccals2@gmail.com
-[2026-07-12 20:26:16] INFO/DiagnosisViewModel: Starting diagnosis for: BMW 5 Series
-[2026-07-12 20:26:16] INFO/DiagnosisViewModel: Diagnosis result: LocalHit
-[2026-07-12 20:26:49] INFO/DiagnosisViewModel: Starting diagnosis for: BMW 5 Series
-[2026-07-12 20:27:35] ERROR/AiService: OpenAI timeout
-java.net.SocketTimeoutException: timeout
-	at okhttp3.internal.http2.Http2Stream$StreamTimeout.newTimeoutException(Http2Stream.kt:675)
-	at okhttp3.internal.http2.Http2Stream$StreamTimeout.exitAndThrowIfTimedOut(Http2Stream.kt:684)
-	at okhttp3.internal.http2.Http2Stream.takeHeaders(Http2Stream.kt:143)
-	at okhttp3.internal.http2.Http2ExchangeCodec.readResponseHeaders(Http2ExchangeCodec.kt:97)
-	at okhttp3.internal.connection.Exchange.readResponseHeaders(Exchange.kt:110)
-	at okhttp3.internal.http.CallServerInterceptor.intercept(CallServerInterceptor.kt:93)
-	at okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109)
-	at okhttp3.internal.connection.ConnectInterceptor.intercept(ConnectInterceptor.kt:34)
-	at okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109)
-	at okhttp3.internal.cache.CacheInterceptor.intercept(CacheInterceptor.kt:95)
-	at okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109)
-	at okhttp3.internal.http.BridgeInterceptor.intercept(BridgeInterceptor.kt:83)
-	at okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109)
-	at okhttp3.internal.http.RetryAndFollowUpInterceptor.intercept(RetryAndFollowUpInterceptor.kt:76)
-	at okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109)
-	at okhttp3.logging.HttpLoggingInterceptor.intercept(HttpLoggingInterceptor.kt:221)
-	at okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109)
-	at okhttp3.internal.connection.RealCall.getResponseWithInterceptorChain$okhttp(RealCall.kt:201)
-	at okhttp3.internal.connection.RealCall$AsyncCall.run(RealCall.kt:517)
+[2026-07-15 09:00:12] ERROR/CloudSyncRepo: Failed to pull community updates
+com.google.firebase.firestore.FirebaseFirestoreException: PERMISSION_DENIED: Missing or insufficient permissions.
+	at com.google.firebase.firestore.util.Util.exceptionFromStatus(Util.java:113)
+	at com.google.firebase.firestore.core.EventManager.onError(EventManager.java:247)
+	at com.google.firebase.firestore.core.SyncEngine.removeAndCleanupTarget(SyncEngine.java:642)
+	at com.google.firebase.firestore.core.SyncEngine.handleRejectedListen(SyncEngine.java:478)
+	at com.google.firebase.firestore.core.MemoryComponentProvider$RemoteStoreCallback.handleRejectedListen(MemoryComponentProvider.java:125)
+	at com.google.firebase.firestore.remote.RemoteStore.processTargetError(RemoteStore.java:596)
+	at com.google.firebase.firestore.remote.RemoteStore.handleWatchChange(RemoteStore.java:479)
+	at com.google.firebase.firestore.remote.RemoteStore.access$100(RemoteStore.java:60)
+	at com.google.firebase.firestore.remote.RemoteStore$1.onWatchChange(RemoteStore.java:188)
+	at com.google.firebase.firestore.remote.WatchStream.onNext(WatchStream.java:114)
+	at com.google.firebase.firestore.remote.WatchStream.onNext(WatchStream.java:38)
+	at com.google.firebase.firestore.remote.AbstractStream$StreamObserver.lambda$onNext$1$com-google-firebase-firestore-remote-AbstractStream$StreamObserver(AbstractStream.java:126)
+	at com.google.firebase.firestore.remote.AbstractStream$StreamObserver$$ExternalSyntheticLambda0.run(D8$$SyntheticClass:0)
+	at com.google.firebase.firestore.remote.AbstractStream$CloseGuardedRunner.run(AbstractStream.java:67)
+	at com.google.firebase.firestore.remote.AbstractStream$StreamObserver.onNext(AbstractStream.java:113)
+	at com.google.firebase.firestore.remote.FirestoreChannel$1.onMessage(FirestoreChannel.java:162)
+	at io.grpc.internal.DelayedClientCall$DelayedListener.onMessage(DelayedClientCall.java:473)
+	at io.grpc.internal.ClientCallImpl$ClientStreamListenerImpl$1MessagesAvailable.runInternal(ClientCallImpl.java:667)
+	at io.grpc.internal.ClientCallImpl$ClientStreamListenerImpl$1MessagesAvailable.runInContext(ClientCallImpl.java:654)
+	at io.grpc.internal.ContextRunnable.run(ContextRunnable.java:37)
+	at io.grpc.internal.SerializingExecutor.run(SerializingExecutor.java:133)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:520)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:328)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:323)
 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1100)
 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at com.google.firebase.firestore.util.AsyncQueue$SynchronizedShutdownAwareExecutor$DelayedStartFactory.run(AsyncQueue.java:235)
 	at java.lang.Thread.run(Thread.java:1572)
+Caused by: io.grpc.StatusException: PERMISSION_DENIED: Missing or insufficient permissions.
+	at io.grpc.Status.asException(Status.java:541)
+	at com.google.firebase.firestore.util.Util.exceptionFromStatus(Util.java:111)
+	... 27 more
 
-[2026-07-12 20:27:36] ERROR/AiService: Gemini HTTP error 400: {
-  "error": {
-    "code": 400,
-    "message": "User location is not supported for the API use.",
-    "status": "FAILED_PRECONDITION"
-  }
-}
+[2026-07-15 09:00:12] INFO/MainActivity: No cached session found, signed in anonymously: xk41Fe9vXBdSZhgp6QSVGWId9v52
+[2026-07-15 09:00:36] INFO/CloudSyncRepo: Successfully set role admin for j.j.niccals2@gmail.com
+[2026-07-15 09:00:36] INFO/CloudSyncRepo: Successfully set role admin for j.j.niccals2@gmail.com
+[2026-07-15 09:05:48] ERROR/AppUpdateManager: Download error
+java.lang.IllegalStateException: Flow invariant is violated:
+		Flow was collected in [StandaloneCoroutine{Active}@60306fa, Dispatchers.Main.immediate],
+		but emission happened in [DispatchedCoroutine{Active}@ac654ab, Dispatchers.IO].
+		Please refer to 'flow' documentation or use 'flowOn' instead
+	at kotlinx.coroutines.flow.internal.SafeCollector_commonKt.checkContext(SafeCollector.common.kt:84)
+	at kotlinx.coroutines.flow.internal.SafeCollector.checkContext(SafeCollector.kt:132)
+	at kotlinx.coroutines.flow.internal.SafeCollector.emit(SafeCollector.kt:109)
+	at kotlinx.coroutines.flow.internal.SafeCollector.emit(SafeCollector.kt:82)
+	at com.example.autoelectricai.data.update.AppUpdateManager$downloadUpdate$1$1.invokeSuspend(AppUpdateManager.kt:128)
+	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:33)
+	at kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:100)
+	at kotlinx.coroutines.internal.LimitedDispatcher$Worker.run(LimitedDispatcher.kt:124)
+	at kotlinx.coroutines.scheduling.TaskImpl.run(Tasks.kt:89)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler.runSafely(CoroutineScheduler.kt:586)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.executeTask(CoroutineScheduler.kt:820)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.runWorker(CoroutineScheduler.kt:717)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.run(CoroutineScheduler.kt:704)
 
-retrofit2.HttpException: HTTP 400 
-	at retrofit2.KotlinExtensions$await$2$2.onResponse(KotlinExtensions.kt:53)
-	at retrofit2.OkHttpCall$1.onResponse(OkHttpCall.java:164)
-	at okhttp3.internal.connection.RealCall$AsyncCall.run(RealCall.kt:519)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1100)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
-	at java.lang.Thread.run(Thread.java:1572)
-
-[2026-07-12 20:27:58] INFO/DiagnosisViewModel: Diagnosis result: AiHit
-[2026-07-12 20:35:37] INFO/DiagnosisViewModel: Starting diagnosis for: Ford Mondeo
-[2026-07-12 20:36:39] ERROR/AiService: OpenAI HTTP error 502: {"error":{"message":"Service is temporarily unavailable. Please retry in a moment.","type":"upstream_error","code":"upstream_transport_error"}}
-retrofit2.HttpException: HTTP 502 
-	at retrofit2.KotlinExtensions$await$2$2.onResponse(KotlinExtensions.kt:53)
-	at retrofit2.OkHttpCall$1.onResponse(OkHttpCall.java:164)
-	at okhttp3.internal.connection.RealCall$AsyncCall.run(RealCall.kt:519)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1100)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
-	at java.lang.Thread.run(Thread.java:1572)
-
-[2026-07-12 20:37:17] INFO/DiagnosisViewModel: Diagnosis result: AiHit
-[2026-07-12 20:37:34] INFO/CloudSyncRepo: Successfully pushed solution to cloud: iA3MxaQ09tSygVRtvgcK
-[2026-07-12 20:37:45] INFO/CloudSyncRepo: Successfully set role admin for j.j.niccals2@gmail.com
-[2026-07-12 20:38:11] INFO/CloudSyncRepo: Successfully set role admin for j.j.niccals2@gmail.com
-[2026-07-12 20:38:13] INFO/CloudSyncRepo: Pulled 4 updates from community
-[2026-07-12 20:39:06] INFO/CloudSyncRepo: Successfully set role admin for j.j.niccals2@gmail.com
-[2026-07-12 20:39:57] INFO/CloudSyncRepo: Successfully set role admin for j.j.niccals2@gmail.com
-[2026-07-12 21:26:49] INFO/CloudSyncRepo: Pulled 4 updates from community
-[2026-07-12 21:29:07] INFO/CloudSyncRepo: Successfully set role admin for j.j.niccals2@gmail.com
-[2026-07-12 21:44:47] INFO/CloudSyncRepo: Successfully set role admin for j.j.niccals2@gmail.com
-[2026-07-12 21:45:34] ERROR/AppUpdateManager: Failed to upload update
-com.google.firebase.storage.StorageException: Object does not exist at location.
-	at com.google.firebase.storage.UploadTask.snapStateImpl(UploadTask.java:574)
-	at com.google.firebase.storage.UploadTask.snapStateImpl(UploadTask.java:57)
-	at com.google.firebase.storage.StorageTask.snapState(StorageTask.java:344)
-	at com.google.firebase.storage.StorageTask.getFinalResult(StorageTask.java:454)
-	at com.google.firebase.storage.StorageTask.getException(StorageTask.java:314)
-	at kotlinx.coroutines.tasks.TasksKt$awaitImpl$2$1.onComplete(Tasks.kt:139)
-	at com.google.firebase.storage.StorageTask.lambda$new$2$com-google-firebase-storage-StorageTask(StorageTask.java:144)
-	at com.google.firebase.storage.StorageTask$$ExternalSyntheticLambda5.raise(D8$$SyntheticClass:0)
-	at com.google.firebase.storage.TaskListenerImpl.lambda$onInternalStateChanged$2$com-google-firebase-storage-TaskListenerImpl(TaskListenerImpl.java:90)
-	at com.google.firebase.storage.TaskListenerImpl$$ExternalSyntheticLambda0.run(D8$$SyntheticClass:0)
-	at kotlinx.coroutines.tasks.DirectExecutor.execute(Tasks.kt:161)
-	at com.google.firebase.storage.internal.SmartHandler.callBack(SmartHandler.java:69)
-	at com.google.firebase.storage.TaskListenerImpl.onInternalStateChanged(TaskListenerImpl.java:90)
-	at com.google.firebase.storage.StorageTask.tryChangeState(StorageTask.java:393)
-	at com.google.firebase.storage.StorageTask.tryChangeState(StorageTask.java:427)
-	at com.google.firebase.storage.UploadTask.serverStateValid(UploadTask.java:362)
-	at com.google.firebase.storage.UploadTask.shouldContinue(UploadTask.java:325)
-	at com.google.firebase.storage.UploadTask.run(UploadTask.java:246)
-	at com.google.firebase.storage.StorageTask.lambda$getRunnable$7$com-google-firebase-storage-StorageTask(StorageTask.java:1078)
-	at com.google.firebase.storage.StorageTask$$ExternalSyntheticLambda1.run(D8$$SyntheticClass:0)
-	at com.google.firebase.concurrent.LimitedConcurrencyExecutor.lambda$decorate$0$com-google-firebase-concurrent-LimitedConcurrencyExecutor(LimitedConcurrencyExecutor.java:65)
-	at com.google.firebase.concurrent.LimitedConcurrencyExecutor$$ExternalSyntheticLambda0.run(D8$$SyntheticClass:0)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1100)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
-	at com.google.firebase.concurrent.CustomThreadFactory.lambda$newThread$0$com-google-firebase-concurrent-CustomThreadFactory(CustomThreadFactory.java:47)
-	at com.google.firebase.concurrent.CustomThreadFactory$$ExternalSyntheticLambda0.run(D8$$SyntheticClass:0)
-	at java.lang.Thread.run(Thread.java:1572)
-Caused by: java.io.IOException: The server has terminated the upload session
-	at com.google.firebase.storage.UploadTask.serverStateValid(UploadTask.java:359)
-	... 11 more
-Caused by: java.io.IOException: {  "error": {    "code": 404,    "message": "Not Found."  }}
-	at com.google.firebase.storage.network.NetworkRequest.parseResponse(NetworkRequest.java:415)
-	at com.google.firebase.storage.network.NetworkRequest.parseErrorResponse(NetworkRequest.java:432)
-	at com.google.firebase.storage.network.NetworkRequest.processResponseStream(NetworkRequest.java:423)
-	at com.google.firebase.storage.network.NetworkRequest.performRequest(NetworkRequest.java:265)
-	at com.google.firebase.storage.network.NetworkRequest.performRequest(NetworkRequest.java:282)
-	at com.google.firebase.storage.internal.ExponentialBackoffSender.sendWithExponentialBackoff(ExponentialBackoffSender.java:76)
-	at com.google.firebase.storage.internal.ExponentialBackoffSender.sendWithExponentialBackoff(ExponentialBackoffSender.java:68)
-	at com.google.firebase.storage.UploadTask.sendWithRetry(UploadTask.java:527)
-	at com.google.firebase.storage.UploadTask.beginResumableUpload(UploadTask.java:293)
-	at com.google.firebase.storage.UploadTask.run(UploadTask.java:241)
-	... 9 more
-
-[2026-07-12 22:19:55] INFO/CloudSyncRepo: Pulled 5 updates from community
-[2026-07-12 22:20:02] INFO/CloudSyncRepo: Successfully set role admin for j.j.niccals2@gmail.com
-[2026-07-12 22:21:18] ERROR/AppUpdateManager: Failed to upload update
-com.google.firebase.storage.StorageException: Object does not exist at location.
-	at com.google.firebase.storage.UploadTask.snapStateImpl(UploadTask.java:574)
-	at com.google.firebase.storage.UploadTask.snapStateImpl(UploadTask.java:57)
-	at com.google.firebase.storage.StorageTask.snapState(StorageTask.java:344)
-	at com.google.firebase.storage.TaskListenerImpl.onInternalStateChanged(TaskListenerImpl.java:85)
-	at com.google.firebase.storage.StorageTask.tryChangeState(StorageTask.java:391)
-	at com.google.firebase.storage.StorageTask.tryChangeState(StorageTask.java:427)
-	at com.google.firebase.storage.UploadTask.serverStateValid(UploadTask.java:362)
-	at com.google.firebase.storage.UploadTask.shouldContinue(UploadTask.java:325)
-	at com.google.firebase.storage.UploadTask.run(UploadTask.java:246)
-	at com.google.firebase.storage.StorageTask.lambda$getRunnable$7$com-google-firebase-storage-StorageTask(StorageTask.java:1078)
-	at com.google.firebase.storage.StorageTask$$ExternalSyntheticLambda1.run(D8$$SyntheticClass:0)
-	at com.google.firebase.concurrent.LimitedConcurrencyExecutor.lambda$decorate$0$com-google-firebase-concurrent-LimitedConcurrencyExecutor(LimitedConcurrencyExecutor.java:65)
-	at com.google.firebase.concurrent.LimitedConcurrencyExecutor$$ExternalSyntheticLambda0.run(D8$$SyntheticClass:0)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1100)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
-	at com.google.firebase.concurrent.CustomThreadFactory.lambda$newThread$0$com-google-firebase-concurrent-CustomThreadFactory(CustomThreadFactory.java:47)
-	at com.google.firebase.concurrent.CustomThreadFactory$$ExternalSyntheticLambda0.run(D8$$SyntheticClass:0)
-	at java.lang.Thread.run(Thread.java:1572)
-Caused by: java.io.IOException: The server has terminated the upload session
-	at com.google.firebase.storage.UploadTask.serverStateValid(UploadTask.java:359)
-	... 11 more
-Caused by: java.io.IOException: {  "error": {    "code": 404,    "message": "Not Found."  }}
-	at com.google.firebase.storage.network.NetworkRequest.parseResponse(NetworkRequest.java:415)
-	at com.google.firebase.storage.network.NetworkRequest.parseErrorResponse(NetworkRequest.java:432)
-	at com.google.firebase.storage.network.NetworkRequest.processResponseStream(NetworkRequest.java:423)
-	at com.google.firebase.storage.network.NetworkRequest.performRequest(NetworkRequest.java:265)
-	at com.google.firebase.storage.network.NetworkRequest.performRequest(NetworkRequest.java:282)
-	at com.google.firebase.storage.internal.ExponentialBackoffSender.sendWithExponentialBackoff(ExponentialBackoffSender.java:76)
-	at com.google.firebase.storage.internal.ExponentialBackoffSender.sendWithExponentialBackoff(ExponentialBackoffSender.java:68)
-	at com.google.firebase.storage.UploadTask.sendWithRetry(UploadTask.java:527)
-	at com.google.firebase.storage.UploadTask.beginResumableUpload(UploadTask.java:293)
-	at com.google.firebase.storage.UploadTask.run(UploadTask.java:241)
-	... 9 more
-
-[2026-07-12 22:21:41] ERROR/AppUpdateManager: Failed to upload update
-com.google.firebase.storage.StorageException: Object does not exist at location.
-	at com.google.firebase.storage.UploadTask.snapStateImpl(UploadTask.java:574)
-	at com.google.firebase.storage.UploadTask.snapStateImpl(UploadTask.java:57)
-	at com.google.firebase.storage.StorageTask.snapState(StorageTask.java:344)
-	at com.google.firebase.storage.TaskListenerImpl.onInternalStateChanged(TaskListenerImpl.java:85)
-	at com.google.firebase.storage.StorageTask.tryChangeState(StorageTask.java:391)
-	at com.google.firebase.storage.StorageTask.tryChangeState(StorageTask.java:427)
-	at com.google.firebase.storage.UploadTask.serverStateValid(UploadTask.java:362)
-	at com.google.firebase.storage.UploadTask.shouldContinue(UploadTask.java:325)
-	at com.google.firebase.storage.UploadTask.run(UploadTask.java:246)
-	at com.google.firebase.storage.StorageTask.lambda$getRunnable$7$com-google-firebase-storage-StorageTask(StorageTask.java:1078)
-	at com.google.firebase.storage.StorageTask$$ExternalSyntheticLambda1.run(D8$$SyntheticClass:0)
-	at com.google.firebase.concurrent.LimitedConcurrencyExecutor.lambda$decorate$0$com-google-firebase-concurrent-LimitedConcurrencyExecutor(LimitedConcurrencyExecutor.java:65)
-	at com.google.firebase.concurrent.LimitedConcurrencyExecutor$$ExternalSyntheticLambda0.run(D8$$SyntheticClass:0)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1100)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
-	at com.google.firebase.concurrent.CustomThreadFactory.lambda$newThread$0$com-google-firebase-concurrent-CustomThreadFactory(CustomThreadFactory.java:47)
-	at com.google.firebase.concurrent.CustomThreadFactory$$ExternalSyntheticLambda0.run(D8$$SyntheticClass:0)
-	at java.lang.Thread.run(Thread.java:1572)
-Caused by: java.io.IOException: The server has terminated the upload session
-	at com.google.firebase.storage.UploadTask.serverStateValid(UploadTask.java:359)
-	... 11 more
-Caused by: java.io.IOException: {  "error": {    "code": 404,    "message": "Not Found."  }}
-	at com.google.firebase.storage.network.NetworkRequest.parseResponse(NetworkRequest.java:415)
-	at com.google.firebase.storage.network.NetworkRequest.parseErrorResponse(NetworkRequest.java:432)
-	at com.google.firebase.storage.network.NetworkRequest.processResponseStream(NetworkRequest.java:423)
-	at com.google.firebase.storage.network.NetworkRequest.performRequest(NetworkRequest.java:265)
-	at com.google.firebase.storage.network.NetworkRequest.performRequest(NetworkRequest.java:282)
-	at com.google.firebase.storage.internal.ExponentialBackoffSender.sendWithExponentialBackoff(ExponentialBackoffSender.java:76)
-	at com.google.firebase.storage.internal.ExponentialBackoffSender.sendWithExponentialBackoff(ExponentialBackoffSender.java:68)
-	at com.google.firebase.storage.UploadTask.sendWithRetry(UploadTask.java:527)
-	at com.google.firebase.storage.UploadTask.beginResumableUpload(UploadTask.java:293)
-	at com.google.firebase.storage.UploadTask.run(UploadTask.java:241)
-	... 9 more
-
-[2026-07-13 00:49:15] INFO/CloudSyncRepo: Pulled 5 updates from community
-[2026-07-13 00:49:17] INFO/CloudSyncRepo: Successfully set role admin for j.j.niccals2@gmail.com
-[2026-07-13 00:50:24] INFO/CloudSyncRepo: Successfully set role admin for j.j.niccals2@gmail.com
-[2026-07-14 19:43:42] INFO/CloudSyncRepo: Successfully set role admin for j.j.niccals2@gmail.com
-[2026-07-14 19:43:47] INFO/CloudSyncRepo: Pulled 5 updates from community
-[2026-07-14 19:45:52] INFO/CloudSyncRepo: Successfully set role admin for j.j.niccals2@gmail.com
-[2026-07-15 00:10:16] INFO/CloudSyncRepo: Pulled 5 updates from community
-[2026-07-15 00:11:27] INFO/DiagnosisViewModel: Starting diagnosis for: Chevrolet Epica
-[2026-07-15 00:12:41] INFO/DiagnosisViewModel: Diagnosis result: AiHit
-[2026-07-15 00:13:39] INFO/CloudSyncRepo: Successfully set role admin for j.j.niccals2@gmail.com
-[2026-07-15 00:15:15] INFO/CloudSyncRepo: Successfully set role admin for j.j.niccals2@gmail.com
-[2026-07-15 00:15:26] INFO/CloudSyncRepo: Pulled 5 updates from community
-[2026-07-15 01:45:38] INFO/CloudSyncRepo: Pulled 6 updates from community
-[2026-07-15 01:45:43] INFO/CloudSyncRepo: Successfully set role admin for j.j.niccals2@gmail.com
-[2026-07-15 01:46:07] INFO/DiagnosisViewModel: Starting diagnosis for: BMW 6 Series
-[2026-07-15 01:47:21] INFO/DiagnosisViewModel: Diagnosis result: AiHit
-[2026-07-15 01:47:31] INFO/CloudSyncRepo: Successfully pushed solution to cloud: dey3wk1kV04QGuxYrlfX
-[2026-07-15 01:47:36] INFO/CloudSyncRepo: Successfully set role admin for j.j.niccals2@gmail.com
-[2026-07-15 01:47:52] INFO/CloudSyncRepo: Successfully set role admin for j.j.niccals2@gmail.com
-[2026-07-15 01:48:00] INFO/CloudSyncRepo: Successfully set role admin for j.j.niccals2@gmail.com
+[2026-07-15 09:05:50] INFO/MainActivity: User already present on start: j.j.niccals2@gmail.com
+[2026-07-15 09:05:51] INFO/CloudSyncRepo: Pulled 7 updates from community
+[2026-07-15 09:05:52] INFO/CloudSyncRepo: Successfully set role admin for j.j.niccals2@gmail.com

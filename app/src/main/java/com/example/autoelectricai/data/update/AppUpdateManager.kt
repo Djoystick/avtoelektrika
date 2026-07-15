@@ -17,6 +17,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.tasks.await
 import java.io.File
 import javax.inject.Inject
@@ -93,84 +94,82 @@ class AppUpdateManager @Inject constructor(
             val client = okhttp3.OkHttpClient()
             val request = okhttp3.Request.Builder().url(url).build()
             
-            kotlinx.coroutines.withContext(kotlinx.coroutines.Dispatchers.IO) {
-                val response = client.newCall(request).execute()
-                if (!response.isSuccessful) {
-                    emit(DownloadState.Error("Ошибка скачивания: ${response.code}"))
-                    return@withContext
-                }
-
-                val body = response.body
-                if (body == null) {
-                    emit(DownloadState.Error("Пустой ответ от сервера"))
-                    return@withContext
-                }
-
-                val contentLength = body.contentLength()
-                val totalMb = if (contentLength > 0) contentLength / (1024f * 1024f) else 0f
-                
-                val dir = context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS)
-                if (dir != null && !dir.exists()) {
-                    dir.mkdirs()
-                }
-                
-                val file = File(dir, fileName)
-                if (file.exists()) file.delete()
-                
-                val inputStream = body.byteStream()
-                val outputStream = java.io.FileOutputStream(file)
-                
-                val buffer = ByteArray(8 * 1024)
-                var bytesCopied = 0L
-                var bytesCopiedInLastSecond = 0L
-                var lastTime = System.currentTimeMillis()
-                
-                emit(DownloadState.Downloading(0, 0f, totalMb, 0f, totalMb))
-                
-                var bytes = inputStream.read(buffer)
-                while (bytes >= 0) {
-                    // Check for cancellation
-                    kotlinx.coroutines.yield()
-                    
-                    outputStream.write(buffer, 0, bytes)
-                    bytesCopied += bytes
-                    bytesCopiedInLastSecond += bytes
-                    
-                    val currentTime = System.currentTimeMillis()
-                    val timeDiff = currentTime - lastTime
-                    if (timeDiff >= 500) {
-                        val speedBytesPerSec = (bytesCopiedInLastSecond * 1000f) / timeDiff
-                        val speedMbPerSec = speedBytesPerSec / (1024f * 1024f)
-                        
-                        val downloadedMb = bytesCopied / (1024f * 1024f)
-                        val remainingMb = totalMb - downloadedMb
-                        val progress = if (contentLength > 0) ((bytesCopied * 100L) / contentLength).toInt() else 0
-                        
-                        emit(DownloadState.Downloading(
-                            progress = progress,
-                            downloadedMb = downloadedMb,
-                            totalMb = totalMb,
-                            speedMbPerSec = speedMbPerSec,
-                            remainingMb = remainingMb
-                        ))
-                        
-                        bytesCopiedInLastSecond = 0
-                        lastTime = currentTime
-                    }
-                    bytes = inputStream.read(buffer)
-                }
-                
-                outputStream.flush()
-                outputStream.close()
-                inputStream.close()
-                
-                val uri = FileProvider.getUriForFile(
-                    context,
-                    "${context.packageName}.fileprovider",
-                    file
-                )
-                emit(DownloadState.Downloaded(uri))
+            val response = client.newCall(request).execute()
+            if (!response.isSuccessful) {
+                emit(DownloadState.Error("Ошибка скачивания: ${response.code}"))
+                return@flow
             }
+
+            val body = response.body
+            if (body == null) {
+                emit(DownloadState.Error("Пустой ответ от сервера"))
+                return@flow
+            }
+
+            val contentLength = body.contentLength()
+            val totalMb = if (contentLength > 0) contentLength / (1024f * 1024f) else 0f
+            
+            val dir = context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS)
+            if (dir != null && !dir.exists()) {
+                dir.mkdirs()
+            }
+            
+            val file = File(dir, fileName)
+            if (file.exists()) file.delete()
+            
+            val inputStream = body.byteStream()
+            val outputStream = java.io.FileOutputStream(file)
+            
+            val buffer = ByteArray(8 * 1024)
+            var bytesCopied = 0L
+            var bytesCopiedInLastSecond = 0L
+            var lastTime = System.currentTimeMillis()
+            
+            emit(DownloadState.Downloading(0, 0f, totalMb, 0f, totalMb))
+            
+            var bytes = inputStream.read(buffer)
+            while (bytes >= 0) {
+                // Check for cancellation
+                kotlinx.coroutines.yield()
+                
+                outputStream.write(buffer, 0, bytes)
+                bytesCopied += bytes
+                bytesCopiedInLastSecond += bytes
+                
+                val currentTime = System.currentTimeMillis()
+                val timeDiff = currentTime - lastTime
+                if (timeDiff >= 500) {
+                    val speedBytesPerSec = (bytesCopiedInLastSecond * 1000f) / timeDiff
+                    val speedMbPerSec = speedBytesPerSec / (1024f * 1024f)
+                    
+                    val downloadedMb = bytesCopied / (1024f * 1024f)
+                    val remainingMb = totalMb - downloadedMb
+                    val progress = if (contentLength > 0) ((bytesCopied * 100L) / contentLength).toInt() else 0
+                    
+                    emit(DownloadState.Downloading(
+                        progress = progress,
+                        downloadedMb = downloadedMb,
+                        totalMb = totalMb,
+                        speedMbPerSec = speedMbPerSec,
+                        remainingMb = remainingMb
+                    ))
+                    
+                    bytesCopiedInLastSecond = 0
+                    lastTime = currentTime
+                }
+                bytes = inputStream.read(buffer)
+            }
+            
+            outputStream.flush()
+            outputStream.close()
+            inputStream.close()
+            
+            val uri = FileProvider.getUriForFile(
+                context,
+                "${context.packageName}.fileprovider",
+                file
+            )
+            emit(DownloadState.Downloaded(uri))
         } catch (e: kotlinx.coroutines.CancellationException) {
             AppLogger.i(TAG, "Download cancelled")
             throw e
@@ -178,5 +177,5 @@ class AppUpdateManager @Inject constructor(
             AppLogger.e(TAG, "Download error", e)
             emit(DownloadState.Error(e.message ?: "Неизвестная ошибка скачивания"))
         }
-    }
+    }.flowOn(kotlinx.coroutines.Dispatchers.IO)
 }

@@ -1,4 +1,4 @@
 {
-  "versionName": "1.7.11",
-  "releaseNotes": "Тестовое обновление: Проверка новой системы ручной проверки обновлений."
+  "versionName": "1.7.12",
+  "releaseNotes": "Hotfix: Исправлена ошибка загрузки обновлений (Flow Invariant Violation)."
 }

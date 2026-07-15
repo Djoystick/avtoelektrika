@@ -565,6 +565,7 @@ fun SettingsScreen(
 @Composable
 fun ChangelogDialog(onDismiss: () -> Unit) {
     val changelog = listOf(
+        "v1.7.12" to "Hotfix: Исправлена ошибка загрузки обновлений (Flow Invariant Violation).",
         "v1.7.11" to "Тестовое обновление: Проверка новой системы ручной проверки обновлений.",
         "v1.7.10" to "Hotfix: Исправлен критический сбой при запуске приложения на старых устройствах.",
         "v1.7.9" to "Автоматизированная система обновлений через GitHub Releases. Больше никакой рутины! 🎉",
