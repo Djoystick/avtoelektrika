@@ -73,6 +73,7 @@ fun BookmarksScreen(
                         Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Назад", tint = TextPrimary)
                     }
                 },
+                windowInsets = WindowInsets(0, 0, 0, 0),
                 colors = TopAppBarDefaults.topAppBarColors(containerColor = DarkSurface)
             )
         }
@@ -189,7 +190,25 @@ private fun BookmarkCard(
                     Spacer(Modifier.height(8.dp))
                     
                     Text("Решение", color = TextHint, fontSize = 11.sp, fontWeight = FontWeight.Bold)
-                    Text(entity.solution, color = SuccessGreen, fontSize = 13.sp)
+                    
+                    val formattedSolution = try {
+                        val gson = com.google.gson.Gson()
+                        val cleaned = entity.solution.replace("```json", "").replace("```", "").trim()
+                        val parsed = gson.fromJson(cleaned, com.example.autoelectricai.data.ai.DiagnosisResponse::class.java)
+                        if (parsed != null && parsed.solutions.isNotEmpty()) {
+                            parsed.solutions.joinToString(separator = "\n\n") { solution ->
+                                val t = if (solution.title.isBlank()) "" else "🔹 ${solution.title}\n"
+                                val desc = if (solution.description.isNullOrBlank()) "" else "${solution.description}\n"
+                                val stps = if (solution.steps.isEmpty()) "" else solution.steps.joinToString("\n") { "• $it" }
+                                "$t$desc$stps".trim()
+                            }
+                        } else {
+                            entity.solution
+                        }
+                    } catch (e: Exception) {
+                        entity.solution
+                    }
+                    Text(formattedSolution, color = SuccessGreen, fontSize = 13.sp)
                     
                     Spacer(Modifier.height(16.dp))
 
