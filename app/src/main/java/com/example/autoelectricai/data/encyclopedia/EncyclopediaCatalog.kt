@@ -3,6 +3,13 @@ package com.example.autoelectricai.data.encyclopedia
 import androidx.compose.ui.graphics.Color
 import com.example.autoelectricai.R
 
+data class EncCountry(
+    val id: String,
+    val displayName: String,
+    val flagEmoji: String,
+    val brands: List<EncBrand>
+)
+
 data class EncBrand(
     val id: String,
     val displayName: String,
@@ -29,7 +36,13 @@ data class EncSystem(
 
 object EncyclopediaCatalog {
 
-    val brands: List<EncBrand> = listOf(
+    val countries: List<EncCountry> = listOf(
+        // Россия
+        EncCountry(
+            id = "russia",
+            displayName = "Россия",
+            flagEmoji = "🇷🇺",
+            brands = listOf(
         // ВАЗ (LADA)
         EncBrand(
             id = "vaz", displayName = "ВАЗ (LADA)", shortName = "ВАЗ",
@@ -72,12 +85,18 @@ object EncyclopediaCatalog {
                 EncPlatform("vesta_akpp", "Веста / XRAY с АКПП", "📂", listOf(
                     EncSystem("tcu", "Электронное управление АКПП (TCU)", "⚙️", listOf("Распиновка", "Схема")),
                     EncSystem("dtc", "Коды ошибок трансмиссии", "❌", listOf("Расшифровка")),
-                    EncSystem("adapt", "Адаптация и сброс TCU", "🔄", listOf("Процедура"))
                 ))
             )
-        ),
+        )
+        ) // close brands for russia
+        ), // close EncCountry russia
 
-        // Volkswagen
+        // Германия
+        EncCountry(
+            id = "germany",
+            displayName = "Германия",
+            flagEmoji = "🇩🇪",
+            brands = listOf(
         EncBrand(
             id = "volkswagen", displayName = "Volkswagen", shortName = "VW",
             primaryColor = Color(0xFF003399), secondaryColor = Color(0xFFFFFFFF),
@@ -359,5 +378,11 @@ object EncyclopediaCatalog {
                 ))
             )
         )
-    )
+        ) // close brands for germany
+        ) // close EncCountry germany
+    ) // close countries list
+
+    // Flat list of all brands for backward compatibility and cross-searching
+    val brands: List<EncBrand>
+        get() = countries.flatMap { it.brands }
 }

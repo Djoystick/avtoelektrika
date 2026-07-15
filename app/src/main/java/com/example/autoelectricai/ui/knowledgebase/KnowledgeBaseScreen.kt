@@ -34,6 +34,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.autoelectricai.data.db.DiagnosisEntity
 import com.example.autoelectricai.data.encyclopedia.EncBrand
+import com.example.autoelectricai.data.encyclopedia.EncCountry
 import com.example.autoelectricai.data.encyclopedia.EncPlatform
 import com.example.autoelectricai.data.encyclopedia.EncSystem
 import com.example.autoelectricai.data.encyclopedia.EncyclopediaCatalog
@@ -41,7 +42,7 @@ import com.example.autoelectricai.theme.*
 import java.text.SimpleDateFormat
 import java.util.*
 
-private enum class EncNav { BRANDS, PLATFORMS, SYSTEMS, SUBSYSTEMS, ARTICLES }
+private enum class EncNav { COUNTRIES, BRANDS, PLATFORMS, SYSTEMS, SUBSYSTEMS, ARTICLES }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -53,7 +54,8 @@ fun KnowledgeBaseScreen(
     val isLoading by viewModel.isLoading.collectAsStateWithLifecycle()
     val currentUserRole by viewModel.currentUserRole.collectAsStateWithLifecycle()
 
-    var nav by remember { mutableStateOf(EncNav.BRANDS) }
+    var nav by remember { mutableStateOf(EncNav.COUNTRIES) }
+    var selectedCountry by remember { mutableStateOf<EncCountry?>(null) }
     var selectedBrand by remember { mutableStateOf<EncBrand?>(null) }
     var selectedPlatform by remember { mutableStateOf<EncPlatform?>(null) }
     var selectedSystem by remember { mutableStateOf<EncSystem?>(null) }
@@ -67,16 +69,17 @@ fun KnowledgeBaseScreen(
 
     fun goBack() = when (nav) {
         EncNav.ARTICLES -> {
-            if (selectedBrand == null) nav = EncNav.BRANDS
+            if (selectedBrand == null) nav = EncNav.COUNTRIES
             else nav = EncNav.SUBSYSTEMS
         }
         EncNav.SUBSYSTEMS -> nav = EncNav.SYSTEMS
         EncNav.SYSTEMS -> nav = EncNav.PLATFORMS
         EncNav.PLATFORMS -> nav = EncNav.BRANDS
-        EncNav.BRANDS -> {}
+        EncNav.BRANDS -> nav = EncNav.COUNTRIES
+        EncNav.COUNTRIES -> {}
     }
 
-    BackHandler(enabled = nav != EncNav.BRANDS) { goBack() }
+    BackHandler(enabled = nav != EncNav.COUNTRIES) { goBack() }
 
     // Addendum Dialog
     if (addendumEntity != null) {
@@ -133,7 +136,8 @@ fun KnowledgeBaseScreen(
             TopAppBar(
                 title = {
                     val title = when (nav) {
-                        EncNav.BRANDS -> "Энциклопедия"
+                        EncNav.COUNTRIES -> "Энциклопедия"
+                        EncNav.BRANDS -> selectedCountry?.displayName ?: "Марки"
                         EncNav.PLATFORMS -> selectedBrand?.displayName ?: "Платформы"
                         EncNav.SYSTEMS -> selectedPlatform?.displayName ?: "Системы"
                         EncNav.SUBSYSTEMS -> selectedSystem?.displayName ?: "Разделы"
@@ -142,7 +146,7 @@ fun KnowledgeBaseScreen(
                     Text(title, color = TextPrimary, fontWeight = FontWeight.Bold, maxLines = 1, overflow = TextOverflow.Ellipsis)
                 },
                 navigationIcon = {
-                    if (nav != EncNav.BRANDS) {
+                    if (nav != EncNav.COUNTRIES) {
                         IconButton(onClick = { goBack() }) {
                             Icon(Icons.AutoMirrored.Filled.ArrowBack, "Назад", tint = TextPrimary)
                         }
@@ -156,7 +160,7 @@ fun KnowledgeBaseScreen(
         Column(modifier = Modifier.fillMaxSize().padding(padding)) {
 
             // Breadcrumb trail
-            if (nav != EncNav.BRANDS) {
+            if (nav != EncNav.COUNTRIES) {
                 Row(
                     modifier = Modifier.fillMaxWidth().background(DarkSurface2)
                         .horizontalScroll(rememberScrollState())
@@ -165,8 +169,14 @@ fun KnowledgeBaseScreen(
                     horizontalArrangement = Arrangement.spacedBy(4.dp)
                 ) {
                     Text("База", color = TextHint, fontSize = 11.sp,
-                        modifier = Modifier.clickable { nav = EncNav.BRANDS })
-                    if (selectedBrand != null) {
+                        modifier = Modifier.clickable { nav = EncNav.COUNTRIES })
+                    if (selectedCountry != null) {
+                        Icon(Icons.AutoMirrored.Filled.KeyboardArrowRight, null, tint = TextHint, modifier = Modifier.size(14.dp))
+                        Text("${selectedCountry!!.flagEmoji} ${selectedCountry!!.displayName}",
+                            color = if (nav == EncNav.BRANDS) AmberPrimary else TextHint,
+                            fontSize = 11.sp, modifier = Modifier.clickable { nav = EncNav.BRANDS })
+                    }
+                    if (selectedBrand != null && nav >= EncNav.PLATFORMS) {
                         Icon(Icons.AutoMirrored.Filled.KeyboardArrowRight, null, tint = TextHint, modifier = Modifier.size(14.dp))
                         Text(selectedBrand!!.shortName,
                             color = if (nav == EncNav.PLATFORMS) AmberPrimary else TextHint,
@@ -201,8 +211,40 @@ fun KnowledgeBaseScreen(
             ) { currentNav ->
                 when (currentNav) {
 
+                    // ─── COUNTRIES GRID ──────────────────────────────────────────
+                    EncNav.COUNTRIES -> {
+                        LazyVerticalGrid(
+                            columns = GridCells.Fixed(3),
+                            modifier = Modifier.fillMaxSize(),
+                            contentPadding = PaddingValues(horizontal = 16.dp, vertical = 24.dp),
+                            horizontalArrangement = Arrangement.spacedBy(10.dp),
+                            verticalArrangement = Arrangement.spacedBy(10.dp)
+                        ) {
+                            items(EncyclopediaCatalog.countries) { country ->
+                                CountryCard(country = country, onClick = {
+                                    selectedCountry = country
+                                    selectedBrand = null
+                                    selectedPlatform = null
+                                    selectedSystem = null
+                                    selectedSubsystem = null
+                                    nav = EncNav.BRANDS
+                                })
+                            }
+                            // Extra tile: "All / Community"
+                            item {
+                                CommunityCard(onClick = {
+                                    selectedCountry = null
+                                    selectedBrand = null; selectedPlatform = null
+                                    selectedSystem = null; selectedSubsystem = null
+                                    nav = EncNav.ARTICLES
+                                })
+                            }
+                        }
+                    }
+
                     // ─── BRANDS GRID ──────────────────────────────────────────
                     EncNav.BRANDS -> {
+                        val country = selectedCountry ?: return@AnimatedContent
                         LazyVerticalGrid(
                             columns = GridCells.Fixed(4),
                             modifier = Modifier.fillMaxSize(),
@@ -210,21 +252,13 @@ fun KnowledgeBaseScreen(
                             horizontalArrangement = Arrangement.spacedBy(10.dp),
                             verticalArrangement = Arrangement.spacedBy(10.dp)
                         ) {
-                            items(EncyclopediaCatalog.brands) { brand ->
+                            items(country.brands) { brand ->
                                 BrandCard(brand = brand, onClick = {
                                     selectedBrand = brand
                                     selectedPlatform = null
                                     selectedSystem = null
                                     selectedSubsystem = null
                                     nav = EncNav.PLATFORMS
-                                })
-                            }
-                            // Extra tile: "All / Community"
-                            item {
-                                CommunityCard(onClick = {
-                                    selectedBrand = null; selectedPlatform = null
-                                    selectedSystem = null; selectedSubsystem = null
-                                    nav = EncNav.ARTICLES
                                 })
                             }
                         }
@@ -378,6 +412,34 @@ fun KnowledgeBaseScreen(
 }
 
 // ─── BRAND CARD (4-column grid tile) ─────────────────────────────────────────
+@Composable
+private fun CountryCard(country: EncCountry, onClick: () -> Unit) {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable(onClick = onClick),
+        colors = CardDefaults.cardColors(containerColor = DarkSurface),
+        shape = RoundedCornerShape(12.dp),
+        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
+    ) {
+        Column(
+            modifier = Modifier.fillMaxWidth().padding(vertical = 16.dp, horizontal = 4.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+        ) {
+            Text(text = country.flagEmoji, fontSize = 48.sp)
+            Spacer(Modifier.height(8.dp))
+            Text(
+                text = country.displayName,
+                color = TextPrimary,
+                fontSize = 14.sp,
+                fontWeight = FontWeight.SemiBold,
+                textAlign = TextAlign.Center
+            )
+        }
+    }
+}
+
 @Composable
 private fun BrandCard(brand: EncBrand, onClick: () -> Unit) {
     Card(
