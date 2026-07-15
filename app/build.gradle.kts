@@ -14,8 +14,8 @@ android {
         applicationId = "com.example.autoelectricai"
         minSdk = 24
         targetSdk = 36
-        versionCode = 68
-        versionName = "1.7.27"
+        versionCode = 70
+        versionName = "1.7.28"
     }
 
     buildTypes {

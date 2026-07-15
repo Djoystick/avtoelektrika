@@ -565,6 +565,8 @@ fun SettingsScreen(
 @Composable
 fun ChangelogDialog(onDismiss: () -> Unit) {
     val changelog = listOf(
+        "v1.7.28" to """Added all missing brand logos to the Encyclopedia catalog.""",
+        "v1.7.28" to """Added all missing brand logos to the Encyclopedia catalog.""",
         "v1.7.27" to """— Масштабное расширение: добавлено более 40 новых марок автомобилей.
 — Интеллектуальный фильтр: теперь платформы можно фильтровать по году выпуска.
 — Улучшен интерфейс каталога (авто-генерация логотипов для новых марок).""",

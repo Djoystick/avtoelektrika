@@ -321,10 +321,55 @@ object EncyclopediaCatalog {
                     EncSystem("dtc", "Honda DTC каталог", "❌", listOf("VTEC / CVT специфика"))
                 ))
             )
-        )
-    ) // close countries list
+        ),
+        EncBrand(id = "chery", displayName = "Chery", shortName = "Chery", primaryColor = Color(0xFF003366), secondaryColor = Color(0xFFFFFFFF), logoResId = R.drawable.img_logo_chery, platforms = emptyList()),
+        EncBrand(id = "haval", displayName = "Haval", shortName = "Haval", primaryColor = Color(0xFFD0112B), secondaryColor = Color(0xFFFFFFFF), logoResId = R.drawable.img_logo_haval, platforms = emptyList()),
+        EncBrand(id = "geely", displayName = "Geely", shortName = "Geely", primaryColor = Color(0xFF00438A), secondaryColor = Color(0xFFFFFFFF), logoResId = R.drawable.img_logo_geely, platforms = emptyList()),
+        EncBrand(id = "changan", displayName = "Changan", shortName = "Changan", primaryColor = Color(0xFF005BAC), secondaryColor = Color(0xFFFFFFFF), logoResId = R.drawable.img_logo_changan, platforms = emptyList()),
+        EncBrand(id = "exeed", displayName = "Exeed", shortName = "Exeed", primaryColor = Color(0xFF1A1A1A), secondaryColor = Color(0xFFFFFFFF), logoResId = R.drawable.img_logo_exeed, platforms = emptyList()),
+        EncBrand(id = "omoda", displayName = "Omoda", shortName = "Omoda", primaryColor = Color(0xFF000000), secondaryColor = Color(0xFFFFFFFF), logoResId = R.drawable.img_logo_omoda, platforms = emptyList()),
+        EncBrand(id = "byd", displayName = "BYD", shortName = "BYD", primaryColor = Color(0xFFDE0E19), secondaryColor = Color(0xFFFFFFFF), logoResId = R.drawable.img_logo_byd, platforms = emptyList()),
+        EncBrand(id = "lifan", displayName = "Lifan", shortName = "Lifan", primaryColor = Color(0xFF0053A0), secondaryColor = Color(0xFFFFFFFF), logoResId = R.drawable.img_logo_lifan, platforms = emptyList()),
+        EncBrand(id = "great_wall", displayName = "Great Wall", shortName = "Great Wall", primaryColor = Color(0xFFE31B23), secondaryColor = Color(0xFFFFFFFF), logoResId = R.drawable.img_logo_great_wall, platforms = emptyList()),
+        EncBrand(id = "faw", displayName = "FAW", shortName = "FAW", primaryColor = Color(0xFF00387B), secondaryColor = Color(0xFFFFFFFF), logoResId = R.drawable.img_logo_faw, platforms = emptyList()),
+        EncBrand(id = "hyundai", displayName = "Hyundai", shortName = "Hyundai", primaryColor = Color(0xFF002C5F), secondaryColor = Color(0xFFFFFFFF), logoResId = R.drawable.img_logo_hyundai, platforms = emptyList()),
+        EncBrand(id = "kia", displayName = "Kia", shortName = "Kia", primaryColor = Color(0xFF05141F), secondaryColor = Color(0xFFFFFFFF), logoResId = R.drawable.img_logo_kia, platforms = emptyList()),
+        EncBrand(id = "genesis", displayName = "Genesis", shortName = "Genesis", primaryColor = Color(0xFF1A1A1A), secondaryColor = Color(0xFFFFFFFF), logoResId = R.drawable.img_logo_genesis, platforms = emptyList()),
+        EncBrand(id = "ssangyong", displayName = "SsangYong", shortName = "SsangYong", primaryColor = Color(0xFF004D95), secondaryColor = Color(0xFFFFFFFF), logoResId = R.drawable.img_logo_ssangyong, platforms = emptyList()),
+        EncBrand(id = "nissan", displayName = "Nissan", shortName = "Nissan", primaryColor = Color(0xFFC3002F), secondaryColor = Color(0xFFFFFFFF), logoResId = R.drawable.img_logo_nissan, platforms = emptyList()),
+        EncBrand(id = "mazda", displayName = "Mazda", shortName = "Mazda", primaryColor = Color(0xFF101010), secondaryColor = Color(0xFFFFFFFF), logoResId = R.drawable.img_logo_mazda, platforms = emptyList()),
+        EncBrand(id = "subaru", displayName = "Subaru", shortName = "Subaru", primaryColor = Color(0xFF00458C), secondaryColor = Color(0xFFFFFFFF), logoResId = R.drawable.img_logo_subaru, platforms = emptyList()),
+        EncBrand(id = "suzuki", displayName = "Suzuki", shortName = "Suzuki", primaryColor = Color(0xFFE31837), secondaryColor = Color(0xFFFFFFFF), logoResId = R.drawable.img_logo_suzuki, platforms = emptyList()),
+        EncBrand(id = "lexus", displayName = "Lexus", shortName = "Lexus", primaryColor = Color(0xFF202020), secondaryColor = Color(0xFFFFFFFF), logoResId = R.drawable.img_logo_lexus, platforms = emptyList()),
+        EncBrand(id = "infiniti", displayName = "Infiniti", shortName = "Infiniti", primaryColor = Color(0xFF000000), secondaryColor = Color(0xFFFFFFFF), logoResId = R.drawable.img_logo_infiniti, platforms = emptyList()),
+        EncBrand(id = "acura", displayName = "Acura", shortName = "Acura", primaryColor = Color(0xFF000000), secondaryColor = Color(0xFFFFFFFF), logoResId = R.drawable.img_logo_acura, platforms = emptyList()),
+        EncBrand(id = "datsun", displayName = "Datsun", shortName = "Datsun", primaryColor = Color(0xFF004B87), secondaryColor = Color(0xFFFFFFFF), logoResId = R.drawable.img_logo_datsun, platforms = emptyList()),
+        EncBrand(id = "renault", displayName = "Renault", shortName = "Renault", primaryColor = Color(0xFFFFCC00), secondaryColor = Color(0xFF000000), logoResId = R.drawable.img_logo_renault, platforms = emptyList()),
+        EncBrand(id = "peugeot", displayName = "Peugeot", shortName = "Peugeot", primaryColor = Color(0xFF002554), secondaryColor = Color(0xFFFFFFFF), logoResId = R.drawable.img_logo_peugeot, platforms = emptyList()),
+        EncBrand(id = "citroen", displayName = "Citroen", shortName = "Citroen", primaryColor = Color(0xFFDA291C), secondaryColor = Color(0xFFFFFFFF), logoResId = R.drawable.img_logo_citroen, platforms = emptyList()),
+        EncBrand(id = "bmw", displayName = "BMW", shortName = "BMW", primaryColor = Color(0xFF0066B1), secondaryColor = Color(0xFFFFFFFF), logoResId = R.drawable.img_logo_bmw, platforms = emptyList()),
+        EncBrand(id = "mercedes", displayName = "Mercedes-Benz", shortName = "Mercedes", primaryColor = Color(0xFF1A1A1A), secondaryColor = Color(0xFFFFFFFF), logoResId = R.drawable.img_logo_mercedes, platforms = emptyList()),
+        EncBrand(id = "porsche", displayName = "Porsche", shortName = "Porsche", primaryColor = Color(0xFFD4AF37), secondaryColor = Color(0xFF000000), logoResId = R.drawable.img_logo_porsche, platforms = emptyList()),
+        EncBrand(id = "opel", displayName = "Opel", shortName = "Opel", primaryColor = Color(0xFFF3E500), secondaryColor = Color(0xFF000000), logoResId = R.drawable.img_logo_opel, platforms = emptyList()),
+        EncBrand(id = "mini", displayName = "Mini", shortName = "Mini", primaryColor = Color(0xFF000000), secondaryColor = Color(0xFFFFFFFF), logoResId = R.drawable.img_logo_mini, platforms = emptyList()),
+        EncBrand(id = "jeep", displayName = "Jeep", shortName = "Jeep", primaryColor = Color(0xFF1A1A1A), secondaryColor = Color(0xFFFFFFFF), logoResId = R.drawable.img_logo_jeep, platforms = emptyList()),
+        EncBrand(id = "dodge", displayName = "Dodge", shortName = "Dodge", primaryColor = Color(0xFFE01825), secondaryColor = Color(0xFFFFFFFF), logoResId = R.drawable.img_logo_dodge, platforms = emptyList()),
+        EncBrand(id = "chrysler", displayName = "Chrysler", shortName = "Chrysler", primaryColor = Color(0xFF000000), secondaryColor = Color(0xFFFFFFFF), logoResId = R.drawable.img_logo_chrysler, platforms = emptyList()),
+        EncBrand(id = "cadillac", displayName = "Cadillac", shortName = "Cadillac", primaryColor = Color(0xFF000000), secondaryColor = Color(0xFFFFFFFF), logoResId = R.drawable.img_logo_cadillac, platforms = emptyList()),
+        EncBrand(id = "tesla", displayName = "Tesla", shortName = "Tesla", primaryColor = Color(0xFFCC0000), secondaryColor = Color(0xFFFFFFFF), logoResId = R.drawable.img_logo_tesla, platforms = emptyList()),
+        EncBrand(id = "uaz", displayName = "УАЗ (UAZ)", shortName = "УАЗ", primaryColor = Color(0xFF006633), secondaryColor = Color(0xFFFFFFFF), logoResId = R.drawable.img_logo_uaz, platforms = emptyList()),
+        EncBrand(id = "gaz", displayName = "ГАЗ", shortName = "ГАЗ", primaryColor = Color(0xFF1A1A1A), secondaryColor = Color(0xFFFFFFFF), logoResId = R.drawable.img_logo_gaz, platforms = emptyList()),
+        EncBrand(id = "land_rover", displayName = "Land Rover", shortName = "Land Rover", primaryColor = Color(0xFF005A2B), secondaryColor = Color(0xFFFFFFFF), logoResId = R.drawable.img_logo_land_rover, platforms = emptyList()),
+        EncBrand(id = "jaguar", displayName = "Jaguar", shortName = "Jaguar", primaryColor = Color(0xFF000000), secondaryColor = Color(0xFFFFFFFF), logoResId = R.drawable.img_logo_jaguar, platforms = emptyList()),
+        EncBrand(id = "bentley", displayName = "Bentley", shortName = "Bentley", primaryColor = Color(0xFF1A1A1A), secondaryColor = Color(0xFFFFFFFF), logoResId = R.drawable.img_logo_bentley, platforms = emptyList()),
+        EncBrand(id = "fiat", displayName = "Fiat", shortName = "Fiat", primaryColor = Color(0xFFE01825), secondaryColor = Color(0xFFFFFFFF), logoResId = R.drawable.img_logo_fiat, platforms = emptyList()),
+        EncBrand(id = "alfa_romeo", displayName = "Alfa Romeo", shortName = "Alfa Romeo", primaryColor = Color(0xFF9A0000), secondaryColor = Color(0xFFFFFFFF), logoResId = R.drawable.img_logo_alfa_romeo, platforms = emptyList()),
+        EncBrand(id = "volvo", displayName = "Volvo", shortName = "Volvo", primaryColor = Color(0xFF003057), secondaryColor = Color(0xFFFFFFFF), logoResId = R.drawable.img_logo_volvo, platforms = emptyList()),
+        EncBrand(id = "skoda", displayName = "Skoda", shortName = "Skoda", primaryColor = Color(0xFF4BA82E), secondaryColor = Color(0xFFFFFFFF), logoResId = R.drawable.img_logo_skoda, platforms = emptyList()),
+        EncBrand(id = "seat", displayName = "SEAT", shortName = "SEAT", primaryColor = Color(0xFFE31837), secondaryColor = Color(0xFFFFFFFF), logoResId = R.drawable.img_logo_seat, platforms = emptyList())
+    ) // close brandsFlat list
 
-        val countries: List<EncCountry> = listOf(
+    val countries: List<EncCountry> = listOf(
         EncCountry("russia", "Россия", "🇷🇺", brandsFlat.filter { it.id in listOf("vaz", "gaz", "uaz") }),
         EncCountry("germany", "Германия", "🇩🇪", brandsFlat.filter { it.id in listOf("volkswagen", "audi", "bmw", "mercedes", "porsche", "opel", "mini") }),
         EncCountry("japan", "Япония", "🇯🇵", brandsFlat.filter { it.id in listOf("toyota", "mitsubishi", "honda", "nissan", "mazda", "subaru", "suzuki", "lexus", "infiniti", "acura", "datsun") }),
