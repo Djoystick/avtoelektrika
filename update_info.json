@@ -1,4 +1,4 @@
 {
-  "versionName": "1.7.12",
-  "releaseNotes": "Hotfix: Исправлена ошибка загрузки обновлений (Flow Invariant Violation)."
+  "versionName": "1.7.13",
+  "releaseNotes": "Hotfix: Исправлена ошибка FileProvider при установке обновления."
 }
