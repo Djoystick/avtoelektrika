@@ -50,6 +50,7 @@ fun SettingsScreen(
     val updateInfo by updateViewModel.updateInfo.collectAsStateWithLifecycle()
     val downloadState by updateViewModel.downloadState.collectAsStateWithLifecycle()
     val isCheckingForUpdate by updateViewModel.isChecking.collectAsStateWithLifecycle()
+    val hasCheckedForUpdate by updateViewModel.hasChecked.collectAsStateWithLifecycle()
 
     val geminiKey by viewModel.geminiKey.collectAsStateWithLifecycle()
     val geminiProxyUrl by viewModel.geminiProxyUrl.collectAsStateWithLifecycle()
@@ -544,6 +545,7 @@ fun SettingsScreen(
                         updateInfo = updateInfo,
                         downloadState = downloadState,
                         isChecking = isCheckingForUpdate,
+                        hasChecked = hasCheckedForUpdate,
                         onCheckForUpdates = { updateViewModel.checkForUpdates() },
                         onStartDownload = { updateViewModel.startDownload() },
                         onCancelDownload = { updateViewModel.cancelDownload() }
@@ -563,12 +565,8 @@ fun SettingsScreen(
 @Composable
 fun ChangelogDialog(onDismiss: () -> Unit) {
     val changelog = listOf(
-        "v1.7.10" to "Hotfix: Исправлен критический сбой при запуске приложения.",
-        "v1.7.10" to "Hotfix: Исправлен критический сбой при запуске приложения.",
-        "v1.7.10" to "Hotfix: Исправлен критический сбой при запуске приложения.",
-        "v1.7.10" to "Hotfix: Исправлен критический сбой при запуске приложения.",
-        "v1.7.10" to "Hotfix: Исправлен критический сбой при запуске приложения.",
-        "v1.7.9" to "Автоматизированная система обновлений через GitHub Releases. Больше никакой рутины! 🎉",
+        "v1.7.11" to "Тестовое обновление: Проверка новой системы ручной проверки обновлений.",
+        "v1.7.10" to "Hotfix: Исправлен критический сбой при запуске приложения на старых устройствах.",
         "v1.7.9" to "Автоматизированная система обновлений через GitHub Releases. Больше никакой рутины! 🎉",
         "v1.7.8 [Hotfix]" to "Исправлен краш приложения при сбросе формы (Новый поиск). Исправлена логика БД: теперь анонимные пользователи могут отправлять решения на модерацию.",
         "v1.7.7 [Патч]" to "Исправлен сетевой таймаут ожидания для тяжелых ИИ моделей. Теперь подробные ответы (до 4000 токенов) успешно загружаются, а красивые UI-спойлеры работают корректно.",

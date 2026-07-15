@@ -23,22 +23,29 @@ class AppUpdateViewModel @Inject constructor(
     private val _downloadState = MutableStateFlow<DownloadState>(DownloadState.Idle)
     val downloadState: StateFlow<DownloadState> = _downloadState.asStateFlow()
 
+    private val _hasChecked = MutableStateFlow(false)
+    val hasChecked: StateFlow<Boolean> = _hasChecked.asStateFlow()
+
     private val _isChecking = MutableStateFlow(false)
     val isChecking: StateFlow<Boolean> = _isChecking.asStateFlow()
 
     init {
-        checkForUpdates()
+        // Automatic check removed per user request for manual check only
     }
 
     fun checkForUpdates() {
         if (_isChecking.value) return
         _isChecking.value = true
+        _hasChecked.value = false
         viewModelScope.launch {
             val info = appUpdateManager.checkForUpdate()
             if (info != null) {
                 _updateInfo.value = info
+            } else {
+                _updateInfo.value = null
             }
             _isChecking.value = false
+            _hasChecked.value = true
         }
     }
 

@@ -36,6 +36,7 @@ fun UpdateSection(
     updateInfo: UpdateInfo?,
     downloadState: DownloadState,
     isChecking: Boolean,
+    hasChecked: Boolean,
     onCheckForUpdates: () -> Unit,
     onStartDownload: () -> Unit,
     onCancelDownload: () -> Unit
@@ -55,130 +56,128 @@ fun UpdateSection(
     Column(
         modifier = Modifier.fillMaxWidth()
     ) {
-        // We will remove padding here because the parent Card in SettingsScreen will provide padding.
+        Text(
+            text = "Обновление приложения",
+            color = TextPrimary,
+            fontSize = 16.sp,
+            fontWeight = FontWeight.Bold
+        )
+        Spacer(modifier = Modifier.height(12.dp))
 
-
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
+        if (updateInfo != null) {
+            Surface(
+                shape = RoundedCornerShape(16.dp),
+                color = DarkBackground,
+                modifier = Modifier.fillMaxWidth()
             ) {
-                Text(
-                    text = "Обновление приложения",
-                    color = TextPrimary,
-                    fontSize = 16.sp,
-                    fontWeight = FontWeight.Bold
-                )
-                if (updateInfo == null && downloadState !is DownloadState.Downloading) {
-                    TextButton(
-                        onClick = onCheckForUpdates,
-                        enabled = !isChecking,
-                        contentPadding = PaddingValues(0.dp)
-                    ) {
-                        Text(if (isChecking) "Проверка..." else "Проверить", color = AmberPrimary)
-                    }
-                }
-            }
+                Column(modifier = Modifier.padding(16.dp)) {
+                    Text(
+                        text = "Доступна версия ${updateInfo.versionName}",
+                        color = TextPrimary,
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight.Medium
+                    )
+                    Spacer(modifier = Modifier.height(4.dp))
+                    Text(
+                        text = "Загрузите и установите свежую версию приложения",
+                        color = TextSecondary,
+                        fontSize = 12.sp
+                    )
 
-            if (updateInfo != null) {
-                Spacer(modifier = Modifier.height(16.dp))
+                    Spacer(modifier = Modifier.height(16.dp))
 
-                Surface(
-                    shape = RoundedCornerShape(16.dp),
-                    color = DarkBackground,
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    Column(modifier = Modifier.padding(16.dp)) {
-                        Text(
-                            text = "Загрузка ${updateInfo.versionName}",
-                            color = TextPrimary,
-                            fontSize = 16.sp,
-                            fontWeight = FontWeight.Medium
-                        )
-                        Spacer(modifier = Modifier.height(4.dp))
-                        Text(
-                            text = "После завершения загрузки, установите APK",
-                            color = TextSecondary,
-                            fontSize = 12.sp
-                        )
-
-                        Spacer(modifier = Modifier.height(16.dp))
-
-                        if (downloadState is DownloadState.Downloading) {
-                            val dl = downloadState
-                            Row(
-                                modifier = Modifier.fillMaxWidth(),
-                                horizontalArrangement = Arrangement.SpaceBetween
-                            ) {
-                                Text(
-                                    text = String.format("Скачано %.1f MB из %.1f MB", dl.downloadedMb, dl.totalMb),
-                                    color = TextPrimary,
-                                    fontSize = 12.sp
-                                )
-                                Text(
-                                    text = String.format("Скорость %.1f MB/s", dl.speedMbPerSec),
-                                    color = TextSecondary,
-                                    fontSize = 12.sp
-                                )
-                            }
-
-                            Spacer(modifier = Modifier.height(8.dp))
-
-                            Row(
-                                verticalAlignment = Alignment.CenterVertically,
-                                modifier = Modifier.fillMaxWidth()
-                            ) {
-                                LinearProgressIndicator(
-                                    progress = { dl.progress / 100f },
-                                    modifier = Modifier
-                                        .weight(1f)
-                                        .height(4.dp),
-                                    color = Color(0xFF4A80F5),
-                                    trackColor = DarkSurface2
-                                )
-                                Spacer(modifier = Modifier.width(12.dp))
-                                IconButton(
-                                    onClick = onCancelDownload,
-                                    modifier = Modifier.size(24.dp)
-                                ) {
-                                    Icon(
-                                        imageVector = Icons.Default.Cancel,
-                                        contentDescription = "Отмена",
-                                        tint = ErrorRed
-                                    )
-                                }
-                            }
-
-                            Spacer(modifier = Modifier.height(8.dp))
-
+                    if (downloadState is DownloadState.Downloading) {
+                        val dl = downloadState
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceBetween
+                        ) {
                             Text(
-                                text = String.format("Осталось %.1f MB", dl.remainingMb),
-                                color = TextHint,
+                                text = String.format("Скачано %.1f MB из %.1f MB", dl.downloadedMb, dl.totalMb),
+                                color = TextPrimary,
                                 fontSize = 12.sp
                             )
-                        } else {
-                            Button(
-                                onClick = onStartDownload,
-                                modifier = Modifier.fillMaxWidth(),
-                                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF4A80F5)),
-                                shape = RoundedCornerShape(8.dp)
+                            Text(
+                                text = String.format("Скорость %.1f MB/s", dl.speedMbPerSec),
+                                color = TextSecondary,
+                                fontSize = 12.sp
+                            )
+                        }
+
+                        Spacer(modifier = Modifier.height(8.dp))
+
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            modifier = Modifier.fillMaxWidth()
+                        ) {
+                            LinearProgressIndicator(
+                                progress = { dl.progress / 100f },
+                                modifier = Modifier
+                                    .weight(1f)
+                                    .height(4.dp),
+                                color = Color(0xFF4A80F5),
+                                trackColor = DarkSurface2
+                            )
+                            Spacer(modifier = Modifier.width(12.dp))
+                            IconButton(
+                                onClick = onCancelDownload,
+                                modifier = Modifier.size(24.dp)
                             ) {
-                                Text(if (downloadState is DownloadState.Error) "Повторить загрузку" else "Начать загрузку", color = Color.White)
+                                Icon(
+                                    imageVector = Icons.Default.Cancel,
+                                    contentDescription = "Отмена",
+                                    tint = ErrorRed
+                                )
                             }
-                            
-                            if (downloadState is DownloadState.Error) {
-                                Spacer(modifier = Modifier.height(8.dp))
-                                Text(text = downloadState.message, color = ErrorRed, fontSize = 12.sp)
-                            } else if (downloadState is DownloadState.Downloaded) {
-                                Spacer(modifier = Modifier.height(8.dp))
-                                Text(text = "Готово к установке!", color = SuccessGreen, fontSize = 12.sp)
-                            }
+                        }
+
+                        Spacer(modifier = Modifier.height(8.dp))
+
+                        Text(
+                            text = String.format("Осталось %.1f MB", dl.remainingMb),
+                            color = TextHint,
+                            fontSize = 12.sp
+                        )
+                    } else {
+                        Button(
+                            onClick = onStartDownload,
+                            modifier = Modifier.fillMaxWidth(),
+                            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF4A80F5)),
+                            shape = RoundedCornerShape(8.dp)
+                        ) {
+                            Text(if (downloadState is DownloadState.Error) "Повторить загрузку" else "Начать загрузку", color = Color.White)
+                        }
+                        
+                        if (downloadState is DownloadState.Error) {
+                            Spacer(modifier = Modifier.height(8.dp))
+                            Text(text = downloadState.message, color = ErrorRed, fontSize = 12.sp)
+                        } else if (downloadState is DownloadState.Downloaded) {
+                            Spacer(modifier = Modifier.height(8.dp))
+                            Text(text = "Готово к установке!", color = SuccessGreen, fontSize = 12.sp)
                         }
                     }
                 }
-            } else if (!isChecking) {
-                Spacer(modifier = Modifier.height(8.dp))
-                Text("У вас установлена последняя версия.", color = TextHint, fontSize = 13.sp)
             }
+        } else {
+            Button(
+                onClick = onCheckForUpdates,
+                enabled = !isChecking && !hasChecked,
+                modifier = Modifier.fillMaxWidth(),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = if (hasChecked) SuccessGreen.copy(alpha = 0.5f) else Color(0xFF4A80F5),
+                    disabledContainerColor = if (hasChecked) SuccessGreen.copy(alpha = 0.2f) else DarkSurface2
+                ),
+                shape = RoundedCornerShape(8.dp)
+            ) {
+                Text(
+                    text = when {
+                        isChecking -> "Поиск обновления..."
+                        hasChecked -> "Установлена последняя версия"
+                        else -> "Проверить обновление"
+                    },
+                    color = if (hasChecked || isChecking) TextHint else Color.White
+                )
+            }
+        }
     }
 }
