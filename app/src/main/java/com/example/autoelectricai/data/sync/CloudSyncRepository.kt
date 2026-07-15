@@ -454,15 +454,15 @@ class CloudSyncRepository @Inject constructor(
                     transaction.set(roleRef, mapOf("karma" to com.google.firebase.firestore.FieldValue.increment(50)), com.google.firebase.firestore.SetOptions.merge())
                 }
                 
-                val approverEmail = auth.currentUser?.email
-                if (!approverEmail.isNullOrBlank()) {
+                val approverEmail = com.example.autoelectricai.utils.AuthUtils.currentUserEmail
+                if (approverEmail.isNotBlank()) {
                     val approverRef = firestore.collection(COLLECTION_ROLES).document(approverEmail)
                     transaction.set(approverRef, mapOf("approvedCount" to com.google.firebase.firestore.FieldValue.increment(1)), com.google.firebase.firestore.SetOptions.merge())
                 }
             }.await()
             
-            val approverEmail = auth.currentUser?.email
-            if (!approverEmail.isNullOrBlank()) checkAchievements(approverEmail)
+            val approverEmail = com.example.autoelectricai.utils.AuthUtils.currentUserEmail
+            if (approverEmail.isNotBlank()) checkAchievements(approverEmail)
             
             AppLogger.i(TAG, "Approved solution $cloudId and assigned +50 Karma")
         } catch (e: Exception) {

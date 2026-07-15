@@ -83,8 +83,9 @@ class ProfileViewModel @Inject constructor(
 
     private val authStateListener = FirebaseAuth.AuthStateListener { firebaseAuth ->
         val user = firebaseAuth.currentUser
-        if (user != null && !user.isAnonymous && !user.email.isNullOrBlank()) {
-            loadProfile(user.email)
+        val email = com.example.autoelectricai.utils.AuthUtils.currentUserEmail
+        if (user != null && !user.isAnonymous && email.isNotBlank()) {
+            loadProfile(email)
         } else {
             _userEmail.value = ""
             _isOwnProfile.value = false
@@ -106,7 +107,7 @@ class ProfileViewModel @Inject constructor(
     }
 
     fun loadProfile(emailOverride: String?) {
-        val currentEmail = auth.currentUser?.email ?: ""
+        val currentEmail = com.example.autoelectricai.utils.AuthUtils.currentUserEmail
         val email = emailOverride ?: currentEmail
         
         _userEmail.value = email
@@ -138,7 +139,8 @@ class ProfileViewModel @Inject constructor(
     private val urlRegex = Regex(".*[a-zA-Z0-9-]+\\.[a-zA-Z]{2,}.*|.*http.*|.*www.*")
 
     fun setNickname(nickname: String) {
-        val email = auth.currentUser?.email ?: return
+        val email = com.example.autoelectricai.utils.AuthUtils.currentUserEmail
+        if (email.isBlank()) return
         val lower = nickname.lowercase().trim()
 
         if (lower.length !in 3..20) {

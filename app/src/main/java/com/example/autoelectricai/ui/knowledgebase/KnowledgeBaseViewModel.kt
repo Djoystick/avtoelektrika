@@ -35,7 +35,7 @@ class KnowledgeBaseViewModel @Inject constructor(
     init {
         val auth = com.google.firebase.auth.FirebaseAuth.getInstance()
         authStateListener = com.google.firebase.auth.FirebaseAuth.AuthStateListener { firebaseAuth ->
-            val email = firebaseAuth.currentUser?.email ?: ""
+            val email = com.example.autoelectricai.utils.AuthUtils.currentUserEmail
             _currentUserEmail.value = email
 
             viewModelScope.launch {

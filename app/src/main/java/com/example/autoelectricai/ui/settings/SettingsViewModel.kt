@@ -147,7 +147,7 @@ class SettingsViewModel @Inject constructor(
             _authError.value = null
             try {
                 auth.signInWithEmailAndPassword(email, pass).await()
-                val currentEmail = auth.currentUser?.email ?: ""
+                val currentEmail = com.example.autoelectricai.utils.AuthUtils.currentUserEmail
                 _expertEmail.value = currentEmail
                 _isExpertLoggedIn.value = true
                 

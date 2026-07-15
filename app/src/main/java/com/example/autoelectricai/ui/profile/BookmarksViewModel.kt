@@ -25,7 +25,7 @@ class BookmarksViewModel @Inject constructor(
     val isLoading: StateFlow<Boolean> = _isLoading.asStateFlow()
 
     init {
-        val email = auth.currentUser?.email ?: ""
+        val email = com.example.autoelectricai.utils.AuthUtils.currentUserEmail
         
         viewModelScope.launch {
             repository.allDiagnoses.collect { list ->

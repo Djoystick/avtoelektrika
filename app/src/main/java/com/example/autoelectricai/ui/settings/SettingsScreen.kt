@@ -565,6 +565,8 @@ fun SettingsScreen(
 @Composable
 fun ChangelogDialog(onDismiss: () -> Unit) {
     val changelog = listOf(
+        "v1.7.15" to "Fix missing Google Auth Client ID and Telegram auth visibility issues",
+        "v1.7.15" to "Fix missing Google Auth Client ID and Telegram auth visibility issues",
         "v1.7.14" to "Fix AuthScreen visibility bug for unauthenticated users",
         "v1.7.13" to "Fix AuthScreen visibility bug",
         "v1.7.13" to "Fix AuthScreen visibility bug",

@@ -84,10 +84,13 @@ class AuthViewModel @Inject constructor(
         viewModelScope.launch {
             try {
                 val credentialManager = CredentialManager.create(context)
-                // Для работы нужен Web Client ID, который Firebase создает при активации Google Sign In.
-                // Пока мы используем заглушку, которая будет заменена на реальный ключ из strings.xml
-                // Заглушка не сработает в проде, но даст скомпилировать код и покажет нужный Exception.
-                val webClientId = "YOUR_WEB_CLIENT_ID_HERE.apps.googleusercontent.com"
+                val webClientIdRes = context.resources.getIdentifier("default_web_client_id", "string", context.packageName)
+                val webClientId = if (webClientIdRes != 0) context.getString(webClientIdRes) else ""
+                
+                if (webClientId.isBlank()) {
+                    _uiState.value = AuthUiState.Error("Отсутствует Web Client ID. Обновите google-services.json с включенным Google Sign-in!")
+                    return@launch
+                }
                 
                 val googleIdOption = GetGoogleIdOption.Builder()
                     .setFilterByAuthorizedAccounts(false)

@@ -75,7 +75,7 @@ class DiagnosisRepository @Inject constructor(
                     source = "ai_generated",
                     aiProvider = aiResult.provider,
                     isOfflineReady = false,
-                    authorEmail = auth.currentUser?.email ?: ""
+                    authorEmail = com.example.autoelectricai.utils.AuthUtils.currentUserEmail
                 )
                 val id = dao.insert(entity)
                 DiagnosisResult.AiHit(entity.copy(id = id), aiResult.provider)
