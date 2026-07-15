@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "66834435377",
+    "firebase_url": "https://autoelectricai-default-rtdb.europe-west1.firebasedatabase.app",
     "project_id": "autoelectricai",
     "storage_bucket": "autoelectricai.firebasestorage.app"
   },
@@ -12,7 +13,20 @@
           "package_name": "com.example.autoelectricai"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "66834435377-nlijaq43e6s27qptmflhq7haaofik15c.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.autoelectricai",
+            "certificate_hash": "64aaca67bd1f412debe0eb0867fd37e671350193"
+          }
+        },
+        {
+          "client_id": "66834435377-nuuts0krlnhq8a5iv9r47acbd3un5fqi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyBC-8OqySnHWQqB_AiAZacmGxlDRUqQQNg"
@@ -20,7 +34,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "66834435377-nuuts0krlnhq8a5iv9r47acbd3un5fqi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
