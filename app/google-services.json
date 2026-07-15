@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "66834435377",
+    "project_id": "autoelectricai",
+    "storage_bucket": "autoelectricai.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:66834435377:android:5e68c2d70e0b5bbc353410",
+        "android_client_info": {
+          "package_name": "com.example.autoelectricai"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBC-8OqySnHWQqB_AiAZacmGxlDRUqQQNg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
