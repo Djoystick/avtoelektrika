@@ -78,6 +78,9 @@ class ProfileViewModel @Inject constructor(
     private val _nicknameError = MutableStateFlow<String?>(null)
     val nicknameError = _nicknameError.asStateFlow()
 
+    private val _isLoadingAuth = MutableStateFlow(true)
+    val isLoadingAuth = _isLoadingAuth.asStateFlow()
+
     private val _isLoadingNickname = MutableStateFlow(false)
     val isLoadingNickname = _isLoadingNickname.asStateFlow()
 
@@ -94,6 +97,7 @@ class ProfileViewModel @Inject constructor(
             _userName.value = null
             _userAwards.value = emptyList()
             _displayedAwards.value = emptyList()
+            _isLoadingAuth.value = false
         }
     }
 
@@ -131,7 +135,10 @@ class ProfileViewModel @Inject constructor(
                     _displayedAwards.value = AVAILABLE_AWARDS.filter { displayedIds.contains(it.id) }
                 }
                 _isLoadingNickname.value = false
+                _isLoadingAuth.value = false
             }
+        } else {
+            _isLoadingAuth.value = false
         }
     }
 

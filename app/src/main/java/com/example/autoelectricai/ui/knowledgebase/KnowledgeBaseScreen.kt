@@ -394,8 +394,10 @@ private fun BrandCard(brand: EncBrand, onClick: () -> Unit) {
         ) {
             Box(
                 modifier = Modifier
-                    .size(60.dp)
-                    .clip(RoundedCornerShape(8.dp)),
+                    .size(64.dp)
+                    .clip(RoundedCornerShape(12.dp))
+                    .background(Color.White)
+                    .padding(6.dp),
                 contentAlignment = Alignment.Center
             ) {
                 androidx.compose.foundation.Image(
@@ -404,14 +406,14 @@ private fun BrandCard(brand: EncBrand, onClick: () -> Unit) {
                     modifier = Modifier.fillMaxSize()
                 )
             }
-            Spacer(Modifier.height(4.dp))
+            Spacer(Modifier.height(6.dp))
             Text(
                 text = brand.shortName,
-                color = Color(0xFF1A1A1A),
-                fontSize = 9.sp,
+                color = TextPrimary,
+                fontSize = 11.sp,
                 fontWeight = FontWeight.Bold,
                 textAlign = TextAlign.Center,
-                maxLines = 2,
+                maxLines = 1,
                 overflow = TextOverflow.Ellipsis
             )
         }

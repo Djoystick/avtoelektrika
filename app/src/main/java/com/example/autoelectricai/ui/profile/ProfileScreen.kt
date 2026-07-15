@@ -46,6 +46,7 @@ fun ProfileScreen(
     val isOwnProfile by viewModel.isOwnProfile.collectAsStateWithLifecycle()
     val nicknameError by viewModel.nicknameError.collectAsStateWithLifecycle()
     val isLoadingNickname by viewModel.isLoadingNickname.collectAsStateWithLifecycle()
+    val isLoadingAuth by viewModel.isLoadingAuth.collectAsStateWithLifecycle()
 
     var selectedAward by remember { mutableStateOf<AwardInfo?>(null) }
     var nicknameInput by remember { mutableStateOf("") }
@@ -73,7 +74,11 @@ fun ProfileScreen(
     Scaffold(
         containerColor = DarkBackground
     ) { padding ->
-        if (email.isBlank() && onBack == null) {
+        if (isLoadingAuth) {
+            Box(modifier = Modifier.padding(padding).fillMaxSize(), contentAlignment = Alignment.Center) {
+                CircularProgressIndicator(color = AmberPrimary)
+            }
+        } else if (email.isBlank() && onBack == null) {
             Box(modifier = Modifier.padding(padding)) {
                 com.example.autoelectricai.ui.auth.AuthScreen(
                     onAuthSuccess = {
