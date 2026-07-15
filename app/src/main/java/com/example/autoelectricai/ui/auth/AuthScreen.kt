@@ -5,6 +5,7 @@ import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.togetherWith
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -22,6 +23,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.res.painterResource
@@ -52,6 +54,7 @@ fun AuthScreen(
     
     val focusManager = LocalFocusManager.current
     val haptic = LocalHapticFeedback.current
+    val context = LocalContext.current
 
     LaunchedEffect(uiState) {
         if (uiState is AuthUiState.Success) {
@@ -76,7 +79,7 @@ fun AuthScreen(
                 imageVector = Icons.Default.Lock,
                 contentDescription = "Logo",
                 tint = AmberPrimary,
-                modifier = Modifier.size(100.dp)
+                modifier = Modifier.size(80.dp)
             )
             Spacer(Modifier.height(16.dp))
             Text(
@@ -86,12 +89,12 @@ fun AuthScreen(
                 fontWeight = FontWeight.Bold
             )
             Text(
-                text = "Умный помощник автоэлектрика",
+                text = "Доступ к экосистеме",
                 color = TextSecondary,
                 fontSize = 14.sp
             )
             
-            Spacer(Modifier.height(48.dp))
+            Spacer(Modifier.height(32.dp))
 
             AnimatedContent(
                 targetState = isLoginMode,
@@ -168,11 +171,12 @@ fun AuthScreen(
                         Text(
                             (uiState as AuthUiState.Error).message,
                             color = ErrorRed,
-                            fontSize = 12.sp
+                            fontSize = 12.sp,
+                            textAlign = androidx.compose.ui.text.style.TextAlign.Center
                         )
                     }
 
-                    Spacer(Modifier.height(32.dp))
+                    Spacer(Modifier.height(24.dp))
 
                     Button(
                         onClick = {
@@ -183,7 +187,7 @@ fun AuthScreen(
                                 viewModel.registerWithEmail(email.value, password.value, confirmPassword.value)
                             }
                         },
-                        modifier = Modifier.fillMaxWidth().height(56.dp),
+                        modifier = Modifier.fillMaxWidth().height(52.dp),
                         colors = ButtonDefaults.buttonColors(containerColor = AmberPrimary),
                         shape = RoundedCornerShape(12.dp),
                         enabled = uiState !is AuthUiState.Loading
@@ -197,7 +201,7 @@ fun AuthScreen(
                 }
             }
             
-            Spacer(Modifier.height(24.dp))
+            Spacer(Modifier.height(16.dp))
 
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Text(
@@ -218,19 +222,39 @@ fun AuthScreen(
                 )
             }
             
-            Spacer(Modifier.height(32.dp))
+            Spacer(Modifier.height(24.dp))
             
-            Text(
-                text = "Или продолжить без регистрации",
-                color = TextSecondary,
-                fontSize = 14.sp,
-                modifier = Modifier.clickable {
-                    viewModel.signInAnonymously()
+            Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+                HorizontalDivider(modifier = Modifier.weight(1f), color = DarkSurface2)
+                Text("Или с помощью", color = TextSecondary, fontSize = 12.sp, modifier = Modifier.padding(horizontal = 8.dp))
+                HorizontalDivider(modifier = Modifier.weight(1f), color = DarkSurface2)
+            }
+
+            Spacer(Modifier.height(24.dp))
+
+            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(16.dp)) {
+                // Google Button
+                OutlinedButton(
+                    onClick = { viewModel.signInWithGoogle(context) },
+                    modifier = Modifier.weight(1f).height(50.dp),
+                    shape = RoundedCornerShape(12.dp),
+                    colors = ButtonDefaults.outlinedButtonColors(contentColor = TextPrimary),
+                    border = BorderStroke(1.dp, DarkSurface2)
+                ) {
+                    Text("Google", fontWeight = FontWeight.Bold)
                 }
-            )
-            
-            Spacer(Modifier.height(8.dp))
-            Text("Телеграм-авторизация в разработке", color = TextHint, fontSize = 12.sp)
+
+                // Telegram Button
+                OutlinedButton(
+                    onClick = { viewModel.startTelegramAuth(context) },
+                    modifier = Modifier.weight(1f).height(50.dp),
+                    shape = RoundedCornerShape(12.dp),
+                    colors = ButtonDefaults.outlinedButtonColors(contentColor = TextPrimary),
+                    border = BorderStroke(1.dp, DarkSurface2)
+                ) {
+                    Text("Telegram", fontWeight = FontWeight.Bold, color = Color(0xFF2CA5E0))
+                }
+            }
         }
     }
 }

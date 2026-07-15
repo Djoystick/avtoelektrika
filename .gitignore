@@ -15,3 +15,6 @@
 local.properties
 .env
 v1.*.apk
+
+serviceAccountKey.json
+telegram_auth_bot/node_modules/

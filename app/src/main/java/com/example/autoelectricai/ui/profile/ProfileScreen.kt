@@ -73,192 +73,201 @@ fun ProfileScreen(
     Scaffold(
         containerColor = DarkBackground
     ) { padding ->
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(padding)
-                .verticalScroll(rememberScrollState())
-                .padding(16.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp)
-        ) {
-            if (email.isBlank()) {
-                Text("Профиль не найден или вы не авторизованы.", color = TextPrimary)
-                return@Column
-            }
-
-            if (onBack != null) {
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    IconButton(onClick = onBack) {
-                        Icon(Icons.Filled.ArrowBack, contentDescription = "Назад", tint = TextPrimary)
+        if (email.isBlank() && onBack == null) {
+            Box(modifier = Modifier.padding(padding)) {
+                com.example.autoelectricai.ui.auth.AuthScreen(
+                    onAuthSuccess = {
+                        viewModel.loadProfile(null)
                     }
-                    Text("Профиль автора", color = TextPrimary, fontSize = 20.sp, fontWeight = FontWeight.Bold)
-                }
+                )
             }
-
-            // Никнейм Setup
-            if (isOwnProfile && userName == null) {
-                if (isLoadingNickname) {
-                    Box(modifier = Modifier.fillMaxWidth().padding(32.dp), contentAlignment = Alignment.Center) {
-                        CircularProgressIndicator(color = AmberPrimary)
-                    }
+        } else {
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(padding)
+                    .verticalScroll(rememberScrollState())
+                    .padding(16.dp),
+                verticalArrangement = Arrangement.spacedBy(16.dp)
+            ) {
+                if (email.isBlank()) {
+                    Text("Профиль не найден или вы не авторизованы.", color = TextPrimary)
                 } else {
+                    if (onBack != null) {
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            IconButton(onClick = onBack) {
+                                Icon(Icons.Filled.ArrowBack, contentDescription = "Назад", tint = TextPrimary)
+                            }
+                            Text("Профиль автора", color = TextPrimary, fontSize = 20.sp, fontWeight = FontWeight.Bold)
+                        }
+                    }
+
+                    // Никнейм Setup
+                    if (isOwnProfile && userName == null) {
+                        if (isLoadingNickname) {
+                            Box(modifier = Modifier.fillMaxWidth().padding(32.dp), contentAlignment = Alignment.Center) {
+                                CircularProgressIndicator(color = AmberPrimary)
+                            }
+                        } else {
+                            Card(
+                                colors = CardDefaults.cardColors(containerColor = AmberPrimary.copy(alpha = 0.1f)),
+                                shape = RoundedCornerShape(12.dp)
+                            ) {
+                                Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                                    Text("Придумайте никнейм", color = AmberPrimary, fontWeight = FontWeight.Bold, fontSize = 16.sp)
+                                    Text("Никнейм увидят другие пользователи в Энциклопедии. Его можно установить только один раз!", color = TextSecondary, fontSize = 12.sp)
+                                    OutlinedTextField(
+                                        value = nicknameInput,
+                                        onValueChange = { nicknameInput = it },
+                                        placeholder = { Text("Например: VAG_Master", color = TextHint) },
+                                        singleLine = true,
+                                        isError = nicknameError != null,
+                                        colors = OutlinedTextFieldDefaults.colors(
+                                            focusedBorderColor = AmberPrimary,
+                                            unfocusedBorderColor = TextHint,
+                                            focusedTextColor = TextPrimary,
+                                            unfocusedTextColor = TextPrimary
+                                        ),
+                                        modifier = Modifier.fillMaxWidth()
+                                    )
+                                    if (nicknameError != null) {
+                                        Text(nicknameError!!, color = ErrorRed, fontSize = 12.sp)
+                                    }
+                                    Button(
+                                        onClick = { viewModel.setNickname(nicknameInput) },
+                                        enabled = nicknameInput.length >= 3,
+                                        colors = ButtonDefaults.buttonColors(containerColor = AmberPrimary)
+                                    ) {
+                                        Text("Сохранить навсегда", color = DarkBackground)
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    // Bookmarks Card (Offline Sandbox)
+                    if (isOwnProfile && onNavigateToBookmarks != null) {
+                        Card(
+                            modifier = Modifier.fillMaxWidth().clickable { onNavigateToBookmarks() },
+                            colors = CardDefaults.cardColors(containerColor = DarkSurface),
+                            shape = RoundedCornerShape(12.dp)
+                        ) {
+                            Row(
+                                modifier = Modifier.padding(20.dp),
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Box(
+                                    modifier = Modifier
+                                        .size(48.dp)
+                                        .background(AmberPrimary.copy(alpha = 0.15f), RoundedCornerShape(12.dp)),
+                                    contentAlignment = Alignment.Center
+                                ) {
+                                    Icon(Icons.Default.MenuBook, contentDescription = null, tint = AmberPrimary)
+                                }
+                                Spacer(Modifier.width(16.dp))
+                                Column(modifier = Modifier.weight(1f)) {
+                                    Text("Закладки и Мои решения", color = TextPrimary, fontWeight = FontWeight.Bold, fontSize = 16.sp)
+                                    Text("Ваша офлайн-песочница решений", color = TextHint, fontSize = 12.sp)
+                                }
+                                Icon(Icons.Default.ArrowBack, contentDescription = null, tint = TextSecondary, modifier = Modifier.size(20.dp))
+                            }
+                        }
+                    }
+
+                    // User Info Card
                     Card(
-                        colors = CardDefaults.cardColors(containerColor = AmberPrimary.copy(alpha = 0.1f)),
+                        colors = CardDefaults.cardColors(containerColor = DarkSurface),
                         shape = RoundedCornerShape(12.dp)
                     ) {
-                        Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                            Text("Придумайте никнейм", color = AmberPrimary, fontWeight = FontWeight.Bold, fontSize = 16.sp)
-                            Text("Никнейм увидят другие пользователи в Энциклопедии. Его можно установить только один раз!", color = TextSecondary, fontSize = 12.sp)
-                            OutlinedTextField(
-                                value = nicknameInput,
-                                onValueChange = { nicknameInput = it },
-                                placeholder = { Text("Например: VAG_Master", color = TextHint) },
-                                singleLine = true,
-                                isError = nicknameError != null,
-                                colors = OutlinedTextFieldDefaults.colors(
-                                    focusedBorderColor = AmberPrimary,
-                                    unfocusedBorderColor = TextHint,
-                                    focusedTextColor = TextPrimary,
-                                    unfocusedTextColor = TextPrimary
-                                ),
-                                modifier = Modifier.fillMaxWidth()
-                            )
-                            if (nicknameError != null) {
-                                Text(nicknameError!!, color = ErrorRed, fontSize = 12.sp)
-                            }
-                            Button(
-                                onClick = { viewModel.setNickname(nicknameInput) },
-                                enabled = nicknameInput.length >= 3,
-                                colors = ButtonDefaults.buttonColors(containerColor = AmberPrimary)
+                        Column(
+                            modifier = Modifier.fillMaxWidth().padding(24.dp),
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            verticalArrangement = Arrangement.spacedBy(12.dp)
+                        ) {
+                            Box(
+                                modifier = Modifier
+                                    .size(80.dp)
+                                    .background(DarkSurface2, RoundedCornerShape(40.dp)),
+                                contentAlignment = Alignment.Center
                             ) {
-                                Text("Сохранить навсегда", color = DarkBackground)
+                                val initial = userName?.firstOrNull()?.uppercase() ?: email.firstOrNull()?.uppercase() ?: "?"
+                                Text(initial, fontSize = 40.sp, color = AmberPrimary, fontWeight = FontWeight.Bold)
+                            }
+                            Text(userName ?: "Без имени", color = TextPrimary, fontSize = 20.sp, fontWeight = FontWeight.Bold)
+                            Text(email, color = TextHint, fontSize = 14.sp)
+                            
+                            Row(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
+                                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                                    Text("Роль", color = TextSecondary, fontSize = 12.sp)
+                                    Text(roleName, color = roleColor, fontWeight = FontWeight.Bold, fontSize = 16.sp)
+                                }
+                                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                                    Text("Карма", color = TextSecondary, fontSize = 12.sp)
+                                    Text("★ $karma", color = AmberPrimary, fontWeight = FontWeight.Bold, fontSize = 16.sp)
+                                }
                             }
                         }
                     }
-                }
-            }
 
-            // Bookmarks Card (Offline Sandbox)
-            if (isOwnProfile && onNavigateToBookmarks != null) {
-                Card(
-                    modifier = Modifier.fillMaxWidth().clickable { onNavigateToBookmarks() },
-                    colors = CardDefaults.cardColors(containerColor = DarkSurface),
-                    shape = RoundedCornerShape(12.dp)
-                ) {
+                    // Awards Section
                     Row(
-                        modifier = Modifier.padding(20.dp),
+                        modifier = Modifier.fillMaxWidth().padding(top = 8.dp),
+                        horizontalArrangement = Arrangement.SpaceBetween,
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-                        Box(
-                            modifier = Modifier
-                                .size(48.dp)
-                                .background(AmberPrimary.copy(alpha = 0.15f), RoundedCornerShape(12.dp)),
-                            contentAlignment = Alignment.Center
-                        ) {
-                            Icon(Icons.Default.MenuBook, contentDescription = null, tint = AmberPrimary)
+                        Text("Достижения профиля", color = TextPrimary, fontSize = 18.sp, fontWeight = FontWeight.Bold)
+                        if (isOwnProfile && onNavigateToAwards != null) {
+                            TextButton(onClick = onNavigateToAwards) {
+                                Text("Изменить", color = AmberPrimary)
+                            }
                         }
-                        Spacer(Modifier.width(16.dp))
-                        Column(modifier = Modifier.weight(1f)) {
-                            Text("Закладки и Мои решения", color = TextPrimary, fontWeight = FontWeight.Bold, fontSize = 16.sp)
-                            Text("Ваша офлайн-песочница решений", color = TextHint, fontSize = 12.sp)
-                        }
-                        Icon(Icons.Default.ArrowBack, contentDescription = null, tint = TextSecondary, modifier = Modifier.size(20.dp))
                     }
-                }
-            }
-
-            // User Info Card
-            Card(
-                colors = CardDefaults.cardColors(containerColor = DarkSurface),
-                shape = RoundedCornerShape(12.dp)
-            ) {
-                Column(
-                    modifier = Modifier.fillMaxWidth().padding(24.dp),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.spacedBy(12.dp)
-                ) {
-                    Box(
-                        modifier = Modifier
-                            .size(80.dp)
-                            .background(DarkSurface2, RoundedCornerShape(40.dp)),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        val initial = userName?.firstOrNull()?.uppercase() ?: email.firstOrNull()?.uppercase() ?: "?"
-                        Text(initial, fontSize = 40.sp, color = AmberPrimary, fontWeight = FontWeight.Bold)
-                    }
-                    Text(userName ?: "Без имени", color = TextPrimary, fontSize = 20.sp, fontWeight = FontWeight.Bold)
-                    Text(email, color = TextHint, fontSize = 14.sp)
                     
-                    Row(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
-                        Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                            Text("Роль", color = TextSecondary, fontSize = 12.sp)
-                            Text(roleName, color = roleColor, fontWeight = FontWeight.Bold, fontSize = 16.sp)
-                        }
-                        Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                            Text("Карма", color = TextSecondary, fontSize = 12.sp)
-                            Text("★ $karma", color = AmberPrimary, fontWeight = FontWeight.Bold, fontSize = 16.sp)
-                        }
-                    }
-                }
-            }
-
-            // Awards Section
-            Row(
-                modifier = Modifier.fillMaxWidth().padding(top = 8.dp),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Text("Достижения профиля", color = TextPrimary, fontSize = 18.sp, fontWeight = FontWeight.Bold)
-                if (isOwnProfile && onNavigateToAwards != null) {
-                    TextButton(onClick = onNavigateToAwards) {
-                        Text("Изменить", color = AmberPrimary)
-                    }
-                }
-            }
-            
-            if (displayedAwards.isEmpty()) {
-                Text("У вас пока нет достижений для отображения. Помогайте сообществу, публикуя полезные решения, чтобы заработать медали!", color = TextSecondary, fontSize = 14.sp)
-            } else {
-                FlowRow(
-                    horizontalArrangement = Arrangement.spacedBy(16.dp),
-                    verticalArrangement = Arrangement.spacedBy(16.dp),
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    displayedAwards.forEach { award ->
-                        Box(
-                            modifier = Modifier
-                                .size(40.dp)
-                                .background(DarkSurface2, RoundedCornerShape(20.dp)) // Круглая медалька
-                                .clickable { selectedAward = award },
-                            contentAlignment = Alignment.Center
+                    if (displayedAwards.isEmpty()) {
+                        Text("У вас пока нет достижений для отображения. Помогайте сообществу, публикуя полезные решения, чтобы заработать медали!", color = TextSecondary, fontSize = 14.sp)
+                    } else {
+                        FlowRow(
+                            horizontalArrangement = Arrangement.spacedBy(16.dp),
+                            verticalArrangement = Arrangement.spacedBy(16.dp),
+                            modifier = Modifier.fillMaxWidth()
                         ) {
-                            Icon(painterResource(id = award.iconResId), contentDescription = award.title, tint = AmberPrimary, modifier = Modifier.size(20.dp))
+                            displayedAwards.forEach { award ->
+                                Box(
+                                    modifier = Modifier
+                                        .size(40.dp)
+                                        .background(DarkSurface2, RoundedCornerShape(20.dp)) // Круглая медалька
+                                        .clickable { selectedAward = award },
+                                    contentAlignment = Alignment.Center
+                                ) {
+                                    Icon(painterResource(id = award.iconResId), contentDescription = award.title, tint = AmberPrimary, modifier = Modifier.size(20.dp))
+                                }
+                            }
                         }
                     }
-                }
-            }
 
-            Spacer(Modifier.height(16.dp))
+                    Spacer(Modifier.height(16.dp))
 
-            // Test button
-            if (isOwnProfile && email == "j.j.niccals2@gmail.com") {
-                Button(
-                    onClick = { viewModel.grantAllAwardsToSelf() },
-                    modifier = Modifier.fillMaxWidth(),
-                    colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF1E88E5))
-                ) {
-                    Text("DEV: Получить все награды", color = Color.White)
-                }
-            }
+                    // Test button
+                    if (isOwnProfile && email == "j.j.niccals2@gmail.com") {
+                        Button(
+                            onClick = { viewModel.grantAllAwardsToSelf() },
+                            modifier = Modifier.fillMaxWidth(),
+                            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF1E88E5))
+                        ) {
+                            Text("DEV: Получить все награды", color = Color.White)
+                        }
+                    }
 
-            if (isOwnProfile) {
-                Button(
-                    onClick = { viewModel.logout() },
-                    modifier = Modifier.fillMaxWidth(),
-                    colors = ButtonDefaults.buttonColors(containerColor = ErrorRed.copy(alpha = 0.2f)),
-                    shape = RoundedCornerShape(8.dp)
-                ) {
-                    Text("Выйти из аккаунта", color = ErrorRed, fontWeight = FontWeight.SemiBold)
+                    if (isOwnProfile) {
+                        Button(
+                            onClick = { viewModel.logout() },
+                            modifier = Modifier.fillMaxWidth(),
+                            colors = ButtonDefaults.buttonColors(containerColor = ErrorRed.copy(alpha = 0.2f)),
+                            shape = RoundedCornerShape(8.dp)
+                        ) {
+                            Text("Выйти из аккаунта", color = ErrorRed, fontWeight = FontWeight.SemiBold)
+                        }
+                    }
                 }
             }
         }

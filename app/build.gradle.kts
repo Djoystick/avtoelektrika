@@ -14,8 +14,8 @@ android {
         applicationId = "com.example.autoelectricai"
         minSdk = 24
         targetSdk = 36
-        versionCode = 45
-        versionName = "1.7.13"
+        versionCode = 48
+        versionName = "1.7.14"
     }
 
     buildTypes {
@@ -106,6 +106,11 @@ dependencies {
   implementation(libs.firebase.auth)
   implementation(libs.firebase.firestore)
   implementation(libs.firebase.storage)
+
+  // Auth / Credentials
+  implementation("androidx.credentials:credentials:1.3.0-rc01")
+  implementation("androidx.credentials:credentials-play-services-auth:1.3.0-rc01")
+  implementation("com.google.android.libraries.identity.googleid:googleid:1.1.1")
 
   // WorkManager
   implementation(libs.work.runtime)

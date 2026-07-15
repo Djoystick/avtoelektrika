@@ -1,4 +1,4 @@
-[2026-07-15 09:00:12] ERROR/CloudSyncRepo: Failed to pull community updates
+[2026-07-15 09:18:26] ERROR/CloudSyncRepo: Failed to pull community updates
 com.google.firebase.firestore.FirebaseFirestoreException: PERMISSION_DENIED: Missing or insufficient permissions.
 	at com.google.firebase.firestore.util.Util.exceptionFromStatus(Util.java:113)
 	at com.google.firebase.firestore.core.EventManager.onError(EventManager.java:247)
@@ -33,28 +33,19 @@ Caused by: io.grpc.StatusException: PERMISSION_DENIED: Missing or insufficient p
 	at com.google.firebase.firestore.util.Util.exceptionFromStatus(Util.java:111)
 	... 27 more
 
-[2026-07-15 09:00:12] INFO/MainActivity: No cached session found, signed in anonymously: xk41Fe9vXBdSZhgp6QSVGWId9v52
-[2026-07-15 09:00:36] INFO/CloudSyncRepo: Successfully set role admin for j.j.niccals2@gmail.com
-[2026-07-15 09:00:36] INFO/CloudSyncRepo: Successfully set role admin for j.j.niccals2@gmail.com
-[2026-07-15 09:05:48] ERROR/AppUpdateManager: Download error
-java.lang.IllegalStateException: Flow invariant is violated:
-		Flow was collected in [StandaloneCoroutine{Active}@60306fa, Dispatchers.Main.immediate],
-		but emission happened in [DispatchedCoroutine{Active}@ac654ab, Dispatchers.IO].
-		Please refer to 'flow' documentation or use 'flowOn' instead
-	at kotlinx.coroutines.flow.internal.SafeCollector_commonKt.checkContext(SafeCollector.common.kt:84)
-	at kotlinx.coroutines.flow.internal.SafeCollector.checkContext(SafeCollector.kt:132)
-	at kotlinx.coroutines.flow.internal.SafeCollector.emit(SafeCollector.kt:109)
-	at kotlinx.coroutines.flow.internal.SafeCollector.emit(SafeCollector.kt:82)
-	at com.example.autoelectricai.data.update.AppUpdateManager$downloadUpdate$1$1.invokeSuspend(AppUpdateManager.kt:128)
-	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:33)
-	at kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:100)
-	at kotlinx.coroutines.internal.LimitedDispatcher$Worker.run(LimitedDispatcher.kt:124)
-	at kotlinx.coroutines.scheduling.TaskImpl.run(Tasks.kt:89)
-	at kotlinx.coroutines.scheduling.CoroutineScheduler.runSafely(CoroutineScheduler.kt:586)
-	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.executeTask(CoroutineScheduler.kt:820)
-	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.runWorker(CoroutineScheduler.kt:717)
-	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.run(CoroutineScheduler.kt:704)
-
-[2026-07-15 09:05:50] INFO/MainActivity: User already present on start: j.j.niccals2@gmail.com
-[2026-07-15 09:05:51] INFO/CloudSyncRepo: Pulled 7 updates from community
-[2026-07-15 09:05:52] INFO/CloudSyncRepo: Successfully set role admin for j.j.niccals2@gmail.com
+[2026-07-15 09:18:26] INFO/MainActivity: No cached session found, signed in anonymously: lOLRaRGprhUpCnKH3tRNyOATkk12
+[2026-07-15 09:18:34] INFO/CloudSyncRepo: Successfully set role admin for j.j.niccals2@gmail.com
+[2026-07-15 09:18:34] INFO/CloudSyncRepo: Successfully set role admin for j.j.niccals2@gmail.com
+[2026-07-15 09:19:07] INFO/MainActivity: User already present on start: j.j.niccals2@gmail.com
+[2026-07-15 09:19:08] INFO/CloudSyncRepo: Pulled 7 updates from community
+[2026-07-15 09:37:06] INFO/CloudSyncRepo: Successfully set role admin for j.j.niccals2@gmail.com
+[2026-07-15 09:37:19] INFO/MainActivity: User already present on start: j.j.niccals2@gmail.com
+[2026-07-15 09:37:20] INFO/CloudSyncRepo: Pulled 7 updates from community
+[2026-07-15 09:37:29] INFO/MainActivity: User already present on start: 
+[2026-07-15 09:37:30] INFO/CloudSyncRepo: Pulled 7 updates from community
+[2026-07-15 09:45:35] INFO/MainActivity: User already present on start: 
+[2026-07-15 09:45:36] INFO/CloudSyncRepo: Pulled 7 updates from community
+[2026-07-15 09:45:53] INFO/AuthViewModel: Telegram sign in success: tg_6208918931
+[2026-07-15 09:45:54] INFO/CloudSyncRepo: Successfully set role user for tg_6208918931@telegram.auth
+[2026-07-15 09:46:05] INFO/AuthViewModel: Telegram sign in success: tg_6208918931
+[2026-07-15 09:46:06] INFO/CloudSyncRepo: Successfully set role user for tg_6208918931@telegram.auth

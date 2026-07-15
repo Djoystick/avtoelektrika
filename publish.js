@@ -130,21 +130,8 @@ async function publish() {
     }
 
     // 4. Git Push & Tag
-    console.log("Создание Git коммита и тега...");
-    try {
-        const tagName = `v${newVersionName}`;
-        execSync('git add .');
-        execSync(`git commit -m "Release ${tagName}: ${releaseNotes.substring(0, 50)}..."`);
-        execSync(`git tag ${tagName}`);
-        console.log("Отправка в GitHub (git push)...");
-        execSync('git push origin HEAD', { stdio: 'inherit' });
-        execSync('git push --tags', { stdio: 'inherit' });
-        console.log("✅ Код успешно отправлен на GitHub!");
-    } catch (e) {
-        console.error("❌ Ошибка Git! Убедитесь, что репозиторий привязан (git remote add origin) и есть доступ на запись.");
-        console.error(e.message);
-        process.exit(1);
-    }
+    console.log("Пропускаем Git коммиты (выполним их вручную)...");
+    const tagName = `v${newVersionName}`;
 
     // 5. Создание GitHub Release
     let downloadUrl = "";

@@ -565,6 +565,9 @@ fun SettingsScreen(
 @Composable
 fun ChangelogDialog(onDismiss: () -> Unit) {
     val changelog = listOf(
+        "v1.7.14" to "Fix AuthScreen visibility bug for unauthenticated users",
+        "v1.7.13" to "Fix AuthScreen visibility bug",
+        "v1.7.13" to "Fix AuthScreen visibility bug",
         "v1.7.13" to "Hotfix: Исправлена ошибка FileProvider при установке обновления.",
         "v1.7.12" to "Hotfix: Исправлена ошибка загрузки обновлений (Flow Invariant Violation).",
         "v1.7.11" to "Тестовое обновление: Проверка новой системы ручной проверки обновлений.",
