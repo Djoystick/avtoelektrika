@@ -66,7 +66,10 @@ fun KnowledgeBaseScreen(
     val dateFormat = remember { SimpleDateFormat("dd.MM.yy", Locale.getDefault()) }
 
     fun goBack() = when (nav) {
-        EncNav.ARTICLES -> nav = EncNav.SUBSYSTEMS
+        EncNav.ARTICLES -> {
+            if (selectedBrand == null) nav = EncNav.BRANDS
+            else nav = EncNav.SUBSYSTEMS
+        }
         EncNav.SUBSYSTEMS -> nav = EncNav.SYSTEMS
         EncNav.SYSTEMS -> nav = EncNav.PLATFORMS
         EncNav.PLATFORMS -> nav = EncNav.BRANDS
@@ -202,9 +205,9 @@ fun KnowledgeBaseScreen(
                         LazyVerticalGrid(
                             columns = GridCells.Fixed(4),
                             modifier = Modifier.fillMaxSize(),
-                            contentPadding = PaddingValues(12.dp),
-                            horizontalArrangement = Arrangement.spacedBy(8.dp),
-                            verticalArrangement = Arrangement.spacedBy(8.dp)
+                            contentPadding = PaddingValues(horizontal = 16.dp, vertical = 24.dp),
+                            horizontalArrangement = Arrangement.spacedBy(16.dp),
+                            verticalArrangement = Arrangement.spacedBy(16.dp)
                         ) {
                             items(EncyclopediaCatalog.brands) { brand ->
                                 BrandCard(brand = brand, onClick = {
@@ -231,8 +234,8 @@ fun KnowledgeBaseScreen(
                         val brand = selectedBrand ?: return@AnimatedContent
                         LazyColumn(
                             modifier = Modifier.fillMaxSize(),
-                            contentPadding = PaddingValues(16.dp),
-                            verticalArrangement = Arrangement.spacedBy(8.dp)
+                            contentPadding = PaddingValues(horizontal = 16.dp, vertical = 24.dp),
+                            verticalArrangement = Arrangement.spacedBy(16.dp)
                         ) {
                             items(brand.platforms) { platform ->
                                 val count = diagnoses.count {
@@ -261,8 +264,8 @@ fun KnowledgeBaseScreen(
                         val brand = selectedBrand ?: return@AnimatedContent
                         LazyColumn(
                             modifier = Modifier.fillMaxSize(),
-                            contentPadding = PaddingValues(16.dp),
-                            verticalArrangement = Arrangement.spacedBy(8.dp)
+                            contentPadding = PaddingValues(horizontal = 16.dp, vertical = 24.dp),
+                            verticalArrangement = Arrangement.spacedBy(16.dp)
                         ) {
                             items(platform.systems) { system ->
                                 val count = diagnoses.count {
@@ -290,8 +293,8 @@ fun KnowledgeBaseScreen(
                         val brand = selectedBrand ?: return@AnimatedContent
                         LazyColumn(
                             modifier = Modifier.fillMaxSize(),
-                            contentPadding = PaddingValues(16.dp),
-                            verticalArrangement = Arrangement.spacedBy(8.dp)
+                            contentPadding = PaddingValues(horizontal = 16.dp, vertical = 24.dp),
+                            verticalArrangement = Arrangement.spacedBy(16.dp)
                         ) {
                             items(system.subsystems) { sub ->
                                 val count = diagnoses.count {
@@ -348,8 +351,8 @@ fun KnowledgeBaseScreen(
                         } else {
                             LazyColumn(
                                 modifier = Modifier.fillMaxSize(),
-                                contentPadding = PaddingValues(16.dp),
-                                verticalArrangement = Arrangement.spacedBy(8.dp)
+                                contentPadding = PaddingValues(horizontal = 16.dp, vertical = 24.dp),
+                                verticalArrangement = Arrangement.spacedBy(16.dp)
                             ) {
                                 items(articles, key = { it.cloudId ?: it.id }) { entity ->
                                     SolutionCard(
@@ -460,9 +463,9 @@ private fun FolderItem(
         colors = CardDefaults.cardColors(containerColor = DarkSurface),
         shape = RoundedCornerShape(12.dp)
     ) {
-        Row(modifier = Modifier.padding(14.dp), verticalAlignment = Alignment.CenterVertically) {
+        Row(modifier = Modifier.padding(20.dp), verticalAlignment = Alignment.CenterVertically) {
             Box(
-                modifier = Modifier.size(42.dp).clip(RoundedCornerShape(10.dp))
+                modifier = Modifier.size(48.dp).clip(RoundedCornerShape(12.dp))
                     .background(accentColor.copy(alpha = 0.15f))
                     .border(1.dp, accentColor.copy(alpha = 0.3f), RoundedCornerShape(10.dp)),
                 contentAlignment = Alignment.Center

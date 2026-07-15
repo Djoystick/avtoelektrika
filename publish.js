@@ -109,8 +109,8 @@ async function publish() {
     const settingsPath = 'app/src/main/java/com/example/autoelectricai/ui/settings/SettingsScreen.kt';
     let settingsCode = fs.readFileSync(settingsPath, 'utf8');
     
-    const newChangelogEntry = `\n        "v${newVersionName}" to "${releaseNotes.replace(/"/g, '\\"')}",`;
-    settingsCode = settingsCode.replace(/(val changelog = listOf\()/, `$1${newChangelogEntry}`);
+    const changelogEntry = `        "v${newVersionName}" to """${releaseNotes}""",\n`;
+    settingsCode = settingsCode.replace(/(val changelog = listOf\(\n)/, `$1${changelogEntry}`);
     fs.writeFileSync(settingsPath, settingsCode);
     console.log("✅ Чейнджлог обновлен в приложении.");
 
