@@ -77,6 +77,9 @@ abstract class AppDatabase : RoomDatabase() {
                         is_generic INTEGER NOT NULL DEFAULT 1
                     )
                 """)
+                database.execSQL("CREATE INDEX IF NOT EXISTS `idx_dtc_code` ON `dtc_catalog` (`code`)")
+                database.execSQL("CREATE INDEX IF NOT EXISTS `idx_dtc_severity` ON `dtc_catalog` (`severity`)")
+                database.execSQL("CREATE INDEX IF NOT EXISTS `idx_dtc_system` ON `dtc_catalog` (`system`)")
                 database.execSQL("""
                     CREATE VIRTUAL TABLE IF NOT EXISTS dtc_catalog_fts 
                     USING fts4(code, description_ru, description_en, system, 

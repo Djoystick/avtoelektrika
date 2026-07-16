@@ -1,0 +1,307 @@
+﻿
+> crash_full.txt:21657:07-16 09:56:42.208 17628 17628 E AndroidRuntime: java.lang.IllegalStateException: Migration didn
+'t properly handle: dtc_catalog(com.example.autoelectricai.data.db.DtcEntity).
+  crash_full.txt:21658:07-16 09:56:42.208 17628 17628 E AndroidRuntime:  Expected:
+  crash_full.txt:21659:07-16 09:56:42.208 17628 17628 E AndroidRuntime: TableInfo {
+  crash_full.txt:21660:07-16 09:56:42.208 17628 17628 E AndroidRuntime:     name = 'dtc_catalog',
+  crash_full.txt:21661:07-16 09:56:42.208 17628 17628 E AndroidRuntime:     columns = {    
+  crash_full.txt:21662:07-16 09:56:42.208 17628 17628 E AndroidRuntime:         Column {
+  crash_full.txt:21663:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            name = 'affected_brands',
+  crash_full.txt:21664:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            type = 'TEXT',
+  crash_full.txt:21665:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            affinity = '2',
+  crash_full.txt:21666:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            notNull = 'true',
+  crash_full.txt:21667:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            primaryKeyPosition = '0',
+  crash_full.txt:21668:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            defaultValue = 'undefined'
+  crash_full.txt:21669:07-16 09:56:42.208 17628 17628 E AndroidRuntime:         },
+  crash_full.txt:21670:07-16 09:56:42.208 17628 17628 E AndroidRuntime:         Column {
+  crash_full.txt:21671:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            name = 'category',
+  crash_full.txt:21672:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            type = 'TEXT',
+  crash_full.txt:21673:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            affinity = '2',
+  crash_full.txt:21674:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            notNull = 'true',
+  crash_full.txt:21675:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            primaryKeyPosition = '0',
+  crash_full.txt:21676:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            defaultValue = 'undefined'
+  crash_full.txt:21677:07-16 09:56:42.208 17628 17628 E AndroidRuntime:         },
+  crash_full.txt:21678:07-16 09:56:42.208 17628 17628 E AndroidRuntime:         Column {
+  crash_full.txt:21679:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            name = 'code',
+  crash_full.txt:21680:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            type = 'TEXT',
+  crash_full.txt:21681:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            affinity = '2',
+  crash_full.txt:21682:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            notNull = 'true',
+  crash_full.txt:21683:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            primaryKeyPosition = '0',
+  crash_full.txt:21684:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            defaultValue = 'undefined'
+  crash_full.txt:21685:07-16 09:56:42.208 17628 17628 E AndroidRuntime:         },
+  crash_full.txt:21686:07-16 09:56:42.208 17628 17628 E AndroidRuntime:         Column {
+  crash_full.txt:21687:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            name = 'common_causes',
+  crash_full.txt:21688:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            type = 'TEXT',
+  crash_full.txt:21689:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            affinity = '2',
+  crash_full.txt:21690:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            notNull = 'true',
+  crash_full.txt:21691:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            primaryKeyPosition = '0',
+  crash_full.txt:21692:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            defaultValue = 'undefined'
+  crash_full.txt:21693:07-16 09:56:42.208 17628 17628 E AndroidRuntime:         },
+  crash_full.txt:21694:07-16 09:56:42.208 17628 17628 E AndroidRuntime:         Column {
+  crash_full.txt:21695:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            name = 'common_fixes',
+  crash_full.txt:21696:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            type = 'TEXT',
+  crash_full.txt:21697:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            affinity = '2',
+  crash_full.txt:21698:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            notNull = 'true',
+  crash_full.txt:21699:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            primaryKeyPosition = '0',
+  crash_full.txt:21700:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            defaultValue = 'undefined'
+  crash_full.txt:21701:07-16 09:56:42.208 17628 17628 E AndroidRuntime:         },
+  crash_full.txt:21702:07-16 09:56:42.208 17628 17628 E AndroidRuntime:         Column {
+  crash_full.txt:21703:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            name = 'description_en',
+  crash_full.txt:21704:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            type = 'TEXT',
+  crash_full.txt:21705:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            affinity = '2',
+  crash_full.txt:21706:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            notNull = 'true',
+  crash_full.txt:21707:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            primaryKeyPosition = '0',
+  crash_full.txt:21708:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            defaultValue = 'undefined'
+  crash_full.txt:21709:07-16 09:56:42.208 17628 17628 E AndroidRuntime:         },
+  crash_full.txt:21710:07-16 09:56:42.208 17628 17628 E AndroidRuntime:         Column {
+  crash_full.txt:21711:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            name = 'description_ru',
+  crash_full.txt:21712:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            type = 'TEXT',
+  crash_full.txt:21713:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            affinity = '2',
+  crash_full.txt:21714:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            notNull = 'true',
+  crash_full.txt:21715:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            primaryKeyPosition = '0',
+  crash_full.txt:21716:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            defaultValue = 'undefined'
+  crash_full.txt:21717:07-16 09:56:42.208 17628 17628 E AndroidRuntime:         },
+  crash_full.txt:21718:07-16 09:56:42.208 17628 17628 E AndroidRuntime:         Column {
+  crash_full.txt:21719:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            name = 'id',
+  crash_full.txt:21720:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            type = 'INTEGER',
+  crash_full.txt:21721:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            affinity = '3',
+  crash_full.txt:21722:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            notNull = 'true',
+  crash_full.txt:21723:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            primaryKeyPosition = '1',
+  crash_full.txt:21724:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            defaultValue = 'undefined'
+  crash_full.txt:21725:07-16 09:56:42.208 17628 17628 E AndroidRuntime:         },
+  crash_full.txt:21726:07-16 09:56:42.208 17628 17628 E AndroidRuntime:         Column {
+  crash_full.txt:21727:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            name = 'is_generic',
+  crash_full.txt:21728:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            type = 'INTEGER',
+  crash_full.txt:21729:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            affinity = '3',
+  crash_full.txt:21730:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            notNull = 'true',
+  crash_full.txt:21731:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            primaryKeyPosition = '0',
+  crash_full.txt:21732:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            defaultValue = 'undefined'
+  crash_full.txt:21733:07-16 09:56:42.208 17628 17628 E AndroidRuntime:         },
+  crash_full.txt:21734:07-16 09:56:42.208 17628 17628 E AndroidRuntime:         Column {
+  crash_full.txt:21735:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            name = 'related_codes',
+  crash_full.txt:21736:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            type = 'TEXT',
+  crash_full.txt:21737:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            affinity = '2',
+  crash_full.txt:21738:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            notNull = 'true',
+  crash_full.txt:21739:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            primaryKeyPosition = '0',
+  crash_full.txt:21740:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            defaultValue = 'undefined'
+  crash_full.txt:21741:07-16 09:56:42.208 17628 17628 E AndroidRuntime:         },
+  crash_full.txt:21742:07-16 09:56:42.208 17628 17628 E AndroidRuntime:         Column {
+  crash_full.txt:21743:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            name = 'severity',
+  crash_full.txt:21744:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            type = 'TEXT',
+  crash_full.txt:21745:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            affinity = '2',
+  crash_full.txt:21746:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            notNull = 'true',
+  crash_full.txt:21747:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            primaryKeyPosition = '0',
+  crash_full.txt:21748:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            defaultValue = 'undefined'
+  crash_full.txt:21749:07-16 09:56:42.208 17628 17628 E AndroidRuntime:         },
+  crash_full.txt:21750:07-16 09:56:42.208 17628 17628 E AndroidRuntime:         Column {
+  crash_full.txt:21751:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            name = 'system',
+  crash_full.txt:21752:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            type = 'TEXT',
+  crash_full.txt:21753:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            affinity = '2',
+  crash_full.txt:21754:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            notNull = 'true',
+  crash_full.txt:21755:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            primaryKeyPosition = '0',
+  crash_full.txt:21756:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            defaultValue = 'undefined'
+  crash_full.txt:21757:07-16 09:56:42.208 17628 17628 E AndroidRuntime:         }
+  crash_full.txt:21758:07-16 09:56:42.208 17628 17628 E AndroidRuntime:     },
+  crash_full.txt:21759:07-16 09:56:42.208 17628 17628 E AndroidRuntime:     foreignKeys = { }
+  crash_full.txt:21760:07-16 09:56:42.208 17628 17628 E AndroidRuntime:     indices = { }
+  crash_full.txt:21761:07-16 09:56:42.208 17628 17628 E AndroidRuntime: }
+  crash_full.txt:21762:07-16 09:56:42.208 17628 17628 E AndroidRuntime:  Found:
+  crash_full.txt:21763:07-16 09:56:42.208 17628 17628 E AndroidRuntime: TableInfo {
+  crash_full.txt:21764:07-16 09:56:42.208 17628 17628 E AndroidRuntime:     name = 'dtc_catalog',
+  crash_full.txt:21765:07-16 09:56:42.208 17628 17628 E AndroidRuntime:     columns = {    
+  crash_full.txt:21766:07-16 09:56:42.208 17628 17628 E AndroidRuntime:         Column {
+  crash_full.txt:21767:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            name = 'affected_brands',
+  crash_full.txt:21768:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            type = 'TEXT',
+  crash_full.txt:21769:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            affinity = '2',
+  crash_full.txt:21770:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            notNull = 'true',
+  crash_full.txt:21771:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            primaryKeyPosition = '0',
+  crash_full.txt:21772:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            defaultValue = ''*''
+  crash_full.txt:21773:07-16 09:56:42.208 17628 17628 E AndroidRuntime:         },
+  crash_full.txt:21774:07-16 09:56:42.208 17628 17628 E AndroidRuntime:         Column {
+  crash_full.txt:21775:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            name = 'category',
+  crash_full.txt:21776:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            type = 'TEXT',
+  crash_full.txt:21777:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            affinity = '2',
+  crash_full.txt:21778:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            notNull = 'true',
+  crash_full.txt:21779:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            primaryKeyPosition = '0',
+  crash_full.txt:21780:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            defaultValue = 'undefined'
+  crash_full.txt:21781:07-16 09:56:42.208 17628 17628 E AndroidRuntime:         },
+  crash_full.txt:21782:07-16 09:56:42.208 17628 17628 E AndroidRuntime:         Column {
+  crash_full.txt:21783:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            name = 'code',
+  crash_full.txt:21784:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            type = 'TEXT',
+  crash_full.txt:21785:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            affinity = '2',
+  crash_full.txt:21786:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            notNull = 'true',
+  crash_full.txt:21787:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            primaryKeyPosition = '0',
+  crash_full.txt:21788:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            defaultValue = 'undefined'
+  crash_full.txt:21789:07-16 09:56:42.208 17628 17628 E AndroidRuntime:         },
+  crash_full.txt:21790:07-16 09:56:42.208 17628 17628 E AndroidRuntime:         Column {
+  crash_full.txt:21791:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            name = 'common_causes',
+  crash_full.txt:21792:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            type = 'TEXT',
+  crash_full.txt:21793:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            affinity = '2',
+  crash_full.txt:21794:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            notNull = 'true',
+  crash_full.txt:21795:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            primaryKeyPosition = '0',
+  crash_full.txt:21796:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            defaultValue = ''[]''
+  crash_full.txt:21797:07-16 09:56:42.208 17628 17628 E AndroidRuntime:         },
+  crash_full.txt:21798:07-16 09:56:42.208 17628 17628 E AndroidRuntime:         Column {
+  crash_full.txt:21799:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            name = 'common_fixes',
+  crash_full.txt:21800:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            type = 'TEXT',
+  crash_full.txt:21801:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            affinity = '2',
+  crash_full.txt:21802:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            notNull = 'true',
+  crash_full.txt:21803:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            primaryKeyPosition = '0',
+  crash_full.txt:21804:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            defaultValue = ''[]''
+  crash_full.txt:21805:07-16 09:56:42.208 17628 17628 E AndroidRuntime:         },
+  crash_full.txt:21806:07-16 09:56:42.208 17628 17628 E AndroidRuntime:         Column {
+  crash_full.txt:21807:07-16 09:56:42.208 17628 17628 E AndroidRuntime:            name = 'description_en',
+> crash_full.txt:21908:07-16 09:56:54.190 18003 18003 E AndroidRuntime: java.lang.IllegalStateException: Migration didn
+'t properly handle: dtc_catalog(com.example.autoelectricai.data.db.DtcEntity).
+  crash_full.txt:21909:07-16 09:56:54.190 18003 18003 E AndroidRuntime:  Expected:
+  crash_full.txt:21910:07-16 09:56:54.190 18003 18003 E AndroidRuntime: TableInfo {
+  crash_full.txt:21911:07-16 09:56:54.190 18003 18003 E AndroidRuntime:     name = 'dtc_catalog',
+  crash_full.txt:21912:07-16 09:56:54.190 18003 18003 E AndroidRuntime:     columns = {    
+  crash_full.txt:21913:07-16 09:56:54.190 18003 18003 E AndroidRuntime:         Column {
+  crash_full.txt:21914:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            name = 'affected_brands',
+  crash_full.txt:21915:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            type = 'TEXT',
+  crash_full.txt:21916:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            affinity = '2',
+  crash_full.txt:21917:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            notNull = 'true',
+  crash_full.txt:21918:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            primaryKeyPosition = '0',
+  crash_full.txt:21919:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            defaultValue = 'undefined'
+  crash_full.txt:21920:07-16 09:56:54.190 18003 18003 E AndroidRuntime:         },
+  crash_full.txt:21921:07-16 09:56:54.190 18003 18003 E AndroidRuntime:         Column {
+  crash_full.txt:21922:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            name = 'category',
+  crash_full.txt:21923:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            type = 'TEXT',
+  crash_full.txt:21924:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            affinity = '2',
+  crash_full.txt:21925:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            notNull = 'true',
+  crash_full.txt:21926:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            primaryKeyPosition = '0',
+  crash_full.txt:21927:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            defaultValue = 'undefined'
+  crash_full.txt:21928:07-16 09:56:54.190 18003 18003 E AndroidRuntime:         },
+  crash_full.txt:21929:07-16 09:56:54.190 18003 18003 E AndroidRuntime:         Column {
+  crash_full.txt:21930:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            name = 'code',
+  crash_full.txt:21931:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            type = 'TEXT',
+  crash_full.txt:21932:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            affinity = '2',
+  crash_full.txt:21933:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            notNull = 'true',
+  crash_full.txt:21934:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            primaryKeyPosition = '0',
+  crash_full.txt:21935:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            defaultValue = 'undefined'
+  crash_full.txt:21936:07-16 09:56:54.190 18003 18003 E AndroidRuntime:         },
+  crash_full.txt:21937:07-16 09:56:54.190 18003 18003 E AndroidRuntime:         Column {
+  crash_full.txt:21938:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            name = 'common_causes',
+  crash_full.txt:21939:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            type = 'TEXT',
+  crash_full.txt:21940:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            affinity = '2',
+  crash_full.txt:21941:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            notNull = 'true',
+  crash_full.txt:21942:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            primaryKeyPosition = '0',
+  crash_full.txt:21943:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            defaultValue = 'undefined'
+  crash_full.txt:21944:07-16 09:56:54.190 18003 18003 E AndroidRuntime:         },
+  crash_full.txt:21945:07-16 09:56:54.190 18003 18003 E AndroidRuntime:         Column {
+  crash_full.txt:21946:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            name = 'common_fixes',
+  crash_full.txt:21947:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            type = 'TEXT',
+  crash_full.txt:21948:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            affinity = '2',
+  crash_full.txt:21949:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            notNull = 'true',
+  crash_full.txt:21950:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            primaryKeyPosition = '0',
+  crash_full.txt:21951:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            defaultValue = 'undefined'
+  crash_full.txt:21952:07-16 09:56:54.190 18003 18003 E AndroidRuntime:         },
+  crash_full.txt:21953:07-16 09:56:54.190 18003 18003 E AndroidRuntime:         Column {
+  crash_full.txt:21954:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            name = 'description_en',
+  crash_full.txt:21955:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            type = 'TEXT',
+  crash_full.txt:21956:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            affinity = '2',
+  crash_full.txt:21957:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            notNull = 'true',
+  crash_full.txt:21958:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            primaryKeyPosition = '0',
+  crash_full.txt:21959:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            defaultValue = 'undefined'
+  crash_full.txt:21960:07-16 09:56:54.190 18003 18003 E AndroidRuntime:         },
+  crash_full.txt:21961:07-16 09:56:54.190 18003 18003 E AndroidRuntime:         Column {
+  crash_full.txt:21962:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            name = 'description_ru',
+  crash_full.txt:21963:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            type = 'TEXT',
+  crash_full.txt:21964:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            affinity = '2',
+  crash_full.txt:21965:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            notNull = 'true',
+  crash_full.txt:21966:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            primaryKeyPosition = '0',
+  crash_full.txt:21967:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            defaultValue = 'undefined'
+  crash_full.txt:21968:07-16 09:56:54.190 18003 18003 E AndroidRuntime:         },
+  crash_full.txt:21969:07-16 09:56:54.190 18003 18003 E AndroidRuntime:         Column {
+  crash_full.txt:21970:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            name = 'id',
+  crash_full.txt:21971:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            type = 'INTEGER',
+  crash_full.txt:21972:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            affinity = '3',
+  crash_full.txt:21973:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            notNull = 'true',
+  crash_full.txt:21974:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            primaryKeyPosition = '1',
+  crash_full.txt:21975:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            defaultValue = 'undefined'
+  crash_full.txt:21976:07-16 09:56:54.190 18003 18003 E AndroidRuntime:         },
+  crash_full.txt:21977:07-16 09:56:54.190 18003 18003 E AndroidRuntime:         Column {
+  crash_full.txt:21978:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            name = 'is_generic',
+  crash_full.txt:21979:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            type = 'INTEGER',
+  crash_full.txt:21980:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            affinity = '3',
+  crash_full.txt:21981:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            notNull = 'true',
+  crash_full.txt:21982:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            primaryKeyPosition = '0',
+  crash_full.txt:21983:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            defaultValue = 'undefined'
+  crash_full.txt:21984:07-16 09:56:54.190 18003 18003 E AndroidRuntime:         },
+  crash_full.txt:21985:07-16 09:56:54.190 18003 18003 E AndroidRuntime:         Column {
+  crash_full.txt:21986:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            name = 'related_codes',
+  crash_full.txt:21987:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            type = 'TEXT',
+  crash_full.txt:21988:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            affinity = '2',
+  crash_full.txt:21989:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            notNull = 'true',
+  crash_full.txt:21990:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            primaryKeyPosition = '0',
+  crash_full.txt:21991:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            defaultValue = 'undefined'
+  crash_full.txt:21992:07-16 09:56:54.190 18003 18003 E AndroidRuntime:         },
+  crash_full.txt:21993:07-16 09:56:54.190 18003 18003 E AndroidRuntime:         Column {
+  crash_full.txt:21994:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            name = 'severity',
+  crash_full.txt:21995:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            type = 'TEXT',
+  crash_full.txt:21996:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            affinity = '2',
+  crash_full.txt:21997:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            notNull = 'true',
+  crash_full.txt:21998:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            primaryKeyPosition = '0',
+  crash_full.txt:21999:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            defaultValue = 'undefined'
+  crash_full.txt:22000:07-16 09:56:54.190 18003 18003 E AndroidRuntime:         },
+  crash_full.txt:22001:07-16 09:56:54.190 18003 18003 E AndroidRuntime:         Column {
+  crash_full.txt:22002:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            name = 'system',
+  crash_full.txt:22003:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            type = 'TEXT',
+  crash_full.txt:22004:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            affinity = '2',
+  crash_full.txt:22005:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            notNull = 'true',
+  crash_full.txt:22006:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            primaryKeyPosition = '0',
+  crash_full.txt:22007:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            defaultValue = 'undefined'
+  crash_full.txt:22008:07-16 09:56:54.190 18003 18003 E AndroidRuntime:         }
+  crash_full.txt:22009:07-16 09:56:54.190 18003 18003 E AndroidRuntime:     },
+  crash_full.txt:22010:07-16 09:56:54.190 18003 18003 E AndroidRuntime:     foreignKeys = { }
+  crash_full.txt:22011:07-16 09:56:54.190 18003 18003 E AndroidRuntime:     indices = { }
+  crash_full.txt:22012:07-16 09:56:54.190 18003 18003 E AndroidRuntime: }
+  crash_full.txt:22013:07-16 09:56:54.190 18003 18003 E AndroidRuntime:  Found:
+  crash_full.txt:22014:07-16 09:56:54.190 18003 18003 E AndroidRuntime: TableInfo {
+  crash_full.txt:22015:07-16 09:56:54.190 18003 18003 E AndroidRuntime:     name = 'dtc_catalog',
+  crash_full.txt:22016:07-16 09:56:54.190 18003 18003 E AndroidRuntime:     columns = {    
+  crash_full.txt:22017:07-16 09:56:54.190 18003 18003 E AndroidRuntime:         Column {
+  crash_full.txt:22018:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            name = 'affected_brands',
+  crash_full.txt:22019:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            type = 'TEXT',
+  crash_full.txt:22020:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            affinity = '2',
+  crash_full.txt:22021:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            notNull = 'true',
+  crash_full.txt:22022:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            primaryKeyPosition = '0',
+  crash_full.txt:22023:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            defaultValue = ''*''
+  crash_full.txt:22024:07-16 09:56:54.190 18003 18003 E AndroidRuntime:         },
+  crash_full.txt:22025:07-16 09:56:54.190 18003 18003 E AndroidRuntime:         Column {
+  crash_full.txt:22026:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            name = 'category',
+  crash_full.txt:22027:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            type = 'TEXT',
+  crash_full.txt:22028:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            affinity = '2',
+  crash_full.txt:22029:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            notNull = 'true',
+  crash_full.txt:22030:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            primaryKeyPosition = '0',
+  crash_full.txt:22031:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            defaultValue = 'undefined'
+  crash_full.txt:22032:07-16 09:56:54.190 18003 18003 E AndroidRuntime:         },
+  crash_full.txt:22033:07-16 09:56:54.190 18003 18003 E AndroidRuntime:         Column {
+  crash_full.txt:22034:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            name = 'code',
+  crash_full.txt:22035:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            type = 'TEXT',
+  crash_full.txt:22036:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            affinity = '2',
+  crash_full.txt:22037:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            notNull = 'true',
+  crash_full.txt:22038:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            primaryKeyPosition = '0',
+  crash_full.txt:22039:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            defaultValue = 'undefined'
+  crash_full.txt:22040:07-16 09:56:54.190 18003 18003 E AndroidRuntime:         },
+  crash_full.txt:22041:07-16 09:56:54.190 18003 18003 E AndroidRuntime:         Column {
+  crash_full.txt:22042:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            name = 'common_causes',
+  crash_full.txt:22043:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            type = 'TEXT',
+  crash_full.txt:22044:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            affinity = '2',
+  crash_full.txt:22045:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            notNull = 'true',
+  crash_full.txt:22046:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            primaryKeyPosition = '0',
+  crash_full.txt:22047:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            defaultValue = ''[]''
+  crash_full.txt:22048:07-16 09:56:54.190 18003 18003 E AndroidRuntime:         },
+  crash_full.txt:22049:07-16 09:56:54.190 18003 18003 E AndroidRuntime:         Column {
+  crash_full.txt:22050:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            name = 'common_fixes',
+  crash_full.txt:22051:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            type = 'TEXT',
+  crash_full.txt:22052:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            affinity = '2',
+  crash_full.txt:22053:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            notNull = 'true',
+  crash_full.txt:22054:07-16 09:56:54.190 18003 18003 E AndroidRuntime:            primaryKeyPosition = '0',
+  crash_full.txt:22055:07-16 09:56:54.191 18003 18003 E AndroidRuntime:            defaultValue = ''[]''
+  crash_full.txt:22056:07-16 09:56:54.191 18003 18003 E AndroidRuntime:         },
+  crash_full.txt:22057:07-16 09:56:54.191 18003 18003 E AndroidRuntime:         Column {
+  crash_full.txt:22058:07-16 09:56:54.191 18003 18003 E AndroidRuntime:            name = 'description_en',
+
+
