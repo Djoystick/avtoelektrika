@@ -13,7 +13,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase
         DiagnosisFts::class,
         DtcFts::class
     ],
-    version = 7,
+    version = 8,
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {
@@ -128,6 +128,15 @@ abstract class AppDatabase : RoomDatabase() {
                 database.execSQL("CREATE INDEX IF NOT EXISTS idx_dtc_severity ON dtc_catalog(severity)")
                 database.execSQL("CREATE INDEX IF NOT EXISTS idx_offline_cache_diagnosis ON offline_cache(diagnosis_id)")
                 database.execSQL("CREATE INDEX IF NOT EXISTS idx_offline_cache_accessed ON offline_cache(last_accessed_at)")
+            }
+        }
+
+        val MIGRATION_7_8 = object : Migration(7, 8) {
+            override fun migrate(database: SupportSQLiteDatabase) {
+                // Пустая миграция. 
+                // Необходима только для обновления хэша схемы Room (identity hash),
+                // так как в версии 1.8.8 были добавлены defaultValue к OfflineCacheEntity 
+                // и DtcEntity для соответствия MIGRATION_6_7.
             }
         }
     }
