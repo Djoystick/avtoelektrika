@@ -80,13 +80,13 @@ abstract class AppDatabase : RoomDatabase() {
                 database.execSQL("""
                     CREATE VIRTUAL TABLE IF NOT EXISTS dtc_catalog_fts 
                     USING fts4(code, description_ru, description_en, system, 
-                               content='dtc_catalog', content_rowid='id')
+                               content='dtc_catalog')
                 """)
                 database.execSQL("""
                     CREATE VIRTUAL TABLE IF NOT EXISTS diagnoses_fts 
                     USING fts4(carBrand, carModel, system, symptoms, errorCodes, solution,
                                encyclopediaPlatform, encyclopediaSystem, encyclopediaSubsystem,
-                               content='diagnoses', content_rowid='id')
+                               content='diagnoses')
                 """)
                 database.execSQL("""
                     CREATE TABLE IF NOT EXISTS offline_cache (
