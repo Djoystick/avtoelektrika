@@ -2,6 +2,7 @@ package com.example.autoelectricai.di
 
 import android.content.Context
 import androidx.room.Room
+import androidx.room.RoomDatabase
 import com.example.autoelectricai.data.ai.GeminiApiService
 import com.example.autoelectricai.data.ai.OpenAiApiService
 import com.example.autoelectricai.data.db.AppDatabase
@@ -36,6 +37,22 @@ object AppModule {
     @Singleton
     fun provideDatabase(@ApplicationContext context: Context): AppDatabase =
         Room.databaseBuilder(context, AppDatabase::class.java, "autoelectric.db")
+            .addCallback(object : RoomDatabase.Callback() {
+                override fun onCreate(db: androidx.sqlite.db.SupportSQLiteDatabase) {
+                    super.onCreate(db)
+                    val mockDtcs = listOf(
+                        "('P0300', 'Powertrain', 'Обнаружены случайные/множественные пропуски зажигания', 'Random/Multiple Cylinder Misfire Detected', 'Система зажигания', 'critical', '[\"Свечи зажигания\", \"Катушки зажигания\", \"Топливные форсунки\"]', '[\"Замена свечей\", \"Проверка катушек\"]', '', '*', 1)",
+                        "('P0171', 'Powertrain', 'Слишком бедная смесь (Bank 1)', 'System Too Lean (Bank 1)', 'Топливная система', 'warning', '[\"Подсос воздуха\", \"Грязный MAF-сенсор\", \"Слабое давление топлива\"]', '[\"Очистка MAF\", \"Поиск утечек вакуума\"]', '', '*', 1)",
+                        "('P0420', 'Powertrain', 'Эффективность системы катализатора ниже пороговой (Bank 1)', 'Catalyst System Efficiency Below Threshold (Bank 1)', 'Выхлопная система', 'warning', '[\"Неисправный катализатор\", \"Датчик кислорода\"]', '[\"Замена катализатора\", \"Замена лямбда-зонда\"]', '', '*', 1)",
+                        "('U0100', 'Network', 'Потеря связи с модулем управления двигателем (ECM/PCM)', 'Lost Communication With ECM/PCM', 'CAN шина', 'critical', '[\"Обрыв проводки\", \"Окисление контактов\", \"Сгорел предохранитель\"]', '[\"Проверка разъемов ECM\", \"Проверка питания\"]', '', '*', 1)",
+                        "('C0040', 'Chassis', 'Неисправность цепи датчика скорости правого переднего колеса', 'Right Front Wheel Speed Sensor Circuit', 'Тормозная система', 'critical', '[\"Датчик ABS\", \"Ступичный подшипник\", \"Проводка\"]', '[\"Замена датчика ABS\", \"Восстановление проводки\"]', '', '*', 1)",
+                        "('B0020', 'Body', 'Неисправность цепи подушки безопасности пассажира', 'Passenger Airbag Circuit Malfunction', 'Система безопасности (SRS)', 'critical', '[\"Разъем подушки\", \"Шлейф руля\", \"Блок SRS\"]', '[\"Проверка разъема под сиденьем\", \"Замена подушки\"]', '', '*', 1)"
+                    )
+                    mockDtcs.forEach {
+                        db.execSQL("INSERT INTO dtc_catalog (code, category, description_ru, description_en, system, severity, common_causes, common_fixes, related_codes, affected_brands, is_generic) VALUES $it")
+                    }
+                }
+            })
             .addMigrations(AppDatabase.MIGRATION_1_2, AppDatabase.MIGRATION_2_3, AppDatabase.MIGRATION_3_4, AppDatabase.MIGRATION_4_5, AppDatabase.MIGRATION_5_6, AppDatabase.MIGRATION_6_7)
             .build()
 
