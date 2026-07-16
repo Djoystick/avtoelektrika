@@ -1166,21 +1166,254 @@ object EncyclopediaCatalog {
                     EncSystem("dtc", "EV DTC каталог Tata", "❌", listOf("Коды ошибок EV"))
                 ))
             )
-        )
+        ),
+
+        // ─── ДОПОЛНИТЕЛЬНЫЕ БРЕНДЫ ──────────────────────────────────────────
+
+        // ─── КИТАЙ (дополнения) ─────────────────────────────────────────────
+
+        EncBrand(
+            id = "exeed", displayName = "Exeed", shortName = "Exeed",
+            primaryColor = Color(0xFF1A1A2E), secondaryColor = Color(0xFFFFFFFF),
+            logoResId = null,
+            platforms = listOf(
+                EncPlatform("exeed_lx_tx", "Exeed LX / TXL / Sterra (платформа Chery, 2019–н.в.)", "📂", 2019, null, listOf(
+                    EncSystem("wiring", "Бортовая сеть (Chery-based CAN)", "⚡", listOf("CAN-шина", "LIN")),
+                    EncSystem("ecu", "ECM (1.6T SQRE4T15 / 2.0T)", "🖥️", listOf("Коды ошибок OBD-II", "Диагностика Chery Tool Kit")),
+                    EncSystem("abs", "ABS / ESP", "🛡️", listOf("Датчики", "Коды")),
+                    EncSystem("awd", "AWD (TXL 4WD)", "🚗", listOf("Электромуфта", "Коды")),
+                    EncSystem("trouble", "Типовые неисправности Exeed", "🛠️", listOf("ЭБУ", "CAN-шина"))
+                ))
+            )
+        ),
+
+        EncBrand(
+            id = "great_wall", displayName = "Great Wall / Haval", shortName = "GWM",
+            primaryColor = Color(0xFF003DA5), secondaryColor = Color(0xFFFFFFFF),
+            logoResId = null,
+            platforms = listOf(
+                EncPlatform("haval_f_series", "Haval F5/F7/F7x/Jolion (2019–н.в.)", "📂", 2019, null, listOf(
+                    EncSystem("wiring", "Бортовая сеть GWM", "⚡", listOf("CAN-шина", "LIN")),
+                    EncSystem("ecu", "ECM (1.5T GW4G15F / 2.0T GW4C20B)", "🖥️", listOf("Коды ошибок OBD-II", "Live Data GWM诊断")),
+                    EncSystem("abs", "ABS / ESP", "🛡️", listOf("Датчики", "Коды")),
+                    EncSystem("awd", "AWD (F7x 4WD)", "🚗", listOf("Электромуфта", "Коды AWD")),
+                    EncSystem("dct", "7-ст. DCT (湿式双离合)", "⚙️", listOf("Коды ошибок DCT", "Адаптация")),
+                    EncSystem("trouble", "Типовые неисправности Haval", "🛠️", listOf("ЭБУ", "DCT", "CAN-шина"))
+                )),
+                EncPlatform("tank", "Tank 300/500/700 (2021–н.в.)", "📂", 2021, null, listOf(
+                    EncSystem("wiring", "Бортовая сеть Tank (GWM premium)", "⚡", listOf("CAN FD", "Ethernet")),
+                    EncSystem("ecu", "ECM (2.0T GW4C20B / 3.0T V6)", "🖥️", listOf("Коды ошибок", "Live Data")),
+                    EncSystem("4wd", "Полный привод Tank (electronic)", "🚗", listOf("Дифференциалы", "Режимы 4WD")),
+                    EncSystem("air_susp", "Пневмоподвеска (Tank 500/700)", "💺", listOf("Компрессор", "Коды ошибок")),
+                    EncSystem("trouble", "Типовые неисправности Tank", "🛠️", listOf("Электрика", "Подвеска"))
+                ))
+            )
+        ),
+
+        EncBrand(
+            id = "faw", displayName = "FAW", shortName = "FAW",
+            primaryColor = Color(0xFF0053A0), secondaryColor = Color(0xFFFFFFFF),
+            logoResId = null,
+            platforms = listOf(
+                EncPlatform("besturn", "Besturn B70/B90 / X80 (2014–2022)", "📂", 2014, 2022, listOf(
+                    EncSystem("wiring", "Бортовая сеть", "⚡", listOf("CAN-шина", "Предохранители")),
+                    EncSystem("ecu", "ECM (1.8T CA4GC / 2.0L CA4GD)", "🖥️", listOf("Коды ошибок OBD-II", "Live Data")),
+                    EncSystem("abs", "ABS / ESP", "🛡️", listOf("Датчики", "Коды")),
+                    EncSystem("trouble", "Типовые неисправности FAW", "🛠️", listOf("Электрика", "ЭБУ"))
+                )),
+                EncPlatform("faw_jetour", "FAW Jetour (Волжский, 2022–н.в.)", "📂", 2022, null, listOf(
+                    EncSystem("wiring", "Бортовая сеть (Jetour Chery-based)", "⚡", listOf("CAN-шина")),
+                    EncSystem("ecu", "ECM (1.5T)", "🖥️", listOf("Коды ошибок OBD-II")),
+                    EncSystem("trouble", "Типовые неисправности", "🛠️", listOf("Электрика"))
+                ))
+            )
+        ),
+
+        // ─── КОРЕЯ (дополнения) ─────────────────────────────────────────────
+
+        EncBrand(
+            id = "genesis", displayName = "Genesis", shortName = "Genesis",
+            primaryColor = Color(0xFF1A1A1A), secondaryColor = Color(0xFFFFFFFF),
+            logoResId = null,
+            platforms = listOf(
+                EncPlatform("genesis_mnd", "Genesis G70/G80/GV70/GV80 (2018–н.в.)", "📂", 2018, null, listOf(
+                    EncSystem("wiring", "Бортовая сеть Genesis (Hyundai premium)", "⚡", listOf("CAN C-CAN", "Ethernet", "LIN")),
+                    EncSystem("ecu", "ECM (3.3T Lambda / 2.5T Smartstream / 5.0 V8)", "🖥️", listOf("Коды ошибок GDS2", "Live Data Genesis")),
+                    EncSystem("abs_esc", "ABS / ESC / MCC (Multi-Chamber Air)", "🛡️", listOf("Датчики", "Коды")),
+                    EncSystem("air_susp", "Пневмоподвеска (GV70/GV80)", "💺", listOf("Компрессор", "Коды ошибок", "Калибровка")),
+                    EncSystem("adas", "Highway Driving Assist 2 (HDA2)", "📷", listOf("Калибровка камеры/радара", "Коды ADAS")),
+                    EncSystem("digital_key", "Цифровой ключ (NFC/UWB)", "🔑", listOf("Программирование", "Диагностика")),
+                    EncSystem("trouble", "Типовые неисправности Genesis", "🛠️", listOf("Электрика", "Пневма", "ADAS"))
+                ))
+            )
+        ),
+
+        EncBrand(
+            id = "ssangyong", displayName = "SsangYong / KG Mobility", shortName = "SsangYong",
+            primaryColor = Color(0xFF003366), secondaryColor = Color(0xFFFFFFFF),
+            logoResId = null,
+            platforms = listOf(
+                EncPlatform("ssangyong_common", "SsangYong Rexton / Korando / Tivoli (2015–н.в.)", "📂", 2015, null, listOf(
+                    EncSystem("wiring", "Бортовая сеть (Hyundai-derived)", "⚡", listOf("CAN-шина", "LIN")),
+                    EncSystem("ecu", "ECM (2.0 e-XDi200 / 1.5 T-GDi)", "🖥️", listOf("Коды ошибок OBD-II", "Live Data")),
+                    EncSystem("abs", "ABS / ESP", "🛡️", listOf("Датчики", "Коды")),
+                    EncSystem("awd", "AWD (4WD System)", "🚗", listOf("Электромуфта", "Режимы")),
+                    EncSystem("trouble", "Типовые неисправности SsangYong", "🛠️", listOf("ЭБУ", "CAN-шина", "Трансмиссия"))
+                ))
+            )
+        ),
+
+        // ─── ЕВРОПА (дополнения) ─────────────────────────────────────────────
+
+        EncBrand(
+            id = "bmw", displayName = "BMW", shortName = "BMW",
+            primaryColor = Color(0xFF0066B1), secondaryColor = Color(0xFFFFFFFF),
+            logoResId = null,
+            platforms = listOf(
+                EncPlatform("clar", "Платформа CLAR (G20/G30/G05/G01, 2017–н.в.)", "📂", 2017, null, listOf(
+                    EncSystem("can", "CAN FD / Ethernet BMW", "🌐", listOf("PT-CAN", "Body-CAN", "Ethernet backbone")),
+                    EncSystem("ecu", "ECM (B58 / S58 / B47 дизель)", "🖥️", listOf("Коды ошибок ISTA", "Live Data ISTA")),
+                    EncSystem("istag", "Диагностика ISTA / ISTA-P", "🔧", listOf("Подключение", "Процедуры", "Программирование")),
+                    EncSystem("frl", "FRL (FRM / Footwell Module)", "🧠", listOf("Кодирование FRM", "Типовые отказы")),
+                    EncSystem("cas_fem", "CAS / FEM (Center Module)", "🔐", listOf("Программирование ключей", "FEM замена")),
+                    EncSystem("air_susp_bmw", "Пневмоподвеска (7-series, X5)", "💺", listOf("Компрессор", "Клапаны", "Коды ошибок")),
+                    EncSystem("iDrive", "iDrive / MMI", "💡", listOf("Кодирование", "Обновления")),
+                    EncSystem("trouble", "Типовые неисправности BMW", "🛠️", listOf("FRM", "CAS", "ЭБУ", "Пневма"))
+                )),
+                EncPlatform("ukl", "Платформа UKL (F40/F52/X1/F48, 2015–н.в.)", "📂", 2015, null, listOf(
+                    EncSystem("wiring", "Бортовая сеть UKL (FWD-based)", "⚡", listOf("CAN-шина", "LIN")),
+                    EncSystem("ecu", "ECM (B38 / B48 / B47)", "🖥️", listOf("Коды ошибок ISTA", "Live Data")),
+                    EncSystem("abs", "ABS / DSC", "🛡️", listOf("Датчики", "Калибровка")),
+                    EncSystem("trouble", "Типовые неисправности UKL BMW", "🛠️", listOf("ЭБУ", "Трансмиссия"))
+                )),
+                EncPlatform("i_ev", "BMW i3 / i4 / iX / i7 (EV, 2013–н.в.)", "📂", 2013, null, listOf(
+                    EncSystem("hv", "Высоковольтная система (400V/800V)", "⚠️", listOf("Меры безопасности", "HV-разъёмы")),
+                    EncSystem("battery_ev", "HV Battery (LFP / NMC)", "🔋", listOf("BMS", "Thermal", "Коды P0A0x")),
+                    EncSystem("charge", "Зарядка CCS2 (AC 11kW / DC 150kW)", "🔌", listOf("OBC", "DC Fast")),
+                    EncSystem("dtc_ev", "EV DTC каталог BMW", "❌", listOf("Коды EV"))
+                ))
+            )
+        ),
+
+        EncBrand(
+            id = "porsche", displayName = "Porsche", shortName = "Porsche",
+            primaryColor = Color(0xFF000000), secondaryColor = Color(0xFFFFFFFF),
+            logoResId = null,
+            platforms = listOf(
+                EncPlatform("msb_mlb", "Платформа MSB/MLB (Cayenne/Taycan/Macan, 2017–н.в.)", "📂", 2017, null, listOf(
+                    EncSystem("can", "CAN FD / FlexRay / Ethernet Porsche", "🌐", listOf("Топология шин", "Gateway")),
+                    EncSystem("ecu", "ECM (3.0T / 4.0T V8 / E-Hybrid)", "🖥️", listOf("Коды ошибок PIWIS", "Live Data")),
+                    EncSystem("piwis", "Диагностика PIWIS 3", "🔧", listOf("Подключение", "Процедуры", "Программирование")),
+                    EncSystem("air_susp_p", "Пневмоподвеска (Cayenne/Taycan)", "💺", listOf("Компрессор", "Клапаны", "Коды ошибок")),
+                    EncSystem("pccb", "PCCB (керамические тормоза)", "🛡️", listOf("Датчики износа", "Коды")),
+                    EncSystem("trouble", "Типовые неисправности Porsche", "🛠️", listOf("ЭБУ", "Пневма", "Трансмиссия PDK"))
+                )),
+                EncPlatform("taycan_ev", "Taycan (EV, J1 платформа, 2020–н.в.)", "📂", 2020, null, listOf(
+                    EncSystem("hv", "Высоковольтная система (800V)", "⚠️", listOf("Меры безопасности 800V")),
+                    EncSystem("battery", "Taycan Battery (800V NMC)", "🔋", listOf("BMS", "Thermal Management")),
+                    EncSystem("charge", "Зарядка 800V CCS (270kW)", "🔌", listOf("OBC", "DC Fast")),
+                    EncSystem("dtc_ev", "EV DTC каталог Porsche", "❌", listOf("Коды EV"))
+                ))
+            )
+        ),
+
+        EncBrand(
+            id = "seat", displayName = "SEAT / CUPRA", shortName = "SEAT",
+            primaryColor = Color(0xFF004B87), secondaryColor = Color(0xFFFFFFFF),
+            logoResId = null,
+            platforms = listOf(
+                EncPlatform("mqb_seat", "Платформа MQB (Leon/Cupra/Foron/Arona, 2012–н.в.)", "📂", 2012, null, listOf(
+                    EncSystem("can", "VAG CAN-архитектура (общая с VW/Skoda)", "🌐", listOf("Comfort CAN", "Drive CAN")),
+                    EncSystem("vcds", "Диагностика VCDS / ODIS", "🔧", listOf("Кодирование SEAT", "Guided Functions")),
+                    EncSystem("ecu", "ECM (1.0/1.5 TSI EA211 / 2.0 TSI / 2.0 TDI)", "🖥️", listOf("Коды ошибок VAG", "Мессблоки")),
+                    EncSystem("dsg", "DSG DQ200 / DQ381", "⚙️", listOf("Коды ошибок DSG", "Адаптация")),
+                    EncSystem("trouble", "Типовые неисправности SEAT", "🛠️", listOf("ЭБУ", "DSG"))
+                ))
+            )
+        ),
+
+        EncBrand(
+            id = "land_rover", displayName = "Land Rover / Jaguar", shortName = "LR",
+            primaryColor = Color(0xFF005D2B), secondaryColor = Color(0xFFFFFFFF),
+            logoResId = null,
+            platforms = listOf(
+                EncPlatform("d7a", "Платформа D7a (Range Rover Sport / Velar / Discovery 5, 2017–н.в.)", "📂", 2017, null, listOf(
+                    EncSystem("can", "CAN FD / Ethernet / FlexRay", "🌐", listOf("HSCAN", "MSCAN", "Ethernet")),
+                    EncSystem("ecu", "ECM (Ingenium 2.0 / 3.0 I6 / 5.0 V8)", "🖥️", listOf("Коды ошибок SDD/Pathfinder", "Live Data")),
+                    EncSystem("pathfinder", "Диагностика SDD / Pathfinder", "🔧", listOf("Подключение", "Процедуры")),
+                    EncSystem("air_susp_lr", "Пневмоподвеска (Terrain Response)", "💺", listOf("Компрессор", "Клапаны", "Коды ошибок", "Калибровка высоты")),
+                    EncSystem("cas_lr", "CAS (Central Apex Security)", "🔐", listOf("Программирование ключей", "Коды")),
+                    EncSystem("adc2", "ADC2 (Advanced Driver Control)", "📷", listOf("Камеры 360°", "ADAS")),
+                    EncSystem("trouble", "Типовые неисправности Land Rover", "🛠️", listOf("Пневма", "CAS", "ЭБУ"))
+                ))
+            )
+        ),
+
+        // ─── США (дополнения) ────────────────────────────────────────────────
+
+        EncBrand(
+            id = "jeep", displayName = "Jeep", shortName = "Jeep",
+            primaryColor = Color(0xFF3D7A3E), secondaryColor = Color(0xFFFFFFFF),
+            logoResId = null,
+            platforms = listOf(
+                EncPlatform("jl_jt", "Jeep Wrangler JL / Gladiator JT (2018–н.в.)", "📂", 2018, null, listOf(
+                    EncSystem("wiring", "Бортовая сеть FCA (CAN-C / CAN-B)", "⚡", listOf("TIPM", "Жгуты")),
+                    EncSystem("pcm", "PCM (3.6 Pentastar / 2.0T / 3.0 EcoDiesel)", "🖥️", listOf("Коды ошибок wiTECH", "Live Data")),
+                    EncSystem("tipm", "TIPM (Totally Integrated Power Module)", "🧠", listOf("Программирование", "Типовые отказы")),
+                    EncSystem("abs_esc", "ABS / ESC / Selec-Terrain", "🛡️", listOf("Датчики", "Режимы")),
+                    EncSystem("4wd_jeep", "4WD System (Command-Trac / Rock-Trac)", "🚗", listOf("Электронное управление", "Коды")),
+                    EncSystem("trouble", "Типовые неисправности Jeep", "🛠️", listOf("TIPM", "ЭБУ", "CAN-шина"))
+                )),
+                EncPlatform("gu", "Grand Cherokee WK2 / WL (2014–н.в.)", "📂", 2014, null, listOf(
+                    EncSystem("wiring", "Бортовая сеть (CAN / LIN)", "⚡", listOf("Модульные блоки")),
+                    EncSystem("pcm", "PCM (3.6 Pentastar / 5.7 HEMI / 6.4 HEMI)", "🖥️", listOf("Коды ошибок wiTECH", "Live Data")),
+                    EncSystem("air_susp_jeep", "Пневмоподвеска Quadra-Lift", "💺", listOf("Компрессор", "Клапаны", "Коды ошибок")),
+                    EncSystem("quadra", "Quadra-Drive / Quadra-Trac 4WD", "🚗", listOf("Электромуфта NV245", "Коды")),
+                    EncSystem("trouble", "Типовые неисправности Grand Cherokee", "🛠️", listOf("Пневма", "ЭБУ", "Трансмиссия"))
+                ))
+            )
+        ),
+
+        EncBrand(
+            id = "tesla", displayName = "Tesla", shortName = "Tesla",
+            primaryColor = Color(0xFFCC0000), secondaryColor = Color(0xFFFFFFFF),
+            logoResId = null,
+            platforms = listOf(
+                EncPlatform("model_s_x", "Model S / Model X (2012–н.в.)", "📂", 2012, null, listOf(
+                    EncSystem("hv", "Высоковольтная система (350-400V)", "⚠️", listOf("Меры безопасности", "HV-разъёмы")),
+                    EncSystem("battery", "HV Battery (NCA / NCM ячейки)", "🔋", listOf("BMS", "Thermal", "Коды ошибок")),
+                    EncSystem("drive_unit", "Drive Unit (Motor + Inverter + Gearbox)", "⚡", listOf("Диагностика мотора", "Коды ошибок DU")),
+                    EncSystem("charge", "Зарядка (Tesla Supercharger / J1772 / CCS)", "🔌", listOf("OBC", "Supercharger", "V2L")),
+                    EncSystem("autopilot", "Autopilot / FSD Computer", "📷", listOf("Камеры", "Радар", "Калибровка")),
+                    EncSystem("body", "Body Controller / Gateway", "🧠", listOf("Кодирование", "OTA обновления")),
+                    EncSystem("trouble", "Типовые неисправности Tesla", "🛠️", listOf("Battery degradation", "Drive unit", "12V батарея"))
+                )),
+                EncPlatform("model_3_y", "Model 3 / Model Y (2017–н.в.)", "📂", 2017, null, listOf(
+                    EncSystem("hv", "Высоковольтная система (350-400V)", "⚠️", listOf("Меры безопасности")),
+                    EncSystem("battery", "HV Battery (LFP / NMC ячейки)", "🔋", listOf("BMS", "Thermal", "Коды P0A0x")),
+                    EncSystem("drive_unit", "Drive Unit (Motor + Inverter)", "⚡", listOf("Диагностика", "Коды")),
+                    EncSystem("charge", "Зарядка (Tesla SC / CCS / J1772)", "🔌", listOf("OBC 11kW", "DC Fast")),
+                    EncSystem("autopilot", "Autopilot HW3/HW4", "📷", listOf("Камеры 8x", "Калибровка")),
+                    EncSystem("12v", "12V аккумулятор (Li-ion)", "🔋", listOf("Замена", "Проблемы")),
+                    EncSystem("trouble", "Типовые неисправности Model 3/Y", "🛠️", listOf("12V батарея", "Сuspension", "Двери"))
+                ))
+            )
+        ),
 
     ) // close brandsFlat list
 
     val countries: List<EncCountry> = listOf(
         EncCountry("russia", "Россия", "🇷🇺", brandsFlat.filter { it.id in listOf("vaz", "uaz", "gaz", "moskvich") }),
-        EncCountry("germany", "Германия", "🇩🇪", brandsFlat.filter { it.id in listOf("volkswagen", "mercedes", "audi", "opel") }),
+        EncCountry("germany", "Германия", "🇩🇪", brandsFlat.filter { it.id in listOf("volkswagen", "mercedes", "audi", "opel", "bmw", "porsche") }),
         EncCountry("japan", "Япония", "🇯🇵", brandsFlat.filter { it.id in listOf("toyota", "nissan", "honda", "mazda", "subaru", "suzuki", "lexus", "infiniti", "acura", "mitsubishi", "datsun") }),
-        EncCountry("usa", "США", "🇺🇸", brandsFlat.filter { it.id in listOf("ford", "chevrolet", "dodge", "chrysler", "cadillac") }),
-        EncCountry("china", "Китай", "🇨🇳", brandsFlat.filter { it.id in listOf("chery", "omoda", "geely", "changan", "byd", "lifan", "dongfeng", "jac", "jetour") }),
-        EncCountry("korea", "Корея", "🇰🇷", brandsFlat.filter { it.id in listOf("hyundai", "kia", "daewoo") }),
+        EncCountry("usa", "США", "🇺🇸", brandsFlat.filter { it.id in listOf("ford", "chevrolet", "dodge", "chrysler", "cadillac", "jeep", "tesla") }),
+        EncCountry("china", "Китай", "🇨🇳", brandsFlat.filter { it.id in listOf("chery", "omoda", "geely", "changan", "byd", "lifan", "dongfeng", "jac", "jetour", "exeed", "great_wall", "faw") }),
+        EncCountry("korea", "Корея", "🇰🇷", brandsFlat.filter { it.id in listOf("hyundai", "kia", "daewoo", "genesis", "ssangyong") }),
         EncCountry("france", "Франция", "🇫🇷", brandsFlat.filter { it.id in listOf("renault", "peugeot", "citroen") }),
         EncCountry("italy", "Италия", "🇮🇹", brandsFlat.filter { it.id in listOf("fiat", "alfa_romeo", "iveco") }),
         EncCountry("sweden", "Швеция", "🇸🇪", brandsFlat.filter { it.id in listOf("volvo") }),
-        EncCountry("czech", "Чехия", "🇨🇿", brandsFlat.filter { it.id in listOf("skoda") }),
+        EncCountry("czech", "Чехия", "🇨🇿", brandsFlat.filter { it.id in listOf("skoda", "seat") }),
+        EncCountry("uk", "Великобритания", "🇬🇧", brandsFlat.filter { it.id in listOf("land_rover") }),
         EncCountry("india", "Индия", "🇮🇳", brandsFlat.filter { it.id in listOf("tata") })
     )
 
