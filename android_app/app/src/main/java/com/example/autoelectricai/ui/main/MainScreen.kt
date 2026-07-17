@@ -117,7 +117,6 @@ fun MainScreen(
                         val selected = currentDestination?.hierarchy?.any { it.route == screen.route } == true
                         NavigationBarItem(
                             icon = { Icon(screen.icon, contentDescription = screen.title) },
-                            label = { Text(screen.title) },
                             selected = selected,
                             onClick = {
                                 navController.navigate(screen.route) {
@@ -130,10 +129,8 @@ fun MainScreen(
                             },
                             colors = NavigationBarItemDefaults.colors(
                                 selectedIconColor = DarkBackground,
-                                selectedTextColor = AmberPrimary,
                                 indicatorColor = AmberPrimary,
-                                unselectedIconColor = TextSecondary,
-                                unselectedTextColor = TextSecondary
+                                unselectedIconColor = TextSecondary
                             )
                         )
                     }
