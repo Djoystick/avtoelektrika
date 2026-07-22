@@ -15,12 +15,16 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
+import com.example.autoelectricai.data.offline.OfflineDbManager
+import com.example.autoelectricai.data.offline.OfflineDownloadState
+
 @HiltViewModel
 class SettingsViewModel @Inject constructor(
     private val settings: SettingsRepository,
     private val auth: FirebaseAuth,
     private val cloudSyncRepo: CloudSyncRepository,
-    private val appUpdateManager: AppUpdateManager
+    private val appUpdateManager: AppUpdateManager,
+    private val offlineDbManager: OfflineDbManager
 ) : ViewModel() {
 
     private val _geminiKey = MutableStateFlow("")
@@ -100,5 +104,48 @@ class SettingsViewModel @Inject constructor(
         }
         _userRole.value = cloudSyncRepo.getUserRole(email)
         _userKarma.value = cloudSyncRepo.getUserKarma(email)
+    }
+
+    // --- Offline Database Logic ---
+    private val _offlineDbState = MutableStateFlow<OfflineDownloadState>(OfflineDownloadState.Idle)
+    val offlineDbState = _offlineDbState.asStateFlow()
+
+    private val _installedDatabases = MutableStateFlow<Set<String>>(emptySet())
+    val installedDatabases = _installedDatabases.asStateFlow()
+
+    fun checkInstalledDatabases(brands: List<String>) {
+        viewModelScope.launch {
+            val installed = brands.filter { offlineDbManager.isDatabaseInstalled(it) }.toSet()
+            _installedDatabases.value = installed
+        }
+    }
+
+    fun downloadDatabase(brand: String) {
+        viewModelScope.launch {
+            _offlineDbState.value = OfflineDownloadState.Downloading(0, 0f, 0f) // Initial loading state
+            
+            val config = offlineDbManager.fetchDownloadConfig(brand)
+            if (config == null) {
+                _offlineDbState.value = OfflineDownloadState.Error("Не удалось получить ссылку на кэш. Проверьте подключение к интернету или обратитесь к разработчику.")
+                return@launch
+            }
+            
+            offlineDbManager.downloadAndInstallDatabase(brand, config).collect { state ->
+                _offlineDbState.value = state
+                if (state is OfflineDownloadState.Success) {
+                    _installedDatabases.value = _installedDatabases.value + brand
+                }
+            }
+        }
+    }
+
+    fun deleteDatabase(brand: String) {
+        offlineDbManager.deleteDatabase(brand)
+        _installedDatabases.value = _installedDatabases.value - brand
+        _offlineDbState.value = OfflineDownloadState.Idle
+    }
+
+    fun resetOfflineDbState() {
+        _offlineDbState.value = OfflineDownloadState.Idle
     }
 }

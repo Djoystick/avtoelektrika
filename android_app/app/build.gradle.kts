@@ -14,8 +14,11 @@ android {
         applicationId = "com.example.autoelectricai"
         minSdk = 24
         targetSdk = 36
-        versionCode = 85
-        versionName = "1.8.11"
+        versionCode = 122
+        versionName = "1.8.20"
+
+        val gdriveApiKey = project.findProperty("GDRIVE_API_KEY") as? String ?: ""
+        buildConfigField("String", "GDRIVE_API_KEY", "\"$gdriveApiKey\"")
     }
 
     buildTypes {
@@ -98,6 +101,9 @@ dependencies {
 
   // Jsoup (парсинг веб-страниц)
   implementation(libs.jsoup)
+
+  // Coil (асинхронная загрузка картинок)
+  implementation(libs.coil.compose)
 
   // DataStore (хранение настроек: API ключи)
   implementation(libs.datastore.preferences)
