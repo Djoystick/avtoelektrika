@@ -110,14 +110,14 @@ async function publish() {
     let settingsCode = fs.readFileSync(settingsPath, 'utf8');
     
     const changelogEntry = `        "v${newVersionName}" to """${releaseNotes}""",\n`;
-    settingsCode = settingsCode.replace(/(val changelog = listOf\(\n)/, `$1${changelogEntry}`);
+    settingsCode = settingsCode.replace(/(val changelog = listOf\(\r?\n)/, `$1${changelogEntry}`);
     fs.writeFileSync(settingsPath, settingsCode);
     console.log("✅ Чейнджлог обновлен в приложении.");
 
     // 3. Сборка APK
     console.log("Запуск Gradle сборки (это может занять пару минут)...");
     try {
-        execSync('gradlew.bat assembleDebug', { stdio: 'inherit' });
+        execSync('gradlew.bat clean assembleDebug', { stdio: 'inherit' });
     } catch (e) {
         console.error("❌ Ошибка сборки!");
         process.exit(1);
