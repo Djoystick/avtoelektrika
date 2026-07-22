@@ -159,15 +159,19 @@ fun UpdateSection(
                         }
                     } else {
                         Button(
-                            onClick = {},
-                            enabled = false,
+                            onClick = onCheckForUpdates,
+                            enabled = !isChecking,
                             modifier = Modifier.fillMaxWidth(),
                             colors = ButtonDefaults.buttonColors(
-                                disabledContainerColor = SuccessGreen.copy(alpha = 0.2f)
+                                containerColor = Color(0xFF4A80F5),
+                                disabledContainerColor = DarkSurface2
                             ),
                             shape = RoundedCornerShape(8.dp)
                         ) {
-                            Text("Установлена последняя версия", color = TextHint)
+                            Text(
+                                text = if (isChecking) "Поиск обновления..." else "Проверить снова",
+                                color = if (isChecking) TextHint else Color.White
+                            )
                         }
                     }
                 }

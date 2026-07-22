@@ -2,6 +2,7 @@ package com.example.autoelectricai.ui.main
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccountTree
 import androidx.compose.material.icons.filled.Build
 import androidx.compose.material.icons.filled.MenuBook
 import androidx.compose.material.icons.filled.Person
@@ -44,7 +45,10 @@ import com.example.autoelectricai.data.update.DownloadState
 import android.content.Intent
 import com.example.autoelectricai.ui.auth.AuthScreen
 
+import com.example.autoelectricai.ui.diagnosis.DiagnosticTreeScreen
+
 sealed class BottomNavItem(val route: String, val title: String, val icon: androidx.compose.ui.graphics.vector.ImageVector) {
+    object DiagnosticTree : BottomNavItem("diagnostic_tree", "Дерево", Icons.Default.AccountTree)
     object Diagnosis : BottomNavItem("diagnosis", "Диагностика", Icons.Default.Build)
     object Search : BottomNavItem("search", "Поиск", Icons.Default.Search)
     object KnowledgeBase : BottomNavItem("knowledge_base", "Энциклопедия", Icons.Default.MenuBook)
@@ -54,17 +58,27 @@ sealed class BottomNavItem(val route: String, val title: String, val icon: andro
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainScreen(
-    startDestination: String = BottomNavItem.Diagnosis.route,
+    startDestination: String = BottomNavItem.DiagnosticTree.route,
     updateViewModel: AppUpdateViewModel = hiltViewModel()
 ) {
     val navController = rememberNavController()
     val updateInfo by updateViewModel.updateInfo.collectAsState()
     val downloadState by updateViewModel.downloadState.collectAsState()
     val context = LocalContext.current
+    var showUpdateDialog by remember { mutableStateOf(false) }
 
+    LaunchedEffect(Unit) {
+        updateViewModel.checkForUpdates()
+    }
 
+    LaunchedEffect(updateInfo) {
+        if (updateInfo?.isUpdateAvailable == true) {
+            showUpdateDialog = true
+        }
+    }
 
     val items = listOf(
+        BottomNavItem.DiagnosticTree,
         BottomNavItem.Diagnosis,
         BottomNavItem.Search,
         BottomNavItem.KnowledgeBase,
@@ -79,6 +93,7 @@ fun MainScreen(
 
     // Map routes to TopAppBar titles
     val topBarTitle = when (currentDestination?.route) {
+        BottomNavItem.DiagnosticTree.route -> "ИИ-Диагност (Дерево)"
         BottomNavItem.Diagnosis.route -> "АвтоЭлектрик AI"
         BottomNavItem.Search.route -> ""
         BottomNavItem.KnowledgeBase.route -> "База Знаний"
@@ -145,13 +160,26 @@ fun MainScreen(
         ) {
             composable("auth") {
                 AuthScreen(onAuthSuccess = {
-                    navController.navigate(BottomNavItem.Diagnosis.route) {
+                    navController.navigate(BottomNavItem.DiagnosticTree.route) {
                         popUpTo("auth") { inclusive = true }
                     }
                 })
             }
+            composable(BottomNavItem.DiagnosticTree.route) {
+                DiagnosticTreeScreen()
+            }
             composable(BottomNavItem.Diagnosis.route) {
-                DiagnosisScreen()
+                DiagnosisScreen(
+                    onNavigateToTree = {
+                        navController.navigate(BottomNavItem.DiagnosticTree.route) {
+                            popUpTo(navController.graph.findStartDestination().id) {
+                                saveState = false
+                            }
+                            launchSingleTop = true
+                            restoreState = false
+                        }
+                    }
+                )
             }
             composable(BottomNavItem.Search.route) {
                 SearchScreen(
@@ -209,5 +237,27 @@ fun MainScreen(
                 SubscriptionScreen(onBack = { navController.popBackStack() })
             }
         }
+    }
+
+    if (showUpdateDialog && updateInfo != null) {
+        AlertDialog(
+            onDismissRequest = { showUpdateDialog = false },
+            title = { Text("Доступно обновление", color = TextPrimary) },
+            text = { Text("Обнаружена новая версия АвтоЭлектрик AI (${updateInfo!!.versionName}). Рекомендуется обновить приложение.", color = TextSecondary) },
+            confirmButton = {
+                TextButton(onClick = { 
+                    showUpdateDialog = false
+                    navController.navigate("settings")
+                }) {
+                    Text("Обновить", color = AmberPrimary)
+                }
+            },
+            dismissButton = {
+                TextButton(onClick = { showUpdateDialog = false }) {
+                    Text("Позже", color = TextHint)
+                }
+            },
+            containerColor = DarkSurface
+        )
     }
 }
