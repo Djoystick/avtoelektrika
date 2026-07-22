@@ -1,0 +1,40 @@
+{
+    "version": "1.0",
+    "databases": [
+        {
+            "brand": "skoda",
+            "version": "1.1",
+            "size_mb": 0.0,
+            "file": "skoda.zip",
+            "download_url": "https://github.com/Djoystick/avtoelektrika/releases/download/offline-dbs/skoda.zip"
+        },
+        {
+            "brand": "chevrolet",
+            "version": "1.1",
+            "size_mb": 3967.34,
+            "file": "chevrolet.zip",
+            "download_url": "ВСТАВЬТЕ_СЮДА_ПРЯМУЮ_ССЫЛКУ_С_GOOGLE_DRIVE"
+        },
+        {
+            "brand": "kia",
+            "version": "1.1",
+            "size_mb": 270.94,
+            "file": "kia.zip",
+            "download_url": "https://github.com/Djoystick/avtoelektrika/releases/download/offline-dbs/kia.zip"
+        },
+        {
+            "brand": "toyota",
+            "version": "1.1",
+            "size_mb": 411.56,
+            "file": "toyota.zip",
+            "download_url": "https://github.com/Djoystick/avtoelektrika/releases/download/offline-dbs/toyota.zip"
+        },
+        {
+            "brand": "ford",
+            "version": "1.1",
+            "size_mb": 568.3,
+            "file": "ford.zip",
+            "download_url": "https://github.com/Djoystick/avtoelektrika/releases/download/offline-dbs/ford.zip"
+        }
+    ]
+}
